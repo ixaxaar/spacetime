@@ -33,7 +33,10 @@ The human (ixaxaar) must personally touch every proof. Your job is to attack.
 
 ## Build & sim
 
-- `make` builds the pdf; `make sim` reruns bin/toy_universe.py.
+- `make` builds the pdf; `make sim` reruns sim/toy_universe.py.
+- `make lean` builds the Lean 4 + mathlib skeleton in lean/ (toolchain
+  v4.32.0, mathlib v4.32.0). All proofs are `sorry` stubs per rule 1;
+  definitions and executable model only.
 - Simulation currently: d<=2 horns only, exact #P counting, ~20 event limit.
   The sampling estimator (Karzanov–Khachiyan style) is queued work — do not
   claim long-run behavior before it exists.

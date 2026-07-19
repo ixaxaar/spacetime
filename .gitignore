@@ -22,3 +22,6 @@ main.pdf
 Thumbs.db
 bin/
 lib/
+
+# Lean build artifacts
+lean/.lake/

@@ -1,0 +1,72 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Discrete approaches to quantum gravity, from Regge calculus
+\citep{regge1961} to causal dynamical triangulations
+\citep{ambjorn2012cdt}, replace smooth spacetime with combinatorial data:
+simplices, gluings, and moves between configurations. A persistent conceptual
+discomfort with such approaches is that geometric \emph{measure} --- edge
+lengths, volumes, simplex counts --- appears to be minted from nothing as
+configurations grow. In the sum-over-histories formulation this discomfort is
+usually dissolved by fiat: histories of every size appear in the ensemble, and
+a cosmological-constant term prices, but does not conserve, the total volume.
+
+This paper takes the discomfort seriously and asks what a theory looks like if
+one demands, from the start, that
+
+\begin{enumerate}
+  \item nothing is ever destroyed: evolution proceeds only by \emph{forking}
+        and \emph{completion} moves, never deletion, so that topological
+        invariants are conserved by construction;
+  \item time is not a dimension of the fundamental structure but an emergent
+        bookkeeping of an irreversible solving process;
+  \item entropy is attached to frame-invariant causal data, not to spatial
+        slices, so that no preferred foliation is required;
+  \item the dynamical rule is \emph{derived} from an inference principle
+        rather than postulated.
+\end{enumerate}
+
+The framework we arrive at is simple to state. The state of the universe is a
+finite simplicial set with directed edges. It evolves by two local moves: a
+\emph{sprout} attaches a fresh directed edge to a new vertex, creating raw
+material; a \emph{fill} completes an unfilled inner horn, attaching a
+composite edge together with the higher cell witnessing the composition.
+Sprouts create questions; fills answer them. The limit of the filling process
+is a quasicategory: a structure in which every composition question has been
+answered but directedness --- and with it a native causal orientation --- is
+retained. The classical, zero-information limit is the nerve of an ordinary
+category, in which all fillers are unique; the physical content of a solved
+universe is precisely its distance from nervehood.
+
+Each move is an event. An event depends on exactly those earlier events that
+created the cells it consumed, and this dependency relation is a partial
+order: the causal order. A reference frame is nothing but a linearization of
+this order. The central quantitative object of the paper is the entropy
+\[
+  S(e) \;=\; \log \#\{\text{linear extensions of } \past{e}\},
+\]
+the logarithm of the number of ways the causal past of an event could have
+been sequenced. This functional is foliation-invariant by construction,
+monotone under the dynamics, and measures \emph{causal parallelism}: a fully
+sequential past has zero entropy; a fully parallel past of $n$ events has
+entropy $\log n!$.
+
+Our contributions are: (i) a precise state space and move set satisfying the
+conservation demands above (Section~\ref{sec:framework}); (ii) the
+causal-past entropy functional together with statements (and, where complete,
+proofs) of its basic properties (Section~\ref{sec:entropy}); (iii) a
+formulation of the maximum-entropy inference problem that is intended to
+\emph{derive} the dynamical rule (Section~\ref{sec:maxent}); (iv) an argument
+that the combinatorial escalation of coherence questions forces decelerating
+expansion (Section~\ref{sec:tower}); (v) first numerical results from a toy
+implementation (Section~\ref{sec:results}); and (vi) an explicit map of the
+design space, recording the alternatives rejected at each decision point so
+that they remain available for future exploration
+(Section~\ref{sec:designspace}).
+
+We emphasise the register of this paper: it is a \emph{framework} proposal
+with a small number of proved statements, one computed experiment, and a
+list of hard open problems (Section~\ref{sec:open}), of which the recovery
+of the full Lorentz group from causal invariance, and of an area law for the
+entropy of causal horizons, are the most severe. Where a proof is incomplete
+the text says so, visibly.

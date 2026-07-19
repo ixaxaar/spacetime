@@ -1,0 +1,24 @@
+% Entropy as causal parallelism: chain S=0 vs antichain S=log n!
+\begin{tikzpicture}[>=Stealth, thick, every node/.style={circle, fill=black, inner sep=1.6pt}]
+  % chain
+  \node (c1) at (0,0) {};
+  \node (c2) at (0,0.9) {};
+  \node (c3) at (0,1.8) {};
+  \node (c4) at (0,2.7) {};
+  \draw[->] (c1) -- (c2);
+  \draw[->] (c2) -- (c3);
+  \draw[->] (c3) -- (c4);
+  \node[fill=none, rectangle] at (0,-0.8) {chain: $\Ext = 1$, $S = 0$};
+
+  % antichain fork
+  \node (r)  at (5,0) {};
+  \node (f1) at (3.8,1.8) {};
+  \node (f2) at (4.6,1.8) {};
+  \node (f3) at (5.4,1.8) {};
+  \node (f4) at (6.2,1.8) {};
+  \draw[->] (r) -- (f1);
+  \draw[->] (r) -- (f2);
+  \draw[->] (r) -- (f3);
+  \draw[->] (r) -- (f4);
+  \node[fill=none, rectangle] at (5,-0.8) {fork: $\Ext = 4! = 24$, $S = \log 24$};
+\end{tikzpicture}

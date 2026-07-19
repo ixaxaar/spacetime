@@ -1,0 +1,86 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[numbers]{natbib}
+
+% ---------- theorem environments ----------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{axiom}{Axiom}
+\theoremstyle{plain}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{proposition}[definition]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+% ---------- gap marker: every unfinished proof or missing piece is visible ----------
+\newcommand{\gap}[1]{\noindent\textcolor{red}{\textbf{[GAP: #1]}}}
+
+% ---------- notation macros ----------
+\newcommand{\sset}{\mathsf{sSet}}
+\newcommand{\past}[1]{J^{-}(#1)}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\colim}{\operatorname*{colim}}
+\newcommand{\Cat}{\mathsf{Cat}}
+\newcommand{\N}{\mathrm{N}}
+
+\title{Causal-Past Entropy on Non-Deleting Rewriting Systems:\\
+\large A Framework for Emergent Time from Horn-Filling Dynamics}
+\author{ixaxaar\thanks{Draft v0.1 --- work in progress. Gaps are marked in red.}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We propose a framework in which spacetime is not fundamental. The primitive
+ontology is a growing simplicial set with directed edges, evolving by two local,
+non-deleting rewriting moves: \emph{sprouting} (creation of a fresh directed
+edge to a new vertex) and \emph{inner-horn filling} (attachment of a composite
+and its witnessing cell). Moves are events; their dependency structure defines a
+causal partial order, and a reference frame is a linearization of this order.
+Time is not a dimension but the process of horn filling; the fully-solved limit
+object is a quasicategory. We define a foliation-invariant entropy
+$S(e) = \log \#\{\text{linear extensions of } \past{e}\}$ attached to causal
+pasts rather than spatial slices, prove its monotonicity, and present first
+numerical results from a toy implementation showing that entropy growth is
+controlled by the sprout-to-fill ratio. The dynamical rule itself is not
+postulated: we formulate a maximum-entropy inference problem whose solution,
+conjecturally of Gibbs form, determines the rule from locality and a fixed
+update budget alone. We further argue that the escalation of coherence
+questions up the associahedral tower forces decelerating, power-law-like
+expansion. We map the design space of alternatives at every decision point and
+state the open problems, of which the recovery of the Lorentz group and of an
+area law for horizon entropy are the most severe.
+\end{abstract}
+
+\tableofcontents
+
+\input{src/introduction}
+\input{src/prerequisites}
+\input{src/background}
+\input{src/methodology}
+\input{src/results}
+\input{src/discussion}
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography/references}
+
+\appendix
+\input{src/appendix}
+
+\end{document}

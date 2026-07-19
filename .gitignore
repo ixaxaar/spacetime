@@ -1,0 +1,24 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bcf
+*.run.xml
+*.pdf
+
+# Generated PDF
+main.pdf
+
+# OS specific files
+.DS_Store
+Thumbs.db
+bin/
+lib/

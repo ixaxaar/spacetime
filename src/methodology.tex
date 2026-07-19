@@ -1,0 +1,194 @@
+\section{The framework}
+\label{sec:framework}
+
+\subsection{Axioms}
+
+\begin{axiom}[Ontology]
+\label{ax:ontology}
+The state of the universe is a finite simplicial set with directed edges,
+together with its construction history. History is primary; the spatial
+state is derived (Definition~\ref{def:state}).
+\end{axiom}
+
+\begin{axiom}[Dynamics]
+\label{ax:dynamics}
+Evolution proceeds by two local, non-deleting moves: \emph{sprout} and
+\emph{fill} (Definition~\ref{def:moves}). Only inner horns may be filled.
+\end{axiom}
+
+\begin{axiom}[Budget]
+\label{ax:budget}
+The total rate of moves is fixed. The constant $c$ is the exchange rate
+between translation and internal solving (Section~\ref{sec:kinematics}).
+\end{axiom}
+
+\begin{axiom}[Inference]
+\label{ax:inference}
+The probability distribution over available moves is the maximum-entropy
+distribution consistent with Axioms~\ref{ax:dynamics}--\ref{ax:budget} and
+locality (Section~\ref{sec:maxent}). No further dynamical input is allowed.
+\end{axiom}
+
+\subsection{State space and moves}
+
+\begin{definition}[Moves]
+\label{def:moves}
+Fix the two rules, as monomorphisms of finite simplicial sets:
+\begin{enumerate}
+  \item \textbf{Sprout:} $\Delta^0 \hookrightarrow \Delta^1$. A match is a
+        vertex $v$; the application attaches a fresh directed edge from $v$
+        to a new vertex.
+  \item \textbf{Fill:} $\Lambda^n_k \hookrightarrow \Delta^n$ for $0<k<n$.
+        A match is an unfilled inner horn; the application attaches the
+        missing face and interior. Each horn may be filled at most once per
+        distinct match. \gap{decide and justify the at-most-once convention
+        versus allowing multiple fillers of the same horn; interacts with
+        the choice-entropy variant of Section~\ref{sec:designspace}}
+\end{enumerate}
+The initial object is a single vertex $\Delta^0$ (the big-bang event).
+\end{definition}
+
+\begin{remark}[Conservation for free]
+Sprouting is a Whitehead elementary expansion and inner-horn filling is an
+anodyne extension; both are homotopy equivalences. Hence the classical
+homotopy type of the universe is conserved by construction --- indeed it
+remains that of a point. All evolving information is therefore
+\emph{directed} structure, invisible to classical homotopy invariants. This
+is a feature: the framework's physics is located strictly below classical
+homotopy equivalence, in composition and coherence data.
+\end{remark}
+
+\begin{definition}[State as colimit of the causal past]
+\label{def:state}
+Let $e$ be an event of a run, with causal past $\past{e}$
+(Definition~\ref{def:causalorder}). The \emph{state at $e$} is the colimit
+of the diagram of rule applications in $\past{e}$. Since colimits depend
+only on the diagram and not on any ordering of it, the state at $e$ is
+independent of the choice of linearization: no foliation enters.
+\end{definition}
+
+\begin{proposition}[Well-definedness]
+\label{prop:welldef}
+The dependency relation of Definition~\ref{def:causalorder} is a partial
+order, and the colimit in Definition~\ref{def:state} exists and is
+independent of linearization.
+\end{proposition}
+\gap{Proof to be written (target: next session). Sketch: antisymmetry from
+acyclicity of creation-before-use; colimit exists since $\sset$ is
+cocomplete; independence is the universal property.}
+
+\subsection{The entropy functional}
+\label{sec:entropy}
+
+\begin{definition}[Causal-past entropy]
+\label{def:entropy}
+For an event $e$ of a run,
+\[
+  S(e) \;=\; \log \Ext\!\big(\past{e}\big),
+\]
+the logarithm of the number of linear extensions of its causal past.
+\end{definition}
+
+The coarse-graining implicit in $S$ is canonical to the framework: the
+state (colimit) forgets the order of causally independent events, and $S$
+counts exactly the forgotten orderings. A chain has $S=0$; an antichain of
+$n$ events has $S=\log n!$. Entropy measures causal parallelism.
+
+\begin{lemma}[Monotonicity]
+\label{lem:monotone}
+If $e \le e'$ then $S(e) \le S(e')$.
+\end{lemma}
+\gap{Proof to be written (owner: ixaxaar; the injection of extension sets
+should be a half-page). Empirically verified in Section~\ref{sec:results}.}
+
+\begin{lemma}[Foliation invariance]
+\label{lem:invariance}
+$S(e)$ depends only on the isomorphism class of the poset $\past{e}$ and in
+particular is independent of any linearization of the run.
+\end{lemma}
+\gap{Proof to be written; content is the frame-independence of $\past{e}$.}
+
+\begin{remark}[Cost of computation]
+Counting linear extensions is \#P-complete in general
+\citep{brightwell1991}; Section~\ref{sec:results} uses exact counting on
+small runs and future work requires a sampling estimator.
+\end{remark}
+
+\subsection{Kinematics: budget, proper time, mass}
+\label{sec:kinematics}
+
+Under Axiom~\ref{ax:budget} the total move rate available to any subsystem
+is fixed. For a subsystem in uniform translation at speed $v$, the budget
+splits between translation and internal solving; taking the Euclidean
+split of the light-clock argument, the internal rate is
+$c\sqrt{1 - v^2/c^2}$, reproducing time dilation. Proper time along a
+worldline is the accumulated internal solving; a null worldline solves
+nothing (a photon has no internal clock), and, conversely, any system with
+internal evolution --- an oscillation, a tick --- must be massive. We
+identify mass with the rest-frame solving rate, in the spirit of the
+Compton clock $mc^2/\hbar$.
+
+Two honest limitations. First, uniform motion must be locally undetectable:
+all internal processes of a moving subsystem slow \emph{coherently}, so
+rate changes are visible only upon reunion; any locally measurable rate
+change would falsify the framework immediately. Second, the budget argument
+yields dilation only. It does not by itself yield relativity of
+simultaneity or the Lorentz group; that requires the confluence programme
+of Section~\ref{sec:open}.
+
+\subsection{The maximum-entropy problem}
+\label{sec:maxent}
+
+\begin{definition}[Move ensemble]
+At a given state, let $M = M_{\mathrm{sprout}} \sqcup M_{\mathrm{fill}}$ be
+the set of available moves (legal sprout sites and unfilled inner horns),
+and let $k : M \to \mathbb{R}_{>0}$ be a cost function depending only on a
+move's level $d$ in the coherence tower.
+\end{definition}
+
+\begin{definition}[The inference problem]
+\label{def:maxent}
+Find the probability distribution $q$ on $M$ maximizing the Shannon entropy
+$H(q) = -\sum_{m} q(m) \log q(m)$ subject to
+\begin{enumerate}
+  \item[(C1)] normalization, $\sum_m q(m) = 1$;
+  \item[(C2)] budget, $\mathbb{E}_q[k] = R$;
+  \item[(C3)] locality and homogeneity: $q(m)$ depends only on the
+        isomorphism class of the local neighbourhood of $m$'s match.
+\end{enumerate}
+\end{definition}
+
+\begin{conjecture}[Gibbs rule]
+\label{conj:gibbs}
+The problem of Definition~\ref{def:maxent} has a unique solution of the
+form $q(m) \propto e^{-\lambda k(m)}$ with a single multiplier
+$\lambda(R)$. The sprout-to-fill ratio and the expansion law $N(t)$ are then
+determined by the level degeneracies (Catalan counts) and $k$, with no
+further choices.
+\end{conjecture}
+\gap{Derivation is the subject of a dedicated session. Danger to watch:
+whether (C3) can be formulated without smuggling in a preferred scale.}
+
+\subsection{Coherence escalation and decelerating expansion}
+\label{sec:tower}
+
+Filling promotes questions up the associahedral tower
+(Section~\ref{sec:prerequisites}): solving at level $d$ mints questions at
+level $d+1$, with supply growing like $4^d$. Under
+Axiom~\ref{ax:budget}, if the cost of a solve grows with level, the solve
+rate obeys
+\[
+  \frac{dN}{dt} \;=\; \frac{R}{k\big(d(t)\big)},
+\]
+and since consuming level $d$ takes time exponential in $d$, the typical
+level grows slowly, $d(t) \sim \log t$, forcing sub-linear,
+power-law-like growth of $N(t)$. The cost function $k$ plays the role of
+matter content: different $k$ give different deceleration exponents.
+\gap{Make this a theorem for at least one explicit $k$; compare exponents
+against the toy simulation once the sampling estimator allows long runs.}
+
+\begin{remark}[Two arrows]
+The framework contains two independent monotone quantities: the entropy
+$S$ (Lemma~\ref{lem:monotone}) and the tower level $d$. That they are
+aligned is expected but unproved. \gap{prove or refute alignment}
+\end{remark}

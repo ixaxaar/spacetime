@@ -1,0 +1,50 @@
+\section{The budget triangle}
+\label{app:budget}
+
+Let the total move rate of any subsystem be $c$ (Axiom~\ref{ax:budget}) and
+suppose a subsystem translates at speed $v$. Writing the split as orthogonal
+components, the internal rate $r$ satisfies $r^2 + v^2 = c^2$, hence
+\[
+  r \;=\; c\,\sqrt{1 - v^2/c^2},
+\]
+the standard dilation factor, with the photon limit $r = 0$ at $v = c$.
+The orthogonal (Euclidean) composition is here an \emph{assumption}; the
+question of why the emergent geometry of linearizations is Lorentzian
+rather than Euclidean --- why straight worldlines \emph{maximize} accumulated
+solving --- is part of problem O1.
+
+\section{Simulation code}
+\label{app:code}
+
+The toy implementation (also shipped as \texttt{bin/toy\_universe.py}):
+sprout and $\Lambda^2_1$-fill dynamics, event poset construction per
+Definition~\ref{def:causalorder}, and exact linear-extension counting by
+dynamic programming over downsets.
+
+\lstset{language=Python, basicstyle=\ttfamily\footnotesize,
+        breaklines=true, frame=single}
+\begin{lstlisting}
+class Universe:
+    # vertices, directed edges, unfilled inner horns;
+    # every move is an event with explicit parent events.
+
+    def sprout(self):
+        # new vertex w, new edge v -> w
+        # parents = { creator_event(v) }
+        ...
+
+    def fill(self, horn):
+        # horn = (e1: u -> v, e2: v -> w)
+        # new composite edge u -> w (+ 2-cell)
+        # parents = { creator(e1), creator(e2) }
+        ...
+
+def count_linear_extensions(parents):
+    # DP over downsets of the event poset (bitmask),
+    # processing masks in order of popcount.
+    ...
+\end{lstlisting}
+
+Full listing in the repository. Runs: 18 events, six seeds,
+$p_{\mathrm{sprout}} \in \{0.2, 0.5, 0.8\}$; output reproduced in
+Figure~\ref{fig:entropy}.

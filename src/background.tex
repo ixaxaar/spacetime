@@ -1,0 +1,60 @@
+\section{Background and related work}
+\label{sec:background}
+
+\gap{This section must be revised after the adversarial literature scan is
+complete. Overlap verdicts below are provisional.}
+
+\paragraph{Discrete gravity.} Regge \citep{regge1961} showed that curvature
+on a piecewise-flat complex is concentrated on hinges as deficit angles and
+that the corresponding action converges to the Einstein--Hilbert action.
+Dynamical triangulations freeze edge lengths and make the gluing
+combinatorics dynamical; causal dynamical triangulations
+\citep{ambjorn2012cdt} additionally impose a global time foliation and
+recover a de Sitter-like volume profile numerically. Our framework shares
+the combinatorial ontology but differs in three respects: moves are
+non-deleting (CDT's Monte Carlo moves are not), no foliation is imposed
+(causal order is derived from move dependency), and the object grown is a
+directed simplicial set headed toward a quasicategory rather than a
+triangulated pseudomanifold of fixed topology.
+
+\paragraph{Causal sets.} Causal set theory \citep{bombelli1987} takes a
+locally finite partial order as the fundamental ontology, with
+order-plus-number determining geometry, and classical sequential growth
+\citep{rideout2000csg} supplies a stochastic birth process. Our causal
+order is likewise fundamental-but-derived (from move dependency), and our
+sprouting move is a birth event; the essential difference is that our
+elements are not featureless points but cells of a simplicial set, so that
+composition, coherence, and the entropy of Section~\ref{sec:entropy} have
+combinatorial substrate. To our knowledge the linear-extension entropy of a
+causal past has not been used as a dynamical functional in the causal set
+literature. \gap{verify this claim in the lit scan}
+
+\paragraph{Rewriting cosmologies.} The Wolfram physics project
+\citep{gorard2020} evolves hypergraphs by rewriting rules and argues that
+\emph{causal invariance} (confluence of the rewriting system) yields
+observer-independence of the causal graph and, conjecturally, Lorentz
+covariance. We adopt the same event/causal-graph architecture and the same
+open problem (Section~\ref{sec:open}); our divergences are the specific
+simplicial move set (horn filling, with the quasicategory as limit object),
+the derived rather than postulated rule (Section~\ref{sec:maxent}), and the
+entropy functional.
+
+\paragraph{Emergent and thermal time.} That time may be state-dependent
+is the thermal time hypothesis of \citet{connes1994thermal}, built on
+Tomita--Takesaki modular flow; that time may be entanglement is
+\citet{page1983}. Our proposal is coarser but of the same family: time is
+identified with an irreversible solving process, and equilibrium (the
+quasicategory limit, no unfilled inner horns) is the state in which the
+process halts.
+
+\paragraph{Entropic derivations.} Jaynes' maximum-entropy inference
+\citep{jaynes1957}, its dynamical extension by \citet{caticha2011}, and
+Jacobson's derivation of the Einstein equations from the Clausius relation
+on local causal horizons \citep{jacobson1995} together define the strategy
+of Sections~\ref{sec:maxent} and~\ref{sec:open}: derive the rule by
+inference, and aim the long game at an area law.
+
+\paragraph{Computation-budget kinematics.} The Margolus--Levitin bound
+\citep{margolus1998} caps the rate of distinguishable state changes by
+energy, and \citet{lloyd2002} applies it cosmologically. Our budget axiom
+(Section~\ref{sec:kinematics}) is of this lineage.

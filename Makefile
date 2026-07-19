@@ -2,7 +2,7 @@ MAIN = main
 LATEX = pdflatex
 BIBTEX = bibtex
 
-all: $(MAIN)
+all: $(MAIN).pdf
 
 $(MAIN).pdf: $(MAIN).tex src/*.tex figures/*.tex bibliography/*.bib
 	$(LATEX) $(MAIN)
@@ -19,4 +19,12 @@ clean:
 distclean: clean
 	rm -f $(MAIN).pdf
 
-.PHONY: all sim clean distclean
+help:
+	@echo "Targets:"
+	@echo "  all       - build $(MAIN).pdf (default)"
+	@echo "  sim       - run toy simulation (bin/toy_universe.py)"
+	@echo "  clean     - remove LaTeX aux files"
+	@echo "  distclean - clean + remove $(MAIN).pdf"
+	@echo "  help      - show this message"
+
+.PHONY: all sim clean distclean help

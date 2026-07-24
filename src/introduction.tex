@@ -7,49 +7,53 @@ Discrete approaches to quantum gravity, from Regge calculus
 simplices, gluings, and moves between configurations.
 In Regge calculus the geometric measure is inert: edge lengths are
 prescribed variables of a fixed triangulation, and nothing grows. The
-discomfort begins with dynamical triangulations and the sum over histories,
-where the number of simplices fluctuates across the ensemble and spatial
-volume grows from slice to slice. Geometric \emph{measure} then appears to
-be minted from nothing, and the standard remedy, a cosmological-constant
-term, prices the total volume but does not conserve it.
+discomfort begins when one tries to apply Feynman's path integral to universe
+evolution, where the sum is over all histories. Dynamical triangulations
+make this sum computable by making every edge frozen to one length, so a geometry
+becomes a gluing pattern of identical simplices, and summing over
+geometries means counting gluings. The
+number of simplices now differs from history to history, and within a
+single history space grows from one slice to the next. New geometric
+measure appears from nowhere, and the standard remedy, a cosmological
+constant term, puts a price on volume without conserving it.
 
 This paper takes the discomfort seriously and asks what a theory looks like if
 one demands, from the start, that
 
 \begin{enumerate}
-  \item nothing is ever destroyed: evolution proceeds only by \emph{forking}
-        and \emph{completion} moves, never deletion, so that topological
-        invariants are conserved by construction;
+  \item nothing is ever destroyed: evolution proceeds only by forking
+        and completion moves, never deletion, so that topological
+        invariants are conserved by construction.
   \item time is not a dimension of the fundamental structure but an emergent
-        bookkeeping of an irreversible solving process;
+        bookkeeping of an irreversible solving process. % are we REALLY solving anything? or is it just a process of filling in missing data? use a better word
   \item entropy is attached to frame-invariant causal data, not to spatial
-        slices, so that no preferred foliation is required;
-  \item the dynamical rule is \emph{derived} from an inference principle
-        rather than postulated.
+        slices, so that no preferred foliation is required. % wtf is foliation? use a better word or put the meaning literally, or omit it altogether
+  \item the dynamical rule is derived from an inference principle
+        rather than postulated. % dynamical rules of what?
 \end{enumerate}
 
 The framework we arrive at is simple to state. The state of the universe is a
 finite simplicial set with directed edges. It evolves by two local moves: a
-\emph{sprout} attaches a fresh directed edge to a new vertex, creating raw
-material; a \emph{fill} completes an unfilled inner horn, attaching a
+\textbf{sprout} attaches a fresh directed edge to a new vertex, creating raw
+material of spacetime; a \textbf{fill} completes an unfilled inner horn, attaching a % or should we say "extension" insead of spacetime?
 composite edge together with the higher cell witnessing the composition.
-Sprouts create questions; fills answer them. The limit of the filling process
-is a quasicategory: a structure in which every composition question has been
-answered but directedness, and with it a native causal orientation, is
+Sprouts create questions; fills answer them. The limit of the filling process % we could probably give up on the question-answer terminology
+is a quasicategory, a structure in which every composition question has been
+answered but directedness, and with it a native causal orientation is
 retained. The classical, zero-information limit is the nerve of an ordinary
-category, in which all fillers are unique; the physical content of a solved
-universe is precisely its distance from nervehood.
+category in which all fillers are unique and the physical content of a solved
+universe is precisely its distance from the universe being a nerve. % nerve? i thought a kan complex?
 
 Each move is an event. An event depends on exactly those earlier events that
 created the cells it consumed, and this dependency relation is a partial
-order: the causal order. A reference frame is nothing but a linearization of
+order that defines causality. A reference frame is nothing but a linearization of
 this order. The central quantitative object of the paper is the entropy
-\[
+$$
   S(e) \;=\; \log \#\{\text{linear extensions of } \past{e}\},
-\]
+$$
 the logarithm of the number of ways the causal past of an event could have
 been sequenced. This functional is foliation-invariant by construction,
-monotone under the dynamics, and measures \emph{causal parallelism}: a fully
+monotone under the dynamics, and measures causal parallelism, which is a fully
 sequential past has zero entropy; a fully parallel past of $n$ events has
 entropy $\log n!$.
 
@@ -58,7 +62,7 @@ conservation demands above (Section~\ref{sec:framework}); (ii) the
 causal-past entropy functional together with statements (and, where complete,
 proofs) of its basic properties (Section~\ref{sec:entropy}); (iii) a
 formulation of the maximum-entropy inference problem that is intended to
-\emph{derive} the dynamical rule (Section~\ref{sec:maxent}); (iv) an argument
+derive the dynamical rule (Section~\ref{sec:maxent}); (iv) an argument
 that the combinatorial escalation of coherence questions forces decelerating
 expansion (Section~\ref{sec:tower}); (v) first numerical results from a toy
 implementation (Section~\ref{sec:results}); and (vi) an explicit map of the
@@ -66,7 +70,7 @@ design space, recording the alternatives rejected at each decision point so
 that they remain available for future exploration
 (Section~\ref{sec:designspace}).
 
-We emphasise the register of this paper: it is a \emph{framework} proposal
+We emphasise the register of this paper: it is a framework proposal
 with a small number of proved statements, one computed experiment, and a
 list of hard open problems (Section~\ref{sec:open}), of which the recovery
 of the full Lorentz group from causal invariance, and of an area law for the

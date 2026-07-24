@@ -47,25 +47,29 @@
 \maketitle
 
 \begin{abstract}
-We propose a framework in which spacetime is not fundamental. The primitive
-ontology is a growing simplicial set with directed edges, evolving by two local,
-non-deleting rewriting moves: \emph{sprouting} (creation of a fresh directed
-edge to a new vertex) and \emph{inner-horn filling} (attachment of a composite
-and its witnessing cell). Moves are events; their dependency structure defines a
-causal partial order, and a reference frame is a linearization of this order.
-Time is not a dimension but the process of horn filling; the fully-solved limit
-object is a quasicategory. We define a foliation-invariant entropy
-$S(e) = \log \#\{\text{linear extensions of } \past{e}\}$ attached to causal
-pasts rather than spatial slices, prove its monotonicity, and present first
-numerical results from a toy implementation showing that entropy growth is
-controlled by the sprout-to-fill ratio. The dynamical rule itself is not
-postulated: we formulate a maximum-entropy inference problem whose solution,
-conjecturally of Gibbs form, determines the rule from locality and a fixed
-update budget alone. We further argue that the escalation of coherence
-questions up the associahedral tower forces decelerating, power-law-like
-expansion. We map the design space of alternatives at every decision point and
-state the open problems, of which the recovery of the Lorentz group and of an
-area law for horizon entropy are the most severe.
+We propose a framework in which spacetime is a growing simplicial set and
+time is the process of filling its inner horns. Two local, non-deleting
+moves drive the growth of spacetime: a "sprout" attaches a fresh directed edge ending at a
+new vertex, and a "fill" completes an unfilled inner horn with a composite
+edge and its witnessing cell. Each move is a weak homotopy equivalence of
+the underlying space, so the homotopy type is conserved at every step. Since the
+geometric realization of the simplicial set forgets edge orientation, this conserved type cannot
+see any arrow of time; all physical content lives in the directed structure
+that realization forgets. The completed limit of the filling process is a
+quasicategory, in which every composition question has an answer while edges
+remain directed. Each move is an event that consumes cells created by
+earlier events, the dependency of moves forms a partial order, and a
+reference frame is a choice of linearization of this order. The entropy of
+an event is the logarithm of the number of linear extensions of its causal
+past. This quantity measures how much of the past could
+have happened in a different order, and grows monotonically, which we prove;
+a toy implementation provides first numerical support. The arrow of time
+appears as a broken symmetry. The universe carries an arrow exactly when it
+is not isomorphic to its own edge-reversal, this symmetry breaks already at
+the second move, and pairing the universe with its mirror image restores it
+globally, in the spirit of CPT-symmetric cosmologies. We formulate a maximum-entropy inference problem whose
+solution, conjecturally of Gibbs form, would determine the rule from
+locality and a fixed update budget alone. We close with the open problems, foremost the recovery of the Lorentz group and of an area law for horizon entropy.
 \end{abstract}
 
 \tableofcontents

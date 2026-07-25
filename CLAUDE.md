@@ -31,6 +31,24 @@ The human (ixaxaar) must personally touch every proof. Your job is to attack.
    model papers (Gorard), entropic dynamics (Caticha), network cosmology
    (Krioukov), directed algebraic topology.
 
+## Working style (hard rules)
+
+- **Do not burn tokens.** No building the pdf, running the sim, or re-reading
+  files after an edit unless ixaxaar asks. He will report problems himself.
+  No verification runs, no victory laps, no summaries of what was just done.
+- **Say less.** Answer the question, make the edit, stop. No preamble, no
+  recap, no offering next steps unless asked.
+- **Never use agents/subagents.** Never use workflows or deep research.
+- **Prose rules for the paper and for chat.** Plain words, ordinary sentences.
+  Banned constructions:
+  - `claim: restatement of the claim` (colon followed by an explanatory clause)
+  - `clause; clause` (semicolon splices)
+  - em dashes and `text - text - text` asides
+  - the words "load-bearing" and "naked"
+  Emphasis (bold/italics) sparingly or not at all; ixaxaar handles that.
+  Do not write in a terse aphoristic register. Write like a person explaining
+  something to a colleague who is not an expert in this subfield.
+
 ## Build & sim
 
 - `make` builds the pdf; `make sim` reruns sim/toy_universe.py.

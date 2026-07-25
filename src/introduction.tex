@@ -4,18 +4,54 @@
 Discrete approaches to quantum gravity, from Regge calculus
 \citep{regge1961} to causal dynamical triangulations
 \citep{ambjorn2012cdt}, replace smooth spacetime with combinatorial data:
-simplices, gluings, and moves between configurations.
-In Regge calculus the geometric measure is inert. Edge lengths are
-prescribed variables of a fixed triangulation, and nothing grows. The
-discomfort begins when one tries to apply Feynman's path integral to universe
-evolution, where the sum is over all histories. Dynamical triangulations
-make this sum computable by making every edge frozen to one length, so a geometry
-becomes a gluing pattern of identical simplices, and summing over
-geometries means counting gluings. The
-number of simplices now differs from history to history, and within a
-single history space grows from one slice to the next. New geometric
-measure appears from nowhere, and the standard remedy, a cosmological
-constant term, puts a price on volume without conserving it.
+simplices, gluings, and the lengths assigned to them.
+In Regge calculus the combinatorial scaffold is fixed with only
+edge lengths allowed to vary. The vertices, simplices, and gluings of the triangulation
+never change, so no new combinatorial structure is ever introduced. That is
+enough for classical gravity, where one solves the field equations on a
+triangulation that is given in advance. The discomfort begins one step
+later, when Feynman's path integral is applied to the evolution of the
+universe and the sum runs over all histories. Summing over Regge geometries
+means integrating over edge lengths, a continuous space in which many
+assignments describe the same geometry and no canonical measure presents
+itself. On the other hand, dynamical triangulations
+\citep{david1985,ambjorn1985diseases,ambjorn1997quantum} escape this by
+inverting Regge's choice.
+The lengths are frozen and the combinatorics is set free, so a geometry
+becomes a gluing pattern of simplices whose shapes are fixed once and for
+all, and summing over geometries becomes counting gluings.
+
+In both cases the geometry is carried by the gluing and not by any ambient
+space. Each simplex is flat inside, so curvature can only sit where simplices
+meet, and it is measured by how far the angles around such a meeting place
+fall short of a full turn. Figure~\ref{fig:deficit} shows the three cases for
+triangles glued around a vertex.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/deficit_angle}
+  \caption{Flat equilateral triangles glued around a single vertex. With five
+  triangles the angles at the vertex sum to $300^\circ$, the surface cannot
+  lie flat, and it cones up. With six they sum to $360^\circ$ and the surface
+  is genuinely flat. With seven they sum to $420^\circ$, there is no room for
+  the seventh triangle in the plane, and the surface buckles into a saddle.
+  The shortfall $\delta = 360^\circ - \sum_i \theta_i$ is called the deficit
+  angle, and it accounts for all of the curvature of the glued surface.}
+  \label{fig:deficit}
+\end{figure}
+
+Because the combinatorics is now free, the number of simplices differs from
+history to history, and within a single history the number of simplices in a
+slice changes from one slice to the next. New geometric measure appears from
+nowhere. Classical general relativity is no better off on this point, since
+it has no conservation law for spatial volume either, and in a closed
+universe the Hamiltonian constraint balances the total at zero
+\citep{adm1962,dewitt1967} however much volume appears. The complaint is
+therefore not that volume grows, but that the growth answers to nothing the
+theory conserves. A cosmological constant term only assigns a cost to
+four-volume within the ensemble, and where the total is held fixed instead,
+as in simulations and in unimodular gravity \citep{unruh1989,henneaux1989},
+the constraint is imposed by hand rather than descending from a symmetry.
 
 This paper takes the discomfort seriously and asks what a theory looks like if
 one demands, from the start, that
@@ -33,17 +69,29 @@ one demands, from the start, that
         inference principle rather than postulated.
 \end{enumerate}
 
-The framework we arrive at is simple to state. The state of the universe is a
-finite simplicial set with directed edges. It evolves by two local moves: a
-\textbf{sprout} attaches a fresh directed edge to a new vertex, creating raw
-material of spacetime; a \textbf{fill} completes an unfilled inner horn, attaching a % or should we say "extension" insead of spacetime?
-composite edge together with the higher cell witnessing the composition.
-Sprouts create questions; fills answer them. The limit of the filling process % we could probably give up on the question-answer terminology
-is a quasicategory, a structure in which every composition question has been
-answered but directedness, and with it a native causal orientation is
-retained. The classical, zero-information limit is the nerve of an ordinary
-category in which all fillers are unique and the physical content of a solved
-universe is precisely its distance from the universe being a nerve. % nerve? i thought a kan complex?
+The framework we arrive at is simple to state. At any moment, the state of
+the universe is a finite simplicial set with directed edges, together with
+the history of how it was built. It evolves by two local moves. A
+\textbf{sprout} attaches a fresh directed edge ending at a new vertex,
+adding new space. A \textbf{fill} completes an unfilled inner horn,
+attaching a composite edge together with the higher cell that witnesses the
+composition. The limit of the filling process is a quasicategory, a
+structure in which every composition has been formed while the edges remain
+directed. The classical, zero-information limit is the nerve of an ordinary
+category, in which every filler is unique. The physical content of a solved
+universe is precisely how far it is from being a nerve.
+
+Forgetting the directions and the history leaves a bare homotopy type.
+Every move is a weak homotopy equivalence, so this type never changes; it
+remains that of a point, and everything physical lives in the directed
+structure that this forgetting erases. The theory also carries a mirror
+symmetry. Reversing every edge sends each universe to its mirror image, and
+the universe carries an arrow of time exactly when it is not isomorphic to
+this image. The big bang vertex is its own mirror image, so the arrow is
+not present at the beginning; it appears as the growing structure breaks
+this symmetry. Pairing each universe with its mirror image gives a total
+object that is symmetric as a whole, in the spirit of CPT-symmetric
+cosmologies.
 
 Each move is an event. An event depends on exactly those earlier events that
 created the cells it consumed, and this dependency relation is a partial

@@ -69,59 +69,75 @@ one demands, from the start, that
         inference principle rather than postulated.
 \end{enumerate}
 
-The framework we arrive at is simple to state. At any moment, the state of
-the universe is a finite simplicial set with directed edges, together with
-the history of how it was built. It evolves by two local moves. A
-\textbf{sprout} attaches a fresh directed edge ending at a new vertex,
-adding new space. A \textbf{fill} completes an unfilled inner horn,
-attaching a composite edge together with the higher cell that witnesses the
-composition. The limit of the filling process is a quasicategory, a
-structure in which every composition has been formed while the edges remain
-directed. The classical, zero-information limit is the nerve of an ordinary
-category, in which every filler is unique. The physical content of a solved
-universe is precisely how far it is from being a nerve.
+In our framework the universe begins as a single vertex, which we call the
+big bang, and grows by two kinds of local moves:
 
-Forgetting the directions and the history leaves a bare homotopy type.
-Every move is a weak homotopy equivalence, so this type never changes; it
-remains that of a point, and everything physical lives in the directed
-structure that this forgetting erases. The theory also carries a mirror
-symmetry. Reversing every edge sends each universe to its mirror image, and
-the universe carries an arrow of time exactly when it is not isomorphic to
-this image. The big bang vertex is its own mirror image, so the arrow is
-not present at the beginning; it appears as the growing structure breaks
-this symmetry. Pairing each universe with its mirror image gives a total
-object that is symmetric as a whole, in the spirit of CPT-symmetric
-cosmologies.
+\begin{enumerate}
+      \item A \textbf{sprout} attaches a fresh directed edge ending at a new vertex, adding new space.
+      \item A \textbf{fill} completes an unfilled inner horn, attaching a composite edge together with the higher cell that witnesses the composition.
+\end{enumerate}
 
-Each move is an event. An event depends on exactly those earlier events that
-created the cells it consumed, and this dependency relation is a partial
-order that defines causality. A reference frame is nothing but a linearization of
-this order. The central quantitative object of the paper is the entropy
-$$
-  S(e) \;=\; \log \#\{\text{linear extensions of } \past{e}\},
-$$
-the logarithm of the number of ways the causal past of an event could have
-been sequenced. This functional is foliation-invariant by construction,
-monotone under the dynamics, and measures causal parallelism, which is a fully
-sequential past has zero entropy; a fully parallel past of $n$ events has
-entropy $\log n!$.
+% figure: sprout and fill, do later, dont add now (need to figure it out first)
 
-Our contributions are: (i) a precise state space and move set satisfying the
-conservation demands above (Section~\ref{sec:framework}); (ii) the
-causal-past entropy functional together with statements (and, where complete,
-proofs) of its basic properties (Section~\ref{sec:entropy}); (iii) a
-formulation of the maximum-entropy inference problem that is intended to
-derive the dynamical rule (Section~\ref{sec:maxent}); (iv) an argument
-that the combinatorial escalation of coherence questions forces decelerating
-expansion (Section~\ref{sec:tower}); (v) first numerical results from a toy
-implementation (Section~\ref{sec:results}); and (vi) an explicit map of the
-design space, recording the alternatives rejected at each decision point so
-that they remain available for future exploration
-(Section~\ref{sec:designspace}).
+Two kinds of direction appear here. Every edge of the simplicial set carries an orientation, and that
+orientation is what decides which horns count as inner and what composition
+means. Separately, every move is an event, and the events are ordered by
+which of them created the cells the others consumed. We call the first the
+\textbf{orientation} and the second the \textbf{causal order}.
+No move ever deletes anything, so growth always runs forward in the causal order,
+while orientation is a property of the finished cells and can be reversed on paper.
 
-We emphasise the register of this paper: it is a framework proposal
-with a small number of proved statements, one computed experiment, and a
-list of hard open problems (Section~\ref{sec:open}), of which the recovery
-of the full Lorentz group from causal invariance, and of an area law for the
-entropy of causal horizons, are the most severe. Where a proof is incomplete
-the text says so, visibly.
+At the big bang two edges sprout from the single vertex with opposite
+orientation, and this is what produces the two branches. The mirror branch is
+not an independent run. By definition it is the edge-reversal of the branch,
+carrying one mirrored event for every event, which is what makes the pair a
+mirror image of itself. The mirroring is causally inert, since no move in one
+branch ever consumes a cell created in the other, so the causal past of any
+event lies wholly inside its own branch. Each branch grows
+forward in its own causal order while pointing the opposite way in
+orientation, so neither branch runs backward in time in any absolute sense.
+Each is backward only as seen from the other, and there is no global causal
+order in which either of them is reversed. This is a combinatorial
+counterpart of CPT-symmetric cosmologies, where a universe and an antiuniverse
+emerge together from a single point \citep{boyle2018cpt,barbour2014janus}.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/mirror_pair}
+  \caption{The total object. A branch on the right and its mirror image on the
+  left, glued at the single vertex where both were born. Corresponding edges
+  carry opposite orientation, so the pair is isomorphic to its own
+  edge-reversal. The shaded region on each side is a filled inner horn, drawn
+  with its composite edge in bold, and the fill is mirrored along with
+  everything else. The grey arrows are the causal order, which runs away from
+  the shared vertex on both sides, so each branch is backward only as seen from
+  the other, and never in the order in which its own cells were built.}
+  \label{fig:mirrorpair}
+\end{figure}
+
+At any moment the state of the universe is a finite simplicial set with
+directed edges, together with the history of how it was built. The limit of
+the filling process in one branch is a quasicategory, in which every
+composition has been formed while the orientations remain. The classical,
+zero-information limit is the nerve of an ordinary category, the simplicial
+set whose $n$-cells are the chains of $n$ composable morphisms
+\citep{segal1968,lurie2009htt}, and in it every filler is unique. The
+physical content of a completed universe is precisely how far it is from
+being a nerve.
+
+The pair of branches is meant to carry no information at all.
+Two contractible halves glued at a single vertex are again contractible,
+so every homotopy invariant of the pair is that of a point, and the pair is
+isomorphic to its own edge-reversal, so it carries no arrow either. Whatever
+is physical therefore sits inside a single branch, in the orientations and in
+the history of how its cells were built.
+
+% The pair is not a Kan complex, and we do not want it to be. It is not one
+% because a branch is a retract of the pair, by the map sending the mirror
+% branch to the shared vertex, and a retract of a Kan complex is again a Kan
+% complex, so a Kan pair would force each branch to be Kan, which inner-horn
+% filling never delivers. It is also unwanted, because filling outer horns
+% makes every edge invertible, and an object carrying all of its inverses is
+% isomorphic to its own reversal at every stage, so the arrow of time as we
+% define it would never appear at all. Contractibility already gives the
+% triviality we were after, and it costs nothing.

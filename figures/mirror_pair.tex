@@ -1,0 +1,40 @@
+% The total object: a branch and its mirror image, glued at the birth vertex.
+% Every edge on the left is the reverse of the corresponding edge on the right,
+% including the composite edge of the filled 2-cell.
+\begin{tikzpicture}[>=Stealth, thick, scale=1.0]
+
+  % filled 2-cells, drawn first so the edges sit on top
+  \fill[gray!22] (0,0) -- (1.5,0.85) -- (3.1,0.85) -- cycle;
+  \fill[gray!22] (0,0) -- (-1.5,0.85) -- (-3.1,0.85) -- cycle;
+
+  % shared vertex
+  \fill (0,0) circle (2.2pt);
+  \node[below=7pt] at (0,0) {\small big bang};
+
+  % branch
+  \foreach \p in {{1.5,0.85}, {1.5,-0.85}, {3.1,0.85}, {3.1,1.85}} {
+    \fill (\p) circle (1.8pt);
+  }
+  \draw[->] (0.1,0.05) -- (1.4,0.8);
+  \draw[->] (0.1,-0.05) -- (1.4,-0.8);
+  \draw[->] (1.6,0.85) -- (3.0,0.85);
+  \draw[->] (1.55,0.95) -- (3.02,1.8);
+  \draw[->, very thick] (0.12,0.03) -- (3.0,0.81);
+  \node at (2.2,-1.75) {\small branch};
+  \draw[->, gray] (1.0,-2.2) -- (3.4,-2.2);
+  \node[gray, below] at (2.2,-2.25) {\small causal order};
+
+  % mirror branch
+  \foreach \p in {{-1.5,0.85}, {-1.5,-0.85}, {-3.1,0.85}, {-3.1,1.85}} {
+    \fill (\p) circle (1.8pt);
+  }
+  \draw[->] (-1.4,0.8) -- (-0.1,0.05);
+  \draw[->] (-1.4,-0.8) -- (-0.1,-0.05);
+  \draw[->] (-3.0,0.85) -- (-1.6,0.85);
+  \draw[->] (-3.02,1.8) -- (-1.55,0.95);
+  \draw[->, very thick] (-3.0,0.81) -- (-0.12,0.03);
+  \node at (-2.2,-1.75) {\small mirror branch};
+  \draw[->, gray] (-1.0,-2.2) -- (-3.4,-2.2);
+  \node[gray, below] at (-2.2,-2.25) {\small causal order};
+
+\end{tikzpicture}

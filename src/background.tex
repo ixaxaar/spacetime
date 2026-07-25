@@ -1,7 +1,124 @@
-\section{Background and related work}
+\section{Preliminaries and related work}
 \label{sec:background}
+\label{sec:prerequisites}
 
-\gap{This section must be revised after the adversarial literature scan is
+\subsection{Simplicial sets, horns, and quasicategories}
+
+\begin{definition}[Simplicial set]
+Let $\Delta$ denote the category whose objects are the finite nonempty linear
+orders $[n] = \{0 < 1 < \dots < n\}$ and whose morphisms are order-preserving
+maps. A \emph{simplicial set} is a functor $X : \Delta^{\mathrm{op}} \to
+\mathsf{Set}$. The set $X_n = X([n])$ is the set of \emph{$n$-simplices};
+$X_0$ are \emph{vertices}, $X_1$ are (directed) \emph{edges}. The category of
+simplicial sets is denoted $\sset$.
+\end{definition}
+
+\begin{example}
+The \emph{standard $n$-simplex} $\Delta^n = \Delta(-,[n])$. Concretely,
+$\Delta^2$ has three vertices $0,1,2$, three edges $0\to1$, $1\to2$,
+$0\to2$, and one nondegenerate $2$-simplex filling the triangle.
+\end{example}
+
+\begin{definition}[Horn]
+For $0 \le k \le n$, the \emph{horn} $\Lambda^n_k \subset \Delta^n$ is the
+subcomplex obtained by removing the interior of $\Delta^n$ and the face
+opposite vertex $k$. A horn is \emph{inner} if $0 < k < n$.
+\end{definition}
+
+\begin{example}
+$\Lambda^2_1$ consists of two composable edges $0 \to 1 \to 2$ with the
+composite $0 \to 2$ and the filling triangle \emph{missing}. Filling
+$\Lambda^2_1$ means supplying both.
+\end{example}
+
+\begin{definition}[Kan complex; quasicategory; nerve]
+A simplicial set $X$ is a \emph{Kan complex} if every map $\Lambda^n_k \to X$
+extends along $\Lambda^n_k \hookrightarrow \Delta^n$ for all horns, and a
+\emph{quasicategory} if this holds for all \emph{inner} horns. The
+\emph{nerve} $\N(\mathcal{C})$ of a small category $\mathcal{C}$ is the
+simplicial set with $\N(\mathcal{C})_n = $ chains of $n$ composable
+morphisms. A simplicial set is a nerve of a category iff every inner horn has
+a \emph{unique} filler \citep{lurie2009htt}.
+\end{definition}
+
+\begin{remark}[The spectrum used in this paper]
+Bare directed graphs (only $0$- and $1$-cells): nothing filled.
+Quasicategories: everything filled, fillers unique only up to higher cells.
+Nerves: everything filled uniquely. We will interpret these respectively as
+the newborn universe, the completed universe, and the classical
+(zero-information) limit.
+\end{remark}
+
+\begin{remark}[Opposites]
+The involution of $\Delta$ reversing each linear order induces $X \mapsto
+X^{\mathrm{op}}$, under which $\Lambda^n_k$ becomes $\Lambda^n_{n-k}$. The two
+outer horns are exchanged and inner horns go to inner horns, so $X$ is a
+quasicategory exactly when $X^{\mathrm{op}}$ is. Reversing orientations
+therefore cannot turn an inner-horn filling policy into an outer-horn one.
+\end{remark}
+
+\subsection{Rewriting, events, and causal order}
+
+\begin{definition}[Non-deleting rewriting rule]
+A \emph{rule} is a monomorphism $L \hookrightarrow R$ of finite simplicial
+sets. An \emph{application} of the rule to a configuration $X$ is a choice of
+match $m : L \to X$; the result is the pushout $X \cup_L R$. Because $L
+\hookrightarrow R$ is a monomorphism and nothing is removed, applications
+only add cells. (This is the non-deleting special case of double-pushout
+graph rewriting \citep{ehrig2006dpo}, where the interface equals the
+left-hand side.)
+\end{definition}
+
+\begin{definition}[Run; event; causal order]
+\label{def:causalorder}
+A \emph{run} is a finite sequence of rule applications starting from an
+initial object. Each application is an \emph{event}. Event $b$ \emph{depends}
+on event $a$ (written $a \prec b$) if the match of $b$ uses a cell created by
+$a$; the reflexive-transitive closure $\le$ of $\prec$ is the \emph{causal
+order}. The \emph{causal past} of an event $e$ is
+$\past{e} = \{a : a \le e\}$.
+\end{definition}
+
+\begin{remark}[Orientation is not the causal order]
+Two directions must be kept apart. The \emph{orientation} of an edge is part
+of the simplicial set and decides which horns are inner. The causal order of
+Definition~\ref{def:causalorder} is an order on events and records which move
+supplied the cells another move consumed. Since no rule deletes anything, the
+causal order is a partial order whatever the orientations do, and a branch
+whose edges all point towards its origin still grows away from it.
+\end{remark}
+
+\begin{remark}
+The triple (events, causality, independence) is an event structure in the
+sense of \citet{winskel1986event}; we use only the partial order.
+\end{remark}
+
+\begin{definition}[Linearization; frame]
+A \emph{linearization} (or \emph{linear extension}) of a finite poset
+$(P,\le)$ is a total order on $P$ extending $\le$. We write $\Ext(P)$ for the
+number of linear extensions. In this framework a \emph{reference frame} is a
+linearization of the causal order.
+\end{definition}
+
+\subsection{Associahedra and the coherence tower}
+
+\begin{definition}[Catalan numbers; associahedron]
+The $n$-th Catalan number is $C_n = \binom{2n}{n}/(n+1)$; $C_{n-1}$ counts
+the full bracketings of $n$ composable edges. The \emph{associahedron} $K_n$
+\citep{stasheff1963} is the polytope whose vertices are these bracketings
+and whose faces encode partial bracketings; $K_4$ is the pentagon.
+\end{definition}
+
+The relevance is dynamical: filling $2$-horns creates composites, whose
+alternative bracketings pose $3$-horn questions, whose answers pose
+compatibility ($4$-horn, pentagon) questions, and so on. Completion promotes
+questions up this tower; it never depletes them. Since the number of
+bracketings grows like $C_{n-1} \sim 4^n / n^{3/2}$, question supply grows
+exponentially with tower level.
+
+\subsection{Related work}
+
+\gap{This subsection must be revised after the adversarial literature scan is
 complete. Overlap verdicts below are provisional.}
 
 \paragraph{Discrete gravity.} Regge \citep{regge1961} showed that curvature
@@ -43,9 +160,16 @@ entropy functional.
 is the thermal time hypothesis of \citet{connes1994thermal}, built on
 Tomita--Takesaki modular flow; that time may be entanglement is
 \citet{page1983}. Our proposal is coarser but of the same family: time is
-identified with an irreversible solving process, and equilibrium (the
+identified with an irreversible completion process, and equilibrium (the
 quasicategory limit, no unfilled inner horns) is the state in which the
 process halts.
+
+\paragraph{CPT-symmetric cosmology.} Pairing a universe with its mirror image
+so that the total object carries no arrow is the combinatorial counterpart of
+the universe-antiuniverse pair of \citet{boyle2018cpt} and of the two arrows
+emerging from a shared middle in the Janus point picture of
+\citet{barbour2014janus}. In both of those the mirror branch is determined by
+the branch rather than evolving independently, which is also our convention.
 
 \paragraph{Entropic derivations.} Jaynes' maximum-entropy inference
 \citep{jaynes1957}, its dynamical extension by \citet{caticha2011}, and

@@ -12,12 +12,12 @@ It carries no metric, no dimension, and no manifold structure.
 Everything geometric has to be recovered from it.
 Statements about space are made in the framework's own combinatorial terms.
 
-\subsection{Growing the Simplicial Set}
+\subsubsection{Growing the Simplicial Set}
 
 \begin{definition}[]
 \label{def:moves}
 
-The simplicial set grows by two local, non-deleting moves, which are monomorphisms of finite simplicial sets:
+The simplicial set grows by two local, non-deleting moves, which are pushouts along the following two monomorphisms of finite simplicial sets:
 
 \begin{enumerate}
   \item \textbf{Sprout:} $\Delta^0 \hookrightarrow \Delta^1$.
@@ -27,7 +27,6 @@ The simplicial set grows by two local, non-deleting moves, which are monomorphis
         A fill can happen at any unfilled inner horn.
         Performing it attaches the missing face and interior.
         Each horn may be filled at most once.
-        \gap{decide and justify the at-most-once convention versus allowing multiple fillers of the same horn; interacts with the choice-entropy variant of Section~\ref{sec:designspace}} % decision: lets fill the horn only once
 \end{enumerate}
 
 \end{definition}
@@ -35,17 +34,21 @@ The simplicial set grows by two local, non-deleting moves, which are monomorphis
 \begin{figure}[tb]
   \centering
   \input{figures/sprout_fill}
-  \caption{Two moves generate the growth. In (a) a vertex sprouts a fresh
-  directed edge. After a second sprout, (b) shows the composable pair
-  $v_0 \to v_1 \to v_2$ whose composite is absent, an unfilled inner horn
-  $\Lambda^2_1$ (amber, missing edge dashed). In (c) the fill supplies the
-  composite $v_0 \to v_2$ (green) together with the $2$-cell witnessing it
-  (shaded). Panel (d) shows the state after one further sprout and fill at
-  the first tier, followed by a fill at the second: the two routes
-  $v_0 \to v_2 \to v_3$ and $v_0 \to v_1 \to v_3$ both demand the edge
-  $v_0 \to v_3$, and a single $3$-cell (shaded, drawn as the quadrilateral
-  $v_0v_1v_3v_2$) makes them agree. Only inner horns are ever filled, so
-  edge direction is never inverted and the limit object is a
+  \caption{The two moves and what each of them adds. In (a) a vertex
+  sprouts a fresh directed edge to a new vertex. After a second sprout,
+  (b) shows the composable pair $v_0 \to v_1 \to v_2$ whose composite is
+  absent, an unfilled inner horn $\Lambda^2_1$ (amber, missing edge
+  dashed). In (c) the fill supplies the composite $v_0 \to v_2$ (green)
+  together with the $2$-cell witnessing it (shaded). Panel (d) shows the
+  state after a third sprout and both first-tier fills. Two distinct
+  horns now call for a composite from $v_0$ to $v_3$, one built from
+  $v_0 \to v_1$ with $v_1 \to v_3$ and one from $v_0 \to v_2$ with
+  $v_2 \to v_3$. Each fill mints its own composite, so $a$ and $b$ are
+  parallel edges rather than a single shared one. Only once both are
+  present does the inner horn $\Lambda^3_1$ exist, since its three faces
+  already carry all six edges of $\Delta^3$; filling it therefore adds a
+  $2$-cell and a $3$-cell but no edge. Only inner horns are ever filled,
+  so edge direction is never inverted and the limit object is a
   quasicategory.}
   \label{fig:sprout-fill}
 \end{figure}
@@ -55,7 +58,11 @@ The initial object is a single vertex $\Delta^0$ (the big-bang event). At any mo
 \end{remark}
 
 \begin{remark}
-The composite edge cannot be a sprout. A sprout creates a fresh vertex and attaches a directed edge to it. The composite joins two vertices that already exist.
+Every vertex is created by exactly one sprout, which supplies its first incoming edge.
+Every other incoming edge is a composite supplied by a fill.
+So sprout edges and composite edges never mix.
+A sprout creates a fresh vertex and attaches a directed edge to it.
+The composite joins two vertices that already exist.
 \end{remark}
 
 \begin{remark}

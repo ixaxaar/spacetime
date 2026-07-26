@@ -3,34 +3,32 @@
 %   \usepackage{tikz}
 %   \usetikzlibrary{arrows.meta,positioning}
 %   \usepackage{xcolor}
-% Include with \input{figures/fig-sprout-fill}
 
 \definecolor{hornclr}{RGB}{186,117,23}
 \definecolor{compclr}{RGB}{15,110,86}
-\definecolor{cellclr}{RGB}{83,74,183}
 
 \begin{tikzpicture}[
   x=1cm, y=1cm,
-  vtx/.style   ={circle, draw, fill=white, inner sep=0pt,
-                  minimum size=5.4mm, font=\tiny},
-  ed/.style    ={-{Stealth[length=1.8mm]}, semithick},
-  hrn/.style   ={-{Stealth[length=1.8mm]}, line width=1.1pt, hornclr},
-  cmp/.style   ={-{Stealth[length=1.8mm]}, semithick, compclr},
-  mis/.style   ={-{Stealth[length=1.8mm]}, semithick, densely dashed, hornclr},
-  lbl/.style   ={font=\tiny, inner sep=1pt},
-  pcap/.style  ={font=\scriptsize, align=center, anchor=north}
+  vtx/.style  ={circle, draw, fill=white, inner sep=0pt,
+                minimum size=5.4mm, font=\tiny},
+  ed/.style   ={-{Stealth[length=1.8mm]}, semithick},
+  hrn/.style  ={-{Stealth[length=1.8mm]}, line width=1.1pt, hornclr},
+  cmp/.style  ={-{Stealth[length=1.8mm]}, semithick, compclr},
+  mis/.style  ={-{Stealth[length=1.8mm]}, semithick, densely dashed, hornclr},
+  lbl/.style  ={font=\tiny, inner sep=1pt},
+  pcap/.style ={font=\scriptsize, align=center, anchor=north}
 ]
 
   %% (a) sprout
-  \begin{scope}[xshift=0cm]
+  \begin{scope}[xshift=0cm, yshift=3cm]
     \node[vtx] (a0) at (0,0)      {$v_0$};
     \node[vtx] (a1) at (0.75,1.0) {$v_1$};
     \draw[ed] (a0) -- (a1);
-    \node[pcap] at (0.75,-0.50) {(a) sprout};
+    \node[pcap] at (0.75,-0.5) {(a) sprout};
   \end{scope}
 
   %% (b) inner horn
-  \begin{scope}[xshift=2.5cm]
+  \begin{scope}[xshift=2.5cm, yshift=3cm]
     \node[vtx] (b0) at (0,0)      {$v_0$};
     \node[vtx] (b1) at (0.75,1.0) {$v_1$};
     \node[vtx] (b2) at (1.5,0)    {$v_2$};
@@ -38,37 +36,42 @@
     \draw[hrn] (b1) -- (b2);
     \draw[mis] (b0) -- (b2);
     \node[lbl, hornclr] at (0.75,0.34) {$\Lambda^2_1$};
-    \node[pcap] at (0.75,-0.50) {(b) inner horn};
+    \node[pcap] at (0.75,-0.5) {(b) inner horn};
   \end{scope}
 
   %% (c) fill
-  \begin{scope}[xshift=5.0cm]
+  \begin{scope}[xshift=5cm, yshift=3cm]
     \node[vtx] (c0) at (0,0)      {$v_0$};
     \node[vtx] (c1) at (0.75,1.0) {$v_1$};
     \node[vtx] (c2) at (1.5,0)    {$v_2$};
-    \fill[compclr, opacity=0.16] (c0.center) -- (c1.center) -- (c2.center) -- cycle;
+    \fill[compclr, opacity=0.16]
+      (c0.center) -- (c1.center) -- (c2.center) -- cycle;
     \draw[ed]  (c0) -- (c1);
     \draw[ed]  (c1) -- (c2);
     \draw[cmp] (c0) -- (c2);
-    \node[pcap] at (0.75,-0.50) {(c) fill};
+    \node[pcap] at (0.75,-0.5) {(c) fill};
   \end{scope}
 
-  %% (d) second tier
-  \begin{scope}[xshift=7.5cm]
+  %% (d) two parallel composites at the second tier
+  \begin{scope}[xshift=2.125cm, yshift=0cm]
     \node[vtx] (d0) at (0,0)      {$v_0$};
     \node[vtx] (d1) at (0.75,1.0) {$v_1$};
     \node[vtx] (d2) at (1.5,0)    {$v_2$};
     \node[vtx] (d3) at (2.25,1.0) {$v_3$};
-    \fill[cellclr, opacity=0.14]
-      (d0.center) -- (d1.center) -- (d3.center) -- (d2.center) -- cycle;
+    \fill[compclr, opacity=0.14]
+      (d0.center) -- (d1.center) -- (d2.center) -- cycle;
+    \fill[compclr, opacity=0.14]
+      (d1.center) -- (d2.center) -- (d3.center) -- cycle;
     \draw[ed]  (d0) -- (d1);
     \draw[ed]  (d1) -- (d2);
     \draw[ed]  (d2) -- (d3);
     \draw[cmp] (d0) -- (d2);
     \draw[cmp] (d1) -- (d3);
     \draw[cmp] (d0) .. controls (-0.28,1.75) and (1.48,2.15) .. (d3);
-    \node[pcap] at (1.125,-0.50) {(d) second tier};
+    \draw[cmp] (d0) .. controls (0.40,-1.00) and (2.20,-0.90) .. (d3);
+    \node[lbl, compclr] at (1.69,1.74) {$b$};
+    \node[lbl, compclr] at (1.30,-0.80) {$a$};
+    \node[pcap] at (1.125,-1.15) {(d) two composites};
   \end{scope}
 
 \end{tikzpicture}
-

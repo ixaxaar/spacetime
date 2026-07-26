@@ -12,11 +12,13 @@ It carries no metric, no dimension, and no manifold structure.
 Everything geometric has to be recovered from it.
 Statements about space are made in the framework's own combinatorial terms.
 
-\subsection{The moves}
+\subsection{Growing the Simplicial Set}
 
-\begin{definition}[Moves]
+\begin{definition}[]
 \label{def:moves}
-Fix the two rules, as monomorphisms of finite simplicial sets:
+
+The simplicial set grows by two local, non-deleting moves, which are monomorphisms of finite simplicial sets:
+
 \begin{enumerate}
   \item \textbf{Sprout:} $\Delta^0 \hookrightarrow \Delta^1$.
         A sprout can happen at any vertex $v$ of the current state.
@@ -25,26 +27,53 @@ Fix the two rules, as monomorphisms of finite simplicial sets:
         A fill can happen at any unfilled inner horn.
         Performing it attaches the missing face and interior.
         Each horn may be filled at most once.
-        \gap{decide and justify the at-most-once convention versus allowing multiple fillers of the same horn; interacts with the choice-entropy variant of Section~\ref{sec:designspace}}
+        \gap{decide and justify the at-most-once convention versus allowing multiple fillers of the same horn; interacts with the choice-entropy variant of Section~\ref{sec:designspace}} % decision: lets fill the horn only once
 \end{enumerate}
-The initial object is a single vertex $\Delta^0$ (the big-bang event).
+
 \end{definition}
 
-\begin{remark}[Conservation for free]
-Sprouting is a Whitehead elementary expansion and inner-horn filling is an anodyne extension.
-Both are homotopy equivalences, so the classical homotopy type of the universe is conserved by construction.
-Indeed, it remains that of a point.
-All evolving information is therefore \emph{directed} structure, invisible to classical homotopy invariants.
-This is a feature.
-The framework's physics is located strictly below classical homotopy equivalence, in composition and coherence data.
+\begin{figure}[tb]
+  \centering
+  \input{figures/sprout_fill}
+  \caption{Two moves generate the growth. In (a) a vertex sprouts a fresh
+  directed edge. After a second sprout, (b) shows the composable pair
+  $v_0 \to v_1 \to v_2$ whose composite is absent, an unfilled inner horn
+  $\Lambda^2_1$ (amber, missing edge dashed). In (c) the fill supplies the
+  composite $v_0 \to v_2$ (green) together with the $2$-cell witnessing it
+  (shaded). Panel (d) shows the state after one further sprout and fill at
+  the first tier, followed by a fill at the second: the two routes
+  $v_0 \to v_2 \to v_3$ and $v_0 \to v_1 \to v_3$ both demand the edge
+  $v_0 \to v_3$, and a single $3$-cell (shaded, drawn as the quadrilateral
+  $v_0v_1v_3v_2$) makes them agree. Only inner horns are ever filled, so
+  edge direction is never inverted and the limit object is a
+  quasicategory.}
+  \label{fig:sprout-fill}
+\end{figure}
+
+\begin{remark}
+The initial object is a single vertex $\Delta^0$ (the big-bang event). At any moment the current state is a finite simplicial set with directed edges, and the next move is chosen from the set of available moves, which is the disjoint union of all sprout sites and all unfilled inner horns.
 \end{remark}
 
-\begin{remark}[Higher cells are not directions]
+\begin{remark}
+The composite edge cannot be a sprout. A sprout creates a fresh vertex and attaches a directed edge to it. The composite joins two vertices that already exist.
+\end{remark}
+
+\begin{remark}
+Sprouting is a Whitehead elementary expansion and inner-horn filling is an anodyne extension.
+Both operations preserve homotopy equivalences, so the homotopy type of the simplicial set is conserved by construction.
+In our case, the homotopy type remains that of a point.
+\end{remark}
+
+\begin{remark}
 \label{rem:pregeometric}
-One structural fact constrains every later account of geometry.
-Coherence questions escalate without bound (Section~\ref{sec:prerequisites}), so a growing universe creates cells of arbitrarily high dimension.
-Higher cells cannot be directions one can move along.
-Geometry must therefore be built from the one-skeleton together with the causal order, with cells above dimension one acting as witnesses that a composition holds and contributing nothing metric.
+Only two moves ever add an edge. A sprout adds one, and a fill in dimension two adds one. Fills in dimension three and above add no edges at all, only cells that say existing paths agree.
+So every chain is built out of edges, and nothing above dimension one can be part of a chain. Whatever structure this model has is carried by the vertices, the edges, and the causal order between events.
+Treat the edges as a multigraph.
+If two fills each produce a composite, keep both as separate edges.
+The number of parallel edges is a record of how many fills happened there.
+The order says which events can affect which.
+The edge counts say how much happened.
+Both are needed, and neither replaces the other.
 \end{remark}
 
 \subsection{Events, runs, and the causal order}

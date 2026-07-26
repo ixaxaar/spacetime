@@ -5,10 +5,25 @@
 
 \begin{axiom}[Ontology]
 \label{ax:ontology}
-The state of the universe is a finite simplicial set with directed edges,
-together with its construction history. History is primary; the spatial
-state is derived (Definition~\ref{def:state}).
+The fundamental object is the run, a finite sequence of non-deleting moves
+starting from a single vertex. The state of the universe at an event is the
+colimit of that run's causal past (Definition~\ref{def:state}), so it is
+determined by the run rather than being independent data.
 \end{axiom}
+
+\begin{remark}[The object is pre-geometric]
+\label{rem:pregeometric}
+The simplicial set is not spacetime and it is not a representation of a
+spacetime lying elsewhere. It carries no metric, no dimension and no
+manifold structure, and everything geometric has to be recovered from it
+(Section~\ref{sec:geometry} and problem O4). One consequence constrains any
+such recovery. Coherence questions escalate without bound, so a run creates
+cells of arbitrarily high dimension. Higher cells cannot therefore be
+directions one can move along, and geometry must be built from the
+one-skeleton together with the causal order, with cells above dimension one
+acting as witnesses that a composition holds and contributing nothing
+metric.
+\end{remark}
 
 \begin{axiom}[Dynamics]
 \label{ax:dynamics}
@@ -18,9 +33,23 @@ Evolution proceeds by two local, non-deleting moves: \emph{sprout} and
 
 \begin{axiom}[Budget]
 \label{ax:budget}
-The total rate of moves is fixed. The constant $c$ is the exchange rate
-between translation and internal solving (Section~\ref{sec:kinematics}).
+The rate of moves is fixed. The constant $c$ is the exchange rate between
+translation and internal filling (Section~\ref{sec:kinematics}).
 \end{axiom}
+
+\begin{remark}[What the budget axiom leaves open]
+\label{rem:budgetgaps}
+A rate requires a clock, and time in this framework is emergent, a frame
+being only a linearization of the causal order. Read as a universal number
+of moves per tick, the axiom would reinstate a preferred linearization. The
+intended reading is the energetic one of \citet{margolus1998}, in which the
+budget bounds distinguishable changes per unit energy rather than per unit
+of any global time, and it awaits a notion of energy internal to the
+framework. The axiom is also silent on whether the budget is one number for
+the whole universe or one number per region. Locality favours the latter,
+and the two readings give different cosmologies
+(Section~\ref{sec:tower}).
+\end{remark}
 
 \begin{axiom}[Inference]
 \label{ax:inference}
@@ -114,27 +143,98 @@ Counting linear extensions is \#P-complete in general
 small runs and future work requires a sampling estimator.
 \end{remark}
 
-\subsection{Kinematics: budget, proper time, mass}
+\subsection{Space, distance, and speed}
+\label{sec:geometry}
+
+The axioms so far say nothing about space, and no statement about speed has
+content until they do. This section fixes the minimum, in order.
+
+\begin{definition}[Weighted one-skeleton]
+\label{def:weight}
+Every edge created by a sprout has weight $1$. Every composite edge created
+by a fill has weight equal to the total weight of the path it composes. The
+\emph{distance} between two vertices is the least total weight of an
+undirected path between them in the one-skeleton.
+\end{definition}
+
+\begin{remark}[Fills are metrically inert]
+\label{rem:inert}
+A composite edge joins two vertices that were already joined by a path of
+exactly that weight, so under Definition~\ref{def:weight} a fill changes no
+distance and creates no reachability that was not already present. The
+convention is forced if distance is to be stable. Weighting every composite
+by $1$ instead makes each fill a shortcut, and accumulated shortcuts
+collapse the diameter of the complex in the manner of a small-world graph,
+leaving neither a stable distance function nor a bounded signal speed. The
+price of Definition~\ref{def:weight} is that fills contribute nothing
+geometric. What they contribute is coherence data, which is where this
+framework locates its physical content.
+\end{remark}
+
+\begin{definition}[Track; translation; internal evolution]
+\label{def:track}
+A \emph{track} is a chain in the causal order whose consecutive events are
+matched at cells within bounded distance of one another. An event on a track
+is a \emph{translation} if it is a sprout, extending the track's locus by one
+unit of distance, and \emph{internal} if it is a fill, leaving the locus
+where it is.
+\end{definition}
+
+\begin{proposition}[A maximal signal speed]
+\label{prop:maxspeed}
+Along any track, distance advances by at most one unit per event, so the
+speed of propagation of causal influence is bounded by one unit of distance
+per event. We write $c$ for this bound.
+\end{proposition}
+\gap{Proof to be written. Content: by Remark~\ref{rem:inert} a fill adds no
+reachability, and a sprout adds one vertex at distance $1$ from its match.}
+
+The bound of Proposition~\ref{prop:maxspeed} is not derived from anything
+deep. It is the statement that the moves are local, and $c$ is a unit rather
+than a prediction. What is not settled, and is the content of problem O1, is
+why the resulting light-cone structure should be isotropic and the same for
+every observer.
+
+\subsection{Kinematics: proper time and mass}
 \label{sec:kinematics}
 
-Under Axiom~\ref{ax:budget} the total move rate available to any subsystem
-is fixed. For a subsystem in uniform translation at speed $v$, the budget
-splits between translation and internal solving; taking the Euclidean
-split of the light-clock argument, the internal rate is
-$c\sqrt{1 - v^2/c^2}$, reproducing time dilation. Proper time along a
-worldline is the accumulated internal solving; a null worldline solves
-nothing (a photon has no internal clock), and, conversely, any system with
-internal evolution (an oscillation, a tick) must be massive. We
-identify mass with the rest-frame solving rate, in the spirit of the
-Compton clock $mc^2/\hbar$.
+\begin{definition}[Proper time]
+\label{def:propertime}
+The proper time between two causally related events is the length of the
+longest chain in the causal order between them.
+\end{definition}
 
-Two honest limitations. First, uniform motion must be locally undetectable:
-all internal processes of a moving subsystem slow \emph{coherently}, so
-rate changes are visible only upon reunion; any locally measurable rate
-change would falsify the framework immediately. Second, the budget argument
-yields dilation only. It does not by itself yield relativity of
-simultaneity or the Lorentz group; that requires the confluence programme
-of Section~\ref{sec:open}.
+This is the causal set definition of discrete proper time. It is
+frame-independent, since the longest chain is a property of the poset alone.
+A null track, all of whose events are translations, has proper time
+zero, which recovers the statement that a photon carries no internal clock,
+and conversely a system with internal evolution accumulates proper time and
+is massive. Mass is the rest-frame rate of internal fills, in the spirit of
+the Compton clock $mc^2/\hbar$.
+
+\begin{remark}[Why longest chains, and what dilation still costs]
+\label{rem:dilation}
+Counting a track's own events gives the wrong dilation law. If a track has
+$N$ events of which $k$ are internal, the budget splits linearly and the
+internal rate is $1 - v/c$, where relativity requires
+$\sqrt{1 - v^2/c^2}$. The two disagree by a factor of three at $v = 0.8c$.
+The quadratic form comes from the Euclidean geometry of the light-clock
+argument rather than from any bookkeeping over moves, which is why
+Appendix~\ref{app:budget} states that composition as an assumption.
+Definition~\ref{def:propertime} is chosen because it is the definition for
+which the quadratic form is a theorem. For a sprinkling into flat spacetime
+the longest chain between two events is proportional to $\sqrt{t^2 - x^2}$,
+and the straight route maximises it. What that theorem assumes is that the
+causal order resembles a sprinkling into a Lorentzian manifold, so dilation
+in this framework rests on problem O1 and is not established independently
+of it.
+\end{remark}
+
+One further constraint the framework must respect. Uniform motion has to be
+locally undetectable, so all internal processes of a moving subsystem must
+slow together and rate differences may only appear on reunion. Any locally
+measurable change of internal rate under uniform motion would falsify the
+framework at once.
 
 \subsection{The maximum-entropy problem}
 \label{sec:maxent}
@@ -169,23 +269,34 @@ further choices.
 \gap{Derivation is the subject of a dedicated session. Danger to watch:
 whether (C3) can be formulated without smuggling in a preferred scale.}
 
-\subsection{Coherence escalation and decelerating expansion}
+\subsection{Coherence escalation and the growth law}
 \label{sec:tower}
 
 Filling promotes questions up the associahedral tower
-(Section~\ref{sec:prerequisites}): solving at level $d$ mints questions at
-level $d+1$, with supply growing like $4^d$. Under
-Axiom~\ref{ax:budget}, if the cost of a solve grows with level, the solve
-rate obeys
-\[
-  \frac{dN}{dt} \;=\; \frac{R}{k\big(d(t)\big)},
-\]
-and since consuming level $d$ takes time exponential in $d$, the typical
-level grows slowly, $d(t) \sim \log t$, forcing sub-linear,
-power-law-like growth of $N(t)$. The cost function $k$ plays the role of
-matter content: different $k$ give different deceleration exponents.
-\gap{Make this a theorem for at least one explicit $k$; compare exponents
-against the toy simulation once the sampling estimator allows long runs.}
+(Section~\ref{sec:prerequisites}). A fill at level $d$ mints questions at
+level $d+1$, with supply growing like $4^d$, so completion never depletes
+the supply of available moves and no region ever finishes.
+
+The tower taxes fills alone. Sprouts have constant cost and remain available
+at every vertex, and by Remark~\ref{rem:inert} fills are metrically inert, so
+the growth of space is carried by sprouts and coherence escalation exerts no
+direct brake on it. The tower acts only through competition for budget, and
+under a Gibbs rule expensive moves lose share, so the mix shifts towards
+sprouting as the typical level rises.
+
+The growth law is therefore decided by the second question of
+Remark~\ref{rem:budgetgaps}. With one budget for the whole universe the move
+rate saturates at a constant once cheap sprouts dominate, vertex count grows
+linearly, and the scale factor decelerates. With a budget per region the
+total activity is proportional to the number of vertices, growth is
+exponential, and the late universe is a de Sitter phase. Locality favours
+the second reading. We assert neither, and we draw no comparison with the
+observed history of deceleration followed by late-time acceleration, since
+Remark~\ref{rem:pregeometric} and problem O4 stand between vertex count and
+any scale factor.
+\gap{Settle the global versus local budget question and derive the growth
+law for at least one explicit cost function $k$; compare against the toy
+simulation once the sampling estimator allows long runs.}
 
 \begin{remark}[Two arrows]
 The framework contains two independent monotone quantities: the entropy

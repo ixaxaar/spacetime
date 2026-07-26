@@ -23,9 +23,28 @@ limit object is a quasicategory. Alternative: all horns (Kan limit), giving
 an undirected, fully invertible structure. Rejected because directedness
 provides native causal orientation, keeps inverses costly rather than free,
 and makes orientation-reversal (the Feynman--St\"uckelberg reading of
-antimatter) expressible. Note the arrow of time does \emph{not} depend on
-this choice (it comes from non-deletion), so the Kan variant remains a
-coherent, reversible-substrate cousin worth exploring.
+antimatter) expressible. The framework carries two arrows and they behave
+differently under this choice. The non-deletion arrow survives any filling
+policy, since a run never runs backwards, whereas the orientation arrow does
+not, which is the sharper cost of filling every horn.
+
+\paragraph{D2$'$: The groupoid completion.} A variant places the mirror not
+beside the universe but on top of it, so that the same vertices carry the
+reverse of every edge and the completed object is a Kan complex, the
+standard model of an $\infty$-groupoid. It delivers a total object that is
+trivial in the strongest sense. It carries three costs. Reversal exchanges
+the two outer horns and sends inner horns to inner horns, so no assignment
+of filling policies to branches produces it, and it can be had only by
+admitting outer horns as moves, which reverses D2. The two universes cease
+to be places, since they share every cell, and the two-branch picture with a
+big bang between them is lost. An object carrying all of its inverses is
+isomorphic to its own reversal at every stage, so the orientation arrow
+never appears at all. A further option avoids the last cost by making
+reversibility purchasable rather than built in, so that an outer-horn fill
+is an ordinary move at an ordinary price. Most edges then lack an inverse at
+any finite time, the orientation arrow exists as defined, and the Kan
+complex is the limit the process converges to, at which point heat death and
+full reversibility coincide. This variant is uncosted and remains open.
 
 \paragraph{D3: The creation move.} Chosen: sprouting from existing
 vertices. Alternatives: (a) a rich initial seed, rejected as engineered;
@@ -38,10 +57,20 @@ derived by maximum entropy (Axiom~\ref{ax:inference},
 Conjecture~\ref{conj:gibbs}). The postulated alternatives, each a different
 cosmology, are recorded for comparison: free sprouting (exponential, pure
 cosmological constant); frustration-triggered (self-limiting);
-fill-triggered (linear, expansion locked to solving rate);
+fill-triggered (linear, expansion locked to the completion rate);
 curvature-coupled via discrete Ricci curvature (geometry back-reaction,
 Einstein-equation-shaped). Under the max-ent programme these should
 reappear as consequences of which constraints are imposed.
+
+\paragraph{D4$'$: One budget or many.} Chosen: undecided, and the choice is
+recorded here because it fixes the growth law
+(Section~\ref{sec:tower}). A single budget for the whole universe gives a
+move rate that saturates and a scale factor that decelerates. A budget per
+region gives activity proportional to the number of vertices and exponential
+growth. The locality constraint (C3) of Definition~\ref{def:maxent} favours
+the per-region reading, which would place a de Sitter phase in the late
+universe, but the constraint has not been formulated carefully enough to
+settle it.
 
 \paragraph{D5: What entropy counts.} Chosen (v1): orderings only,
 $S = \log \Ext(\past{e})$. Alternative: orderings \emph{plus} filler
@@ -57,8 +86,12 @@ first.
 
 In decreasing order of severity.
 
-\paragraph{O1: The Lorentz group.} The budget argument yields time
-dilation; it does not yield relativity of simultaneity. The required
+\paragraph{O1: The Lorentz group.} Neither time dilation nor relativity of
+simultaneity is established. Proper time is defined as a longest chain
+(Definition~\ref{def:propertime}), for which the Lorentz factor is a theorem
+whenever the causal order resembles a sprinkling into a Lorentzian manifold,
+so dilation reduces to the question of whether the orders this dynamics
+generates are of that kind. The required
 property is causal invariance: confluence of the rewriting system, so that
 all linearizations generate the same causal order and no experiment detects
 a preferred one. Whether confluence plus causal structure yields the actual
@@ -89,19 +122,27 @@ mechanics.
 Distances, dimension (spectral or Hausdorff), and curvature must be shown
 to emerge; discrete Ricci curvatures and spectral-dimension flow are the
 natural instruments, and comparison with the CDT dimensional-reduction
-results \citep{ambjorn2012cdt} is an obvious benchmark.
+results \citep{ambjorn2012cdt} is an obvious benchmark. Two constraints
+narrow the search. Coherence escalation creates cells of unbounded
+dimension, so by Remark~\ref{rem:pregeometric} the emergent geometry must be
+built from the one-skeleton and the causal order alone, with higher cells
+contributing nothing metric. And by Remark~\ref{rem:inert} the weighted
+distance of Definition~\ref{def:weight} is carried entirely by sprouts, so
+any emergent scale factor is a statement about vertex count rather than
+about cell count.
 
-\paragraph{O5: The conserved charge of the tower.} Solving promotes
+\paragraph{O5: The conserved charge of the tower.} Filling promotes
 questions up the coherence tower monotonically. Whether a genuine conserved
 flux (``question current'') exists, and whether the two arrows ($S$ and
 $d$) are provably aligned, is open.
 
 \subsection{Conclusion}
 
-We have proposed a framework in which space is a growing directed
-simplicial set, time is the process of answering its composition questions,
+We have proposed a framework in which the fundamental object is a growing
+directed simplicial set, time is the process of completing its inner horns,
 entropy is the count of forgotten orderings of a frame-invariant causal
-past, and the dynamical law is an inference, not a postulate. The proved
-core is small, one experiment exists, and the failure modes are stated. The
-next steps are fixed: the two lemma proofs, the max-ent derivation, the
-sampling estimator, and the literature scan, in that order of weekends.
+past, and the dynamical law is an inference rather than a postulate. The
+proved core is small, one experiment exists, and the failure modes are
+stated. The next steps are the two lemma proofs, the maximum-entropy
+derivation, a sampling estimator for long runs, and the horizon and area
+definitions that problem O2 requires.

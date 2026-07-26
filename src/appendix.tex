@@ -1,17 +1,24 @@
 \section{The budget triangle}
 \label{app:budget}
 
-Let the total move rate of any subsystem be $c$ (Axiom~\ref{ax:budget}) and
-suppose a subsystem translates at speed $v$. Writing the split as orthogonal
+Let the move rate of any subsystem be $c$ (Axiom~\ref{ax:budget}) and suppose
+a subsystem translates at speed $v$. Writing the split as orthogonal
 components, the internal rate $r$ satisfies $r^2 + v^2 = c^2$, hence
 \[
   r \;=\; c\,\sqrt{1 - v^2/c^2},
 \]
 the standard dilation factor, with the photon limit $r = 0$ at $v = c$.
-The orthogonal (Euclidean) composition is here an \emph{assumption}; the
-question of why the emergent geometry of linearizations is Lorentzian
-rather than Euclidean, that is, why straight worldlines \emph{maximize}
-accumulated solving, is part of problem O1.
+
+The orthogonal composition is an assumption and not a consequence of the
+move set. Counting moves gives a linear split instead. A track of $N$ events
+of which $k$ are internal has $v/c = (N-k)/N$ and internal rate $k/N$, so
+that $r = c\,(1 - v/c)$, which differs from the expression above by a factor
+of three at $v = 0.8c$. Recovering the quadratic form requires the emergent
+geometry of linearizations to be Lorentzian rather than Euclidean, which is
+to say that straight worldlines must maximise accumulated internal filling.
+That is the content of problem O1, and Definition~\ref{def:propertime} is
+framed so that the required statement is the known longest-chain theorem for
+sprinklings rather than a new assumption.
 
 \section{Simulation code}
 \label{app:code}

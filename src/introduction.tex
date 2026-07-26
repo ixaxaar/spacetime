@@ -30,14 +30,20 @@ triangles glued around a vertex.
 \begin{figure}[ht]
   \centering
   \input{figures/deficit_angle}
-  \caption{Flat equilateral triangles glued around a single vertex. With five
-  triangles the angles at the vertex sum to $300^\circ$, the surface cannot
-  lie flat, and it cones up. With six they sum to $360^\circ$ and the surface
-  is genuinely flat. With seven they sum to $420^\circ$, there is no room for
-  the seventh triangle in the plane, and the surface buckles into a saddle.
-  The shortfall $\delta = 360^\circ - \sum_i \theta_i$ is called the deficit
-  angle, and it accounts for all of the curvature of the glued surface.}
-  \label{fig:deficit}
+  \caption{Curvature in Regge calculus lives at the vertices, not on the
+  interiors of the simplices. Gluing $k$ flat unit equilateral triangles
+  around a single point makes the angles there sum to $k \cdot 60^\circ$,
+  and the deficit angle $\delta = 2\pi - \sum_i \theta_i$ measures the
+  failure to close up in the plane. Top row shows the resulting surface in
+  $\mathbb{R}^3$, bottom row shows the same triangles unfolded flat, where
+  $\delta$ is directly visible. For $k=5$ the angles fall short, the gap
+  closes only by lifting the vertex out of the plane, and the cone carries
+  positive curvature concentrated at a point. For $k=6$ the angles close
+  exactly and the neighbourhood is isometric to a patch of the Euclidean
+  plane. For $k=7$ the seventh triangle (dashed) overlaps the first, the
+  excess forces the surface to buckle into a saddle, and the curvature is
+  negative. Every triangle is flat throughout, so all the geometry is
+  carried by the combinatorics of how they are glued.}
 \end{figure}
 
 Because the combinatorics is now free, the number of simplices differs from

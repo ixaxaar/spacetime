@@ -86,14 +86,14 @@ Both are needed, and neither replaces the other.
 \subsection{Events, runs, and the causal order}
 
 Growth happens one move at a time.
-A \textbf{run} is a finite sequence of move applications starting from the single vertex.
+A \textbf{run} is a finite partially ordered set of move applications starting from the single vertex.
 Since no move deletes anything, an event can only consume cells that already exist.
 Event $b$ therefore depends on event $a$ when the match of $b$ uses a cell created by $a$, and the reflexive-transitive closure of dependency is the causal order.
 A reference frame is a linearization of this order.
 
 \begin{definition}[]
 \label{def:run}
-A \textbf{run} is a finite ordered sequence of move applications starting from the single vertex $\Delta^0$.
+A \textbf{run} is a finite partially ordered set of move applications starting from the single vertex $\Delta^0$.
 Each application is an event, which may be a sprout or a fill.
 \end{definition}
 
@@ -133,10 +133,31 @@ Whether the diagram is well-defined, and whether it agrees with what any sequent
 
 \begin{proposition}[]
 \label{prop:welldef}
-The dependency relation of Run~\ref{def:run} is a partial order, and the colimit in Definition~\ref{def:state} exists and is independent of linearization.
+The causal order on the events of a run is a partial order, and the colimit in Definition~\ref{def:state} exists and agrees with the state produced by any sequential build along a linearization of the run.
 \end{proposition}
-\gap{Proof to be written (target: next session).
-Sketch: antisymmetry from acyclicity of creation-before-use; colimit exists since $\sset$ is cocomplete; independence is the universal property.}
+
+\begin{proof}
+Write $(E, \le)$ for the run and $X_D$ for the colimit of the diagram of rule applications over a downset $D \subseteq E$, which exists whenever the diagram is defined since $\sset$ is cocomplete.
+A move application at $b$ comes with a match $m_b : L \to X_{\{a : a < b\}}$, so every cell that $b$ consumes is created by an event strictly below $b$.
+Hence $a \prec b$ implies $a < b$, so dependency is a subrelation of a finite partial order and therefore acyclic.
+Its reflexive-transitive closure is then a partial order, which is the causal order.
+
+For the second claim, define $X_D$ by recursion on the size of the downset $D$.
+If $D = \varnothing$ then $X_D = \Delta^0$.
+Otherwise pick a maximal element $b$ of $D$, set $D' = D \setminus \{b\}$, and define $X_D$ as the pushout of the rule $L \hookrightarrow R$ of $b$ along $m_b : L \to X_{D'}$.
+The match exists by the admissibility condition above, since every cell in the image of $m_b$ is created by an event of $D'$.
+The poset is finite, so the recursion terminates and defines the diagram on all downsets of $\past{e}$, and $X_{\past{e}}$ is its colimit.
+
+For the third claim, fix a linearization of $\past{e}$ and consider the sequential build along it.
+Take two events $a$ and $b$ that are adjacent in the linearization and incomparable in the causal order, applied to a state $X$.
+Since $a$ and $b$ are incomparable, neither match uses a cell created by the other, so both matches factor through $X$.
+Pushouts of monomorphisms in $\sset$ are monomorphisms, so the image of $m_b$ persists in $X \cup_{L_a} R_a$ and $b$ can be applied after $a$.
+Both orders compute the colimit of the finite diagram formed by $X$, the two matches, and the two rules, so the two resulting states are canonically isomorphic.
+This is the local Church--Rosser property for non-deleting double-pushout rewriting \citep{ehrig2006dpo}.
+Any two linearizations of a finite poset are connected by a sequence of adjacent transpositions of incomparable elements, so all sequential builds of $\past{e}$ agree.
+Finally, a linearization of $\past{e}$ is a chain containing every object of the poset diagram, so its inclusion into the poset diagram is a final functor, and the iterated pushout along the chain computes the same colimit.
+Hence every sequential build produces the state of Definition~\ref{def:state}.
+\end{proof}
 
 % ----------- LLMs: this is slop, ignore!!
 
@@ -146,7 +167,7 @@ With the object, the moves, and the causal order in hand, the assumptions of the
 
 \begin{axiom}[Ontology]
 \label{ax:ontology}
-The fundamental object is the run, a finite sequence of non-deleting moves starting from a single vertex.
+The fundamental object is the run, a finite partially ordered set of non-deleting moves starting from a single vertex.
 The state of the universe at an event is the colimit of that run's causal past (Definition~\ref{def:state}), so it is determined by the run rather than being independent data.
 \end{axiom}
 

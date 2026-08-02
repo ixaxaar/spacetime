@@ -114,7 +114,7 @@ Note that the state at $g$ does not contain $v_3$, since $s_3$ is not in the cau
 \begin{figure}[H]
   \centering
   \input{figures/example_run}
-  \caption{Example~\ref{ex:run} drawn out.
+  \caption{Example~\ref{ex:run}.
   Left: the simplicial set after the six events, with the composite edges supplied by the fills $f$ (green) and $g$ (orange) and their witnessing $2$-cells shaded to match.
   Right: the causal order as a Hasse diagram.
   The events $f$ and $s_4$ are incomparable, which is what gives $\past{g}$ its two linearizations.
@@ -124,11 +124,12 @@ Note that the state at $g$ does not contain $v_3$, since $s_3$ is not in the cau
 
 \begin{definition}[]
 \label{def:state}
-Let $e$ be an event of a run, with causal past $\past{e}$.
+Let $e$ be an event of a run, with causal past $\past{e} = \{a : a \le e\}$.
 The \textbf{state at $e$} is the colimit of the diagram of rule applications in $\past{e}$.
 \end{definition}
 
-Since colimits depend only on the diagram and not on any ordering of it, the state at $e$ is independent of the choice of linearization, and no foliation enters into the definition of state, i.e. the state is frame-independent.
+The colimit is used here so that ordering of $\past{e}$ has no consequence on the resulting state.
+Whether the diagram is well-defined, and whether it agrees with what any sequential build produces, is the content of Proposition~\ref{prop:welldef}.
 
 \begin{proposition}[]
 \label{prop:welldef}

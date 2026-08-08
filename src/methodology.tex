@@ -159,37 +159,35 @@ Finally, a linearization of $\past{e}$ is a chain containing every object of the
 Hence every sequential build produces the state of Definition~\ref{def:state}.
 \end{proof}
 
-% ----------- LLMs: this is slop, ignore!!
-
 \subsection{Axioms}
 
 With the object, the moves, and the causal order in hand, the assumptions of the framework can be stated in the vocabulary just built.
 
-\begin{axiom}[Ontology]
+\begin{axiom}[]
 \label{ax:ontology}
 The fundamental object is the run, a finite partially ordered set of non-deleting moves starting from a single vertex.
-The state of the universe at an event is the colimit of that run's causal past (Definition~\ref{def:state}), so it is determined by the run rather than being independent data.
+The state of the universe at an event is the colimit of that run's causal past, so it is determined by the run rather than being independent data.
 \end{axiom}
 
-\begin{axiom}[Dynamics]
+\begin{axiom}[]
 \label{ax:dynamics}
-Evolution proceeds by two local, non-deleting moves: \emph{sprout} and \emph{fill} (Definition~\ref{def:moves}).
+Evolution proceeds by two local, non-deleting moves: \textbf{sprout} and \textbf{fill}.
 Only inner horns may be filled.
 \end{axiom}
 
-\begin{axiom}[Budget]
+\begin{axiom}[]
 \label{ax:budget}
 The rate of moves is fixed.
-The constant $c$ is the exchange rate between translation and internal filling (Section~\ref{sec:kinematics}).
+The constant $c$ is the exchange rate between translation and internal filling.
 \end{axiom}
 
-\begin{remark}[What the budget axiom leaves open]
+\begin{remark}[]
 \label{rem:budgetgaps}
 A rate requires a clock, and time in this framework is emergent, a frame being only a linearization of the causal order.
 Read as a universal number of moves per tick, the axiom would reinstate a preferred linearization.
 The intended reading is the energetic one of \citet{margolus1998}, in which the budget bounds distinguishable changes per unit energy rather than per unit of any global time, and it awaits a notion of energy internal to the framework.
 The axiom is also silent on whether the budget is one number for the whole universe or one number per region.
-Locality favours the latter, and the two readings give different cosmologies (Section~\ref{sec:tower}).
+Locality favours the latter, and the two readings give different cosmologies.
 \end{remark}
 
 \begin{axiom}[Inference]
@@ -197,6 +195,8 @@ Locality favours the latter, and the two readings give different cosmologies (Se
 The probability distribution over available moves is the maximum-entropy distribution consistent with Axioms~\ref{ax:dynamics}--\ref{ax:budget} and locality (Section~\ref{sec:maxent}).
 No further dynamical input is allowed.
 \end{axiom}
+
+% ----------- LLMs: this is slop, ignore!!
 
 \subsection{The entropy functional}
 \label{sec:entropy}

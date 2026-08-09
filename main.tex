@@ -33,8 +33,8 @@
 
 % notation macros
 \newcommand{\sset}{\mathsf{sSet}}
-\newcommand{\causalO}[1]{\mathcal{C}_{\le_H}(#1)}
-\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\causalO}[1]{\mathcal{C}_{\prec_\mathcal{H}}(#1)}
+\newcommand{\Lin}{\mathcal{L}}
 \newcommand{\colim}{\operatorname*{colim}}
 \newcommand{\Cat}{\mathsf{Cat}}
 \newcommand{\N}{\mathrm{N}}
@@ -60,7 +60,7 @@ that realization forgets. The completed limit of the filling process is a
 quasicategory, in which every composition question has an answer while edges
 remain directed. Each move is an event that consumes cells created by
 earlier events, the dependency of moves forms a partial order, and a
-reference frame is a choice of linearization of this order. The entropy of
+reference frame is a choice of linear extension of this order. The entropy of
 an event is the logarithm of the number of linear extensions of its causal
 past. This quantity measures how much of the past could
 have happened in a different order, and grows monotonically, which we prove;

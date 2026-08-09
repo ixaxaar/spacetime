@@ -89,7 +89,8 @@ The \textbf{rule} of an event is a specification that contains three pieces of i
   \item \textbf{Apply}: What new simplices the move puts in there.
 \end{enumerate}
 Formally, the rule is an inclusion $F \hookrightarrow A$ of finite simplicial sets, from the \textbf{find pattern} $F$ to the \textbf{apply pattern} $A$.
-The match is a map $m_e : F \to X_{<e}$ from the find pattern into the state of the events strictly preceding $e$ (Definition~\ref{def:state}), and apply is the pushout of the rule along the match.
+The match is an injective map $m_e : F \hookrightarrow X_{<e}$ from the find pattern into the state of the events strictly preceding $e$ (Definition~\ref{def:state}), and apply is the pushout of the rule along the match.
+Injectivity forbids folded spots, where two simplices of the pattern land on the same simplex of the state.
 The event adds the simplices of $A$ not in the image of $F$.
 The find and apply patterns of an event $e$ are written $F_e$ and $A_e$.
 \end{definition}
@@ -107,7 +108,7 @@ Three kinds of rules exist:
     Apply: attach $\Delta^1$ by its source vertex (the coface $d^1 : \Delta^0 \hookrightarrow \Delta^1$), adding an edge from $v$ to a fresh vertex.
   \item \textbf{A fill.}
     Find: every unfilled inner horn $\Lambda^n_k$ with $0 < k < n$ qualifies.
-    Match: the chosen horn, a map $\Lambda^n_k \to X_{<e}$.
+    Match: the chosen horn, an embedded copy of $\Lambda^n_k$ in $X_{<e}$.
     Apply: attach $\Delta^n$ along the horn ($\Lambda^n_k \hookrightarrow \Delta^n$), adding the missing face and the interior.
 \end{itemize}
 

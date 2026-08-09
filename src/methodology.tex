@@ -314,39 +314,3 @@ Now finish as follows.
 Hence every sequential build produces the state $X_e$ of Definition~\ref{def:state}.
 \end{proof}
 
-\subsection{Axioms}
-
-With the object, the moves, and the causal order in hand, the assumptions of the framework can be stated in the vocabulary just built.
-
-\begin{axiom}[]
-\label{ax:ontology}
-The fundamental object is the history, an unending partially ordered set of non-deleting moves with the big bang as least event.
-The state of the universe at an event is the colimit of the diagram of rule applications in its causal past, so it is determined by the history rather than being independent data.
-\end{axiom}
-
-\begin{axiom}[]
-\label{ax:dynamics}
-Evolution proceeds by two local, non-deleting moves: \textbf{sprout} and \textbf{fill}.
-Only inner horns may be filled.
-\end{axiom}
-
-\begin{axiom}[]
-\label{ax:budget}
-The rate of moves is fixed.
-The constant $c$ is the exchange rate between translation and internal filling.
-\end{axiom}
-
-\begin{remark}[]
-\label{rem:budgetgaps}
-A rate requires a clock, and time in this framework is emergent, a frame being only a linearization of the causal order.
-Read as a universal number of moves per tick, the axiom would reinstate a preferred linearization.
-The intended reading is the energetic one of \citet{margolus1998}, in which the budget bounds distinguishable changes per unit energy rather than per unit of any global time, and it awaits a notion of energy internal to the framework.
-The axiom is also silent on whether the budget is one number for the whole universe or one number per region.
-Locality favours the latter, and the two readings give different cosmologies.
-\end{remark}
-
-\begin{axiom}[Inference]
-\label{ax:inference}
-The probability distribution over available moves is the maximum-entropy distribution consistent with Axioms~\ref{ax:dynamics}--\ref{ax:budget} and locality (Section~\ref{sec:maxent}).
-No further dynamical input is allowed.
-\end{axiom}

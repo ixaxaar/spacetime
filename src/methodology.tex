@@ -97,7 +97,7 @@ A reference frame is a linear extension of this order \citep{davey2002lattices}.
 
 \begin{definition}[History]
 \label{def:history}
-A \textbf{history} $\mathcal{H}$ is a partially ordered set of events with a least element $\bot$, the big bang, in which every other event $e$ is a sprout or a fill applied at a specified spot of the simplicial set built by the events strictly preceding $e$ (the state $X_{<e}$ of Definition~\ref{def:state}), subject to three conditions:
+A \textbf{history} $\mathcal{H}$ is a partially ordered set of events with a least element $\bot$, the big bang, in which every other event $e$ is a sprout or a fill applied at a specified spot of the simplicial set built by the events strictly preceding $e$, subject to three conditions:
 
 \begin{enumerate}
   \item Every event has only finitely many events preceding it.
@@ -106,7 +106,25 @@ A \textbf{history} $\mathcal{H}$ is a partially ordered set of events with a lea
 \end{enumerate}
 \end{definition}
 
-A history maintains a record of every move and all of its data e.g. its spot and direction.
+\begin{definition}[Rule and match]
+\label{def:rulematch}
+Every event $e$ of a history has a \textbf{rule}, which is one of three inclusions of finite simplicial sets.
+The big bang has rule $\varnothing \hookrightarrow \Delta^0$.
+A sprout has rule $d^1 : \Delta^0 \hookrightarrow \Delta^1$.
+A fill has rule $\Lambda^n_k \hookrightarrow \Delta^n$ for some $0 < k < n$.
+The left- and right-hand sides of the rule are written $L_e$ and $R_e$, following double-pushout rewriting \citep{ehrig2006dpo}.
+The \textbf{match} of $e$ is a map $m_e : L_e \to X_{<e}$ from the left-hand side of its rule into the state of the events strictly preceding $e$, specifying the spot at which the rule is applied.
+The match of the big bang is the unique map out of the empty simplicial set.
+\end{definition}
+
+\begin{remark}
+The state $X_{<e}$ is built from the matches of the events preceding $e$, so rules, matches, and states are defined by mutual recursion.
+The recursion is well-founded, since every event has only finitely many predecessors.
+\end{remark}
+
+\gap{Whether the match of a fill must be injective, so that only embedded horns can be filled, is undecided. The choice interacts with the at-most-once filling convention of Definition~\ref{def:moves}.}
+
+A history maintains a record of every event and all of its data, namely its rule and its match.
 Different histories can result in the same simplicial set.
 This implies there is a background of all possible histories, and reality is a growth process that collapses this background into a single history.
 
@@ -232,10 +250,9 @@ The induction is an algorithm that removes one event per step.
   \item \emph{Inductive step.}
         Suppose $X_{D'}$ has been constructed for every downset $D'$ with $|D'| < |D|$.
         Choose a maximal element $b$ of $D$ and set $D' = D \setminus \{b\}$, which is again a downset and has one element fewer.
-        The event $b$ is a sprout, a fill, or the big bang, and its rule is written as an inclusion $L_b \hookrightarrow R_b$ of finite simplicial sets. For a sprout $L_b = \Delta^0$ and $R_b = \Delta^1$, for a fill $L_b = \Lambda^n_k$ and $R_b = \Delta^n$, and for the big bang $L_b = \varnothing$ and $R_b = \Delta^0$.
-        The spot of $b$ is recorded in the history as a map $m_b : L_b \to X_{<b}$, called the \emph{match} of $b$, with $X_{<b}$ as in Definition~\ref{def:state}.
-        The causal past of $b$ is a downset contained in $D'$, and building $X_{D'}$ along a linear extension that lists this past first passes through $X_{<b}$.
-        Each attachment is a pushout of a monomorphism and hence a monomorphism, so $X_{<b}$ includes into $X_{D'}$, and we also write $m_b$ for the composite $L_b \to X_{<b} \hookrightarrow X_{D'}$.
+        Let $L_b \hookrightarrow R_b$ be the rule of $b$ and $m_b : L_b \to X_{<b}$ its match, as in Definition~\ref{def:rulematch}.
+        Every simplex in the image of $m_b$ is created by an event strictly below $b$, and every such event lies in $D'$, so the image sits inside $X_{D'}$ with its face relations unchanged, since no move deletes or re-glues anything.
+        We therefore also write $m_b$ for the map $L_b \to X_{D'}$.
         Now define $X_D$ by the pushout square
         \[
         \begin{tikzcd}

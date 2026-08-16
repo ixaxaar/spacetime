@@ -16,6 +16,9 @@ sim:
 lean:
 	cd lean && lake build
 
+watch:
+	latexmk -pvc -view=none -pdf -interaction=nonstopmode $(MAIN)
+
 clean:
 	rm -f $(MAIN).aux $(MAIN).bbl $(MAIN).blg $(MAIN).log $(MAIN).out $(MAIN).toc
 
@@ -25,10 +28,11 @@ distclean: clean
 help:
 	@echo "Targets:"
 	@echo "  all       - build $(MAIN).pdf (default)"
+	@echo "  watch     - watch sources and rebuild $(MAIN).pdf continuously"
 	@echo "  sim       - run toy simulation (sim/toy_universe.py)"
 	@echo "  lean      - build Lean 4 + mathlib skeleton (lean/)"
 	@echo "  clean     - remove LaTeX aux files"
 	@echo "  distclean - clean + remove $(MAIN).pdf"
 	@echo "  help      - show this message"
 
-.PHONY: all sim lean clean distclean help
+.PHONY: all watch sim lean clean distclean help

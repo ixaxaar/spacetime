@@ -3,7 +3,8 @@
 
 \subsection{The object}
 
-At any moment, the universe is a finite simplicial set with directed edges.
+At any moment, the universe is a finite simplicial set.
+Its edges are directed by the simplicial structure itself, since the face maps assign every edge a source vertex and a target vertex.
 It begins as a single vertex $\Delta^0$ and it grows from there.
 
 The object is pre-geometric.
@@ -46,14 +47,14 @@ The simplicial set grows by two local, non-deleting \textbf{moves}, which are pu
   $v_2 \to v_3$. Each fill mints its own composite, so $a$ and $b$ are
   parallel edges rather than a single shared one. Only once both are
   present does the inner horn $\Lambda^3_1$ exist, since its three faces
-  already carry all six edges of $\Delta^3$; filling it therefore adds a
+  already carry all six edges of $\Delta^3$. Filling it therefore adds a
   $2$-simplex and a $3$-simplex but no edge. Only inner horns are ever filled,
   so edge direction is never inverted and the limit object is a
   quasicategory.}
   \label{fig:sprout-fill}
 \end{figure}
 
-The initial object is a single vertex $\Delta^0$. At any moment the current state is a finite simplicial set with directed edges, and the next move is chosen from the set of available moves, which is the disjoint union of all sprout sites and all unfilled inner horns.
+The initial object is a single vertex $\Delta^0$. At any moment the current state is a finite simplicial set, and the next move is chosen from the set of available moves, which is the disjoint union of all sprout sites and all unfilled inner horns.
 
 
 Every vertex is created by exactly one sprout, which supplies its first incoming edge.
@@ -68,9 +69,22 @@ Both operations preserve homotopy equivalences, so the homotopy type of the simp
 In our case, the homotopy type remains that of a point.
 
 
-Only two moves ever add an edge.
-A sprout adds one, and a fill in dimension two adds one.
-Fills in dimension three and above add no edges at all, only simplices that say existing paths agree.
+Which moves add an edge is a combinatorial fact about horns.
+
+\begin{lemma}[Which moves add edges]
+\label{lem:edges}
+A sprout adds exactly one edge, a fill in dimension two adds exactly one edge, and a fill in dimension three or above adds no edge.
+\end{lemma}
+
+\begin{proof}
+A sprout attaches $\Delta^1$ along its source vertex, so it adds the one edge of $\Delta^1$.
+An inner horn $\Lambda^n_k$ contains every face of $\Delta^n$ except the interior and the $k$-th $(n-1)$-face.
+For $n = 2$ the missing face is itself an edge, the composite, and the fill adds exactly that edge.
+For $n \geq 3$, an edge $\{i, j\}$ of $\Delta^n$ lies in the face opposite vertex $l$ for every $l \notin \{i, j\}$, and at least two such $l$ exist because $\Delta^n$ has at least four vertices.
+The horn misses at most one face, so every edge of the attached $\Delta^n$ already lies in a face the horn contains, and the fill adds no edge.
+\end{proof}
+
+Fills in dimension three and above add only simplices that say existing paths agree.
 So every chain is built out of edges, and nothing above dimension one can be part of a chain.
 Whatever geometric and metric structure this model has is carried by the vertices, the edges, and the causal order between events.
 Treat the edges as a multigraph.
@@ -112,12 +126,24 @@ Three kinds of rules exist:
     Apply: attach $\Delta^n$ along the horn ($\Lambda^n_k \hookrightarrow \Delta^n$), adding the missing face and the interior.
 \end{itemize}
 
+\begin{remark}[The at-most-once convention]
+\label{rem:atmostonce}
+The last clause of Definition~\ref{def:moves} is automatic under the fill rule as stated, since the find pattern offers only unfilled inner horns, and a horn, once filled, is never offered again.
+The clause is kept because it records a choice.
+The alternative convention lets a filled horn be filled again, so that one horn can supply several witnesses to the same composite.
+That variant changes what the events record, and with it any entropy built from the event record.
+It is not studied here.
+\end{remark}
+
 \subsection{History, runs, and the causal order}
 
 Growth happens one move at a time.
 The universe at any moment is a finite stage of an ongoing history, and each event after the big bang is a move applied at a particular spot.
 Since no move deletes anything, an event can only apply to simplices that already exist.
-Event $b$ therefore depends on event $a$ when the spot at which $b$ is applied contains a simplex created by $a$. For a sprout the spot is a single vertex, a $0$-simplex, and for a fill it is the simplices of a horn.
+Event $b$ therefore depends on event $a$ when the spot at which $b$ is applied contains, among its maximal simplices, one created by $a$, where a simplex of the spot is maximal when it is not a face of another simplex of the spot.
+For a sprout the spot is a single vertex, which is maximal.
+For a fill the maximal simplices of the horn $\Lambda^n_k$ are its $(n-1)$-faces, so a dimension-two fill depends on the two events that created the edges of its horn and not directly on the events that created its vertices.
+The vertex creators still lie in the causal past by transitivity, since a simplex is only ever created after its vertices already exist.
 The causal order of an event $e$ is the set of events that $e$ depends on directly or via other events, together with $e$ itself, with the order among them.
 A reference frame is a linear extension of this order \citep{davey2002lattices}.
 
@@ -134,16 +160,32 @@ A \textbf{history} $\mathcal{H}$ is a partially ordered set of events with a lea
 
 A history maintains a record of every event and all of its data, namely its rule.
 Different histories can result in the same simplicial set.
-This implies there is a background of all possible histories, and reality is a growth process that collapses this background into a single history.
+Nothing in the framework as stated selects one history over another, and we do not treat the collection of all histories as a single mathematical object here.
+What selects the realized history is left open.
+Posing that selection as a well-formed inference problem is one of the aims of this work.
 
 \begin{definition}[Causal Order]
 \label{def:causalorder}
-A \textbf{causal order} $\causalO{e}$ of a history $\mathcal{H}$ for an event $e$ is the set of events preceding and including $e$, partially ordered by $\prec$, where $a \prec b$ if and only if $b$ depends on $a$ directly or via other events. The \textbf{causal past} of $e$ is the causal order with $e$ itself removed.
+A \textbf{causal order} $\causalO{e}$ of a history $\mathcal{H}$ for an event $e$ is the set of events preceding and including $e$, partially ordered by $\prec$, where $a \prec b$ if and only if $b$ depends on $a$ directly or via other events. Direct dependency is witnessed only by the maximal simplices of the spot, as fixed above, so a fill depends directly on the creators of the faces of its horn and only indirectly on the creators of its vertices. The \textbf{causal past} of $e$ is the causal order with $e$ itself removed.
 \end{definition}
+
+\begin{lemma}[Acyclicity of the one-skeleton]
+\label{lem:acyclic}
+The directed multigraph formed by the vertices and edges of the state at any event has no directed cycles.
+\end{lemma}
+
+\begin{proof}
+Every vertex is created by a unique event, the big bang for the initial vertex and a sprout for every other vertex, and we write $\varepsilon(v)$ for the event that created $v$.
+We show by induction along the causal order that every edge $u \to w$ of every state satisfies $\varepsilon(u) \prec \varepsilon(w)$.
+A sprout edge leaves a vertex that already exists and ends at the fresh vertex the sprout creates, so the creator of its source lies strictly below the sprout, which is the creator of its target.
+A composite edge $u \to w$ supplied by a fill comes with the two edges $u \to v$ and $v \to w$ of its horn, which were created earlier, and induction gives $\varepsilon(u) \prec \varepsilon(v) \prec \varepsilon(w)$.
+By Lemma~\ref{lem:edges} these are all the edges there are.
+A directed cycle $v_0 \to v_1 \to \dots \to v_0$ would now force $\varepsilon(v_0) \prec \varepsilon(v_0)$, which a strict partial order forbids.
+\end{proof}
 
 \begin{definition}[Run]
 \label{def:run}
-The \textbf{run} at event $e$, written $\mathcal{R}(e)$, is the subposet of $\causalO{e}$ consisting of the big bang and the events that add an edge, namely the sprouts and the dimension-two fills, with the induced order.
+The \textbf{run} at event $e$, written $\mathcal{R}(e)$, is the subposet of $\causalO{e}$ consisting of the big bang and the events that add an edge, with the induced order. By Lemma~\ref{lem:edges} these are exactly the sprouts and the dimension-two fills.
 \end{definition}
 
 The run is closed downward.
@@ -157,7 +199,7 @@ Moreover, the run at $e$ is a history in its own right, since it satisfies the t
 \begin{enumerate}
   \item Every event of the run has only finitely many events below it in the history, hence also in the run.
   \item The big bang is included by definition and stays the least event.
-  \item The induced order on the run is generated by creation-before-use, since every dependency chain between two edge-adding events passes only through edge-adding events.
+  \item The induced order on the run is generated by creation-before-use. A sprout depends only on the event that created its vertex, which is a sprout, and a dimension-two fill depends only on the events that created the two edges of its horn, which are sprouts or dimension-two fills. So every direct dependency of an edge-adding event is again an edge-adding event, and dependency chains between run events never leave the run.
 \end{enumerate}
 
 At any moment, the run is the partially ordered record of exactly those events that change the one-skeleton.
@@ -219,12 +261,33 @@ Whether the diagram is well-defined, and whether it agrees with what any sequent
   \centering
   \input{figures/example_run}
   \caption{Example~\ref{ex:run}.
-  Left: the state at $h$, the simplicial set itself, with sprout edges plain and the three composites colored by the fill that supplied them; the face $(v_0, v_1, v_4)$ (purple) and the solid tetrahedron come from $h$.
+  Left: the state at $h$, the simplicial set itself, with sprout edges plain and the three composites colored by the fill that supplied them. The face $(v_0, v_1, v_4)$ (purple) and the solid tetrahedron come from $h$.
   Middle: the history, with $h$ (purple) a dimension-three fill sitting above the fills it depends on.
   Right: the run at $h$, the same order with $h$ forgotten, since $h$ adds no edge.
   The history remembers every event, the run drops the higher fill, and the state drops the order and the labels.}
   \label{fig:examplerun}
 \end{figure}
+
+\begin{lemma}[Exchange of order]
+\label{lem:exchange}
+Let $X$ be a simplicial set and let $a$ and $b$ be two events whose matches both factor through $X$.
+Then $a$ and $b$ can be applied in either order, and the two resulting simplicial sets are canonically isomorphic.
+\end{lemma}
+
+\begin{proof}
+Pushouts of monomorphisms in $\sset$ are monomorphisms, so the attachment map $X \to X \cup_{F_a} A_a$ is a monomorphism, and since no simplices are deleted or re-glued, the match of $b$ persists as a map into $X \cup_{F_a} A_a$.
+The pushout property used here holds because pushouts in $\sset$ are computed degree by degree, and in the category of sets the pushout of an injection along any map is an injection, which is the adhesiveness property of presheaf categories \citep{ehrig2006dpo}.
+Symmetrically, $a$ can be applied after $b$:
+\[
+\begin{tikzcd}[column sep=small]
+  & X \cup_{F_a} A_a \arrow[dr, "b"] & \\
+  X \arrow[ur, "a"] \arrow[dr, "b"'] & & X_{ab} \\
+  & X \cup_{F_b} A_b \arrow[ur, "a"'] &
+\end{tikzcd}
+\]
+The two routes compute the colimit of the same diagram, formed by $X$, the two matches, and the two rules, so the resulting states $X_{ab}$ are canonically isomorphic by the pasting law for pushouts.
+This is the local Church--Rosser property for non-deleting double-pushout rewriting \citep{ehrig2006dpo}.
+\end{proof}
 
 \begin{proposition}[Well-definedness of the state]
 \label{prop:welldef}
@@ -242,11 +305,15 @@ We prove them in that order.
 
 \medskip
 \noindent\textbf{Claim 1: the causal order is a partial order.}
-Recall that $b$ depends on $a$ when the spot of $b$ contains a simplex created by $a$.
-By the definition of a history, the spot of $b$ lies in the simplicial set built by the events strictly below $b$, so every simplex in it is created by an event strictly below $b$, and every such event lies in the causal past of $b$.
-Dependency therefore never points upward.
-An event depends only on events strictly below it, and a loop of dependencies would make every one of them lie strictly below the next, running off forever.
-No such loop exists, so dependency generates a strict partial order $\prec$ on $\causalO{e}$ by transitive closure, as required by the third condition of a history.
+This claim is a consistency check on Definition~\ref{def:history}, not a theorem about an unordered growth process.
+A history presents its events as a partially ordered set from the outset, and the third condition asks this order to be generated by creation-before-use.
+What needs checking is that the condition can be met, meaning that the dependency relation generates a strict partial order.
+Recall that $b$ depends on $a$ when a maximal simplex of the spot of $b$ is created by $a$.
+The spot of $b$ lies in the simplicial set built by the events strictly below $b$, so every simplex of the spot is created by an event strictly below $b$, and dependency never points upward.
+The transitive closure of the dependency relation is therefore contained in the strict order of the history, and a cycle of dependencies would be a cycle in that strict order, which has none.
+So the dependency relation generates a strict partial order on $\causalO{e}$, as the third condition requires.
+A stronger formulation is possible, in which events are given as a bare sequence of move applications with no order posited in advance, and dependency is shown acyclic by induction on position in the sequence.
+We do not develop that presentation here.
 
 \medskip
 \noindent\textbf{Claim 2: the state of a finite downset exists.}
@@ -273,8 +340,10 @@ The induction is an algorithm that removes one event per step.
         Each step removes one event, so the recursion reaches $\varnothing$ after exactly $|D|$ steps.
         Since $D$ is finite, this always stops.
   \item \emph{The choice of maximal element does not matter.}
-        If $b_1 \neq b_2$ are both maximal in $D$, they are incomparable, and attaching them in either order gives the same simplicial set by the swap argument of Claim 3, whose proof uses only that $D$ is finite.
-        Induction on $|D|$ then shows that $X_D$ is independent of all such choices.
+        If $b_1 \neq b_2$ are both maximal in $D$, they are incomparable, and $D'' = D \setminus \{b_1, b_2\}$ is again a downset, and it contains every event strictly below $b_1$ or $b_2$.
+        Both matches therefore factor through $X_{D''}$.
+        By the induction hypothesis, $X_{D \setminus \{b_1\}}$ can be computed by attaching $b_2$ to $X_{D''}$, and $X_{D \setminus \{b_2\}}$ can be computed by attaching $b_1$ to $X_{D''}$.
+        Lemma~\ref{lem:exchange} identifies the two routes to $X_D$, and induction on $|D|$ then shows that $X_D$ is independent of all such choices.
 \end{enumerate}
 Applying this to $D = \causalO{e}$ defines the state $X_e := X_{\causalO{e}}$.
 The causal order $\causalO{e}$ is finite by the definition of a history, so the algorithm applies.
@@ -282,27 +351,11 @@ The causal order $\causalO{e}$ is finite by the definition of a history, so the 
 \medskip
 \noindent\textbf{Claim 3: every sequential build agrees with the colimit.}
 Fix a linear extension of $\causalO{e}$ and build the state event by event along it.
-The key step is the following swap argument.
-
-\medskip
-\noindent\emph{Swap argument.}
-Let $a$ and $b$ be adjacent in the linear extension and incomparable in the causal order, and let both be applied to a state $X$.
-Since $a$ and $b$ are incomparable, neither match's image contains a simplex created by the other, so both matches factor through the same state $X$:
-\[
-\begin{tikzcd}[column sep=small]
-  & X \cup_{F_a} A_a \arrow[dr, "b"] & \\
-  X \arrow[ur, "a"] \arrow[dr, "b"'] & & X_{ab} \\
-  & X \cup_{F_b} A_b \arrow[ur, "a"'] &
-\end{tikzcd}
-\]
-Pushouts of monomorphisms in $\sset$ are monomorphisms, so the image of $m_b$ persists in $X \cup_{F_a} A_a$ and $b$ can be applied after $a$, and symmetrically.
-The two routes compute the colimit of the same diagram, formed by $X$, the two matches, and the two rules, so the resulting states $X_{ab}$ are canonically isomorphic.
-This is the local Church--Rosser property for non-deleting double-pushout rewriting \citep{ehrig2006dpo}.
-
-\medskip
-Now finish as follows.
 \begin{enumerate}
-  \item Any two linear extensions of a finite poset are connected by a sequence of adjacent transpositions of incomparable elements, so the swap argument implies that all sequential builds of $\causalO{e}$ agree.
+  \item Any two linear extensions of a finite poset are connected by a sequence of adjacent transpositions of incomparable elements.
+        If $a$ and $b$ are adjacent in the extension and incomparable in the causal order, then every event strictly below $b$ precedes $a$ in the extension, since it cannot lie between two adjacent events and cannot be $a$ itself.
+        Both matches then factor through the state built before $a$, and Lemma~\ref{lem:exchange} shows that swapping the two events does not change the result.
+        So all sequential builds of $\causalO{e}$ agree.
   \item The chain of downsets
         \[
           \varnothing \subsetneq \{e_1\} \subsetneq \{e_1, e_2\} \subsetneq \dots \subsetneq \causalO{e}

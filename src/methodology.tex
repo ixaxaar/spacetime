@@ -1,653 +1,312 @@
 \section{The framework}
 \label{sec:framework}
 
-\subsection{The object}
+\subsection{Scope and assumptions}
 
-At any moment, the universe is a finite simplicial set.
-Its edges are directed by the simplicial structure itself, since the face maps assign every edge a source vertex and a target vertex.
-It begins as a single vertex $\Delta^0$ and it grows from there.
+The starting point is a space of admissible histories, not a growing
+spacetime. A history specifies relations between elementary constituents.
+It need not come with a preferred sequence in which those constituents
+were created. The description is pre-geometric in the limited sense that
+no metric, physical dimension, or manifold structure is assigned to it.
+Whether it admits a spacetime interpretation is a question to be answered,
+not a property conferred by calling it a history.
 
-The object is pre-geometric.
-It is not spacetime, and it is not a representation of a spacetime lying elsewhere.
-It carries no metric, no dimension, and no manifold structure.
-Everything geometric has to be recovered from it.
-Statements about space are made in the framework's own combinatorial terms.
+Three choices have to be kept distinct. Admissibility determines which
+histories are allowed. Weighting determines how alternatives contribute to
+predictions. A description of records determines which questions those
+predictions concern. The framework does not yet derive any of these choices
+from the others.
 
-Throughout, \textbf{edge} means a non-degenerate $1$-simplex.
-Every vertex $v$ carries the degenerate edge $s_0 v$ running from $v$ to itself, and these are never counted, never created by a move, and never part of a chain.
+We work at finite size so that the definitions do not presuppose a measure
+on an unspecified collection of infinite objects. Removing that restriction
+will require a separate limiting construction. No conservation of homotopy
+type, growth rule, or global fitness function is imposed. Such conditions
+could be added to a particular model, but each would require its own
+justification.
 
-\subsubsection{Growing the Simplicial Set}
+\subsection{Admissible histories}
+\label{sec:admissibility}
 
-\begin{definition}[Horn, filled and unfilled]
-\label{def:horn}
-A \textbf{horn} in a simplicial set $X$ is a map $h : \Lambda^n_k \to X$ and not a subcomplex of $X$.
-Two horns are the same only when they are the same map, so two embeddings with the same image count separately.
-The horn is \textbf{filled} in $X$ when some map $\Delta^n \to X$ restricts along $\Lambda^n_k \hookrightarrow \Delta^n$ to $h$, and \textbf{unfilled} otherwise.
-It is \textbf{inner} when $0 < k < n$.
+\begin{definition}[Candidate history]
+Fix a finite set of labels $L$ and a finite relational signature $\Sigma$,
+whose symbols have specified finite arities. A candidate history $H$
+consists of a finite nonempty set $E_H$, a label map $\ell_H:E_H\to L$, and
+a relation $R_H\subseteq E_H^k$ for every $k$-ary symbol $R\in\Sigma$.
+An isomorphism of histories is a bijection of their underlying sets that
+preserves labels and all relations.
 \end{definition}
 
-\begin{remark}[Why unfilled is about existence]
-\label{rem:degenerate}
-Definition~\ref{def:horn} asks whether a filler exists and not whether a fill event has supplied one.
-The difference decides whether the set of available moves is finite.
-Take an edge $f$ and the inner horn $\Lambda^2_1 \to X$ whose two edges are $f$ followed by the degenerate edge at the target of $f$.
-The degenerate $2$-simplex $s_1 f$ restricts to that horn, so the horn is filled in every simplicial set containing $f$, and it is never offered as a move.
-The horn whose two edges are the degenerate edge at the source of $f$ followed by $f$ is filled by $s_0 f$ in the same way.
-Under the other reading every edge would immediately offer a horn against each of its degeneracies, each such fill would mint a parallel copy of an edge that already exists, and the copy would offer horns of its own.
-The pool of available moves would be infinite from the first sprout onward.
-\end{remark}
+The elements of $E_H$ are not assumed to be spacetime points or measurement
+events. A directed relation can be included, but its interpretation as
+physical causality would require further work. If its transitive closure
+is required to be a partial order, acyclicity is an additional constraint.
+It does not follow from the definition of a relational structure.
 
-% the above need a figure for visual aid
-
-\begin{definition}[Move]
-\label{def:moves}
-
-The simplicial set grows by two local, non-deleting \textbf{moves}, which are pushouts along the following two monomorphisms of finite simplicial sets, where $\hookrightarrow$ denotes an inclusion of one simplicial set into another:
-
-\begin{enumerate}
-  \item \textbf{Sprout:} the coface $d^1 : \Delta^0 \hookrightarrow \Delta^1$, including $\Delta^0$ as the source vertex.
-        A sprout can happen at any vertex $v$ of the current state.
-        Performing it attaches a fresh directed edge from $v$ to a new vertex.
-  \item \textbf{Fill:} $\Lambda^n_k \hookrightarrow \Delta^n$ for $0<k<n$.
-        A fill can happen at any unfilled inner horn in the sense of Definition~\ref{def:horn}.
-        Performing it attaches the missing face and interior.
-        Each horn may be filled at most once.
-\end{enumerate}
-
-\end{definition}
-
-\begin{figure}[H]
-  \centering
-  \input{figures/sprout_fill}
-  \caption{The two moves and what each of them adds. In (a) a vertex
-  sprouts a fresh directed edge to a new vertex. After a second sprout,
-  (b) shows the composable pair $v_0 \to v_1 \to v_2$ whose composite is
-  absent, an unfilled inner horn $\Lambda^2_1$ (amber, missing edge
-  dashed). In (c) the fill supplies the composite $v_0 \to v_2$ (green)
-  together with the $2$-simplex witnessing it (shaded). Panel (d) shows the
-  state after a third sprout and both first-tier fills. Two distinct
-  horns now call for a composite from $v_0$ to $v_3$, one built from
-  $v_0 \to v_1$ with $v_1 \to v_3$ and one from $v_0 \to v_2$ with
-  $v_2 \to v_3$. Each fill mints its own composite, so $a$ and $b$ are
-  parallel edges rather than a single shared one. Only once both are
-  present does the inner horn $\Lambda^3_1$ exist, since its three faces
-  already carry all six edges of $\Delta^3$. Filling it therefore adds a
-  $2$-simplex and a $3$-simplex but no edge. Only inner horns are ever filled,
-  so edge direction is never inverted and the limit object is a
-  quasicategory.}
-  \label{fig:sprout-fill}
-\end{figure}
-
-\begin{remark}[The sprout is a horn fill as well]
-\label{rem:sproutishorn}
-The two moves are one kind of operation.
-The source vertex of $\Delta^1$ is the face opposite the target, which is the horn $\Lambda^1_0$, so the sprout is the pushout along $\Lambda^1_0 \hookrightarrow \Delta^1$.
-The move set is therefore a set of horn inclusions throughout, consisting of one outer horn in dimension one together with every inner horn in dimension two and above.
-Admitting this outer horn costs nothing, because $0 < k < 1$ has no solutions and both horns of $\Delta^1$ are outer, so no composition is made invertible by it.
-The remaining dimension-one horn $\Lambda^1_1 \hookrightarrow \Delta^1$ would attach a fresh edge ending at an existing vertex.
-It is not used here, and the question of whether it should be is deferred to Section~\ref{sec:kfold}, where its mirror-symmetric role in closing the move set under edge reversal is taken up alongside the $k$-fold moves.
-\end{remark}
-
-The initial object is a single vertex $\Delta^0$. At any moment the current state is a finite simplicial set, and the next move is chosen from the set of available moves, which is the disjoint union of all sprout sites and all unfilled inner horns.
-
-
-Every vertex is created by exactly one sprout, which supplies its first incoming edge.
-Every other incoming edge is a composite supplied by a fill.
-So sprout edges and composite edges never mix.
-A sprout creates a fresh vertex and attaches a directed edge to it.
-The composite joins two vertices that already exist.
-
-
-Sprouting attaches a cone along its base and inner-horn filling is an anodyne extension.
-In both cases the inclusion of the old state into the new one is a weak homotopy equivalence, so no move changes the homotopy type.
-In our case the homotopy type remains that of a point.
-
-\begin{remark}[What conserving the homotopy type costs]
-\label{rem:contractible}
-A state that is contractible at every event has trivial homotopy invariants at every event.
-No such invariant can therefore be an observable of the theory, at any stage and in any limit.
-The whole of the physical content has to be carried by the directed structure and by the order of the events.
-This is a commitment rather than a convenience, and it should be read alongside Remark~\ref{rem:treecost}, which describes what the directed structure is able to carry.
-Section~\ref{sec:kfold} returns to this commitment with the tool that measures it: conserving the homotopy type is the statement that the homotopy ledger of Proposition~\ref{prop:ledger} reads zero at every event, and every departure from it is bought and paid for, one circle per unit of branching.
-\end{remark}
-
-
-Which moves add an edge is a combinatorial fact about horns.
-
-\begin{lemma}[Which moves add edges]
-\label{lem:edges}
-A sprout adds exactly one edge, a fill in dimension two adds exactly one edge, and a fill in dimension three or above adds no edge.
-\end{lemma}
-
-\begin{proof}
-A sprout attaches $\Delta^1$ along its source vertex, so it adds the one edge of $\Delta^1$.
-An inner horn $\Lambda^n_k$ contains every face of $\Delta^n$ except the interior and the $k$-th $(n-1)$-face.
-For $n = 2$ the missing face is itself an edge, the composite, and the fill adds exactly that edge.
-For $n \geq 3$, an edge $\{i, j\}$ of $\Delta^n$ lies in the face opposite vertex $l$ for every $l \notin \{i, j\}$, and at least two such $l$ exist because $\Delta^n$ has at least four vertices.
-The horn misses at most one face, so every edge of the attached $\Delta^n$ already lies in a face the horn contains, and the fill adds no edge.
-\end{proof}
-
-Fills in dimension three and above add only simplices that say existing paths agree.
-So every chain is built out of edges, and nothing above dimension one can be part of a chain.
-Whatever geometric and metric structure this model has is carried by the vertices, the edges, and the causal order between events.
-Treat the edges as a multigraph.
-If two fills each produce a composite, keep both as separate edges.
-The number of parallel edges is a record of how many fills happened there.
-The order says which events can affect which.
-The edge counts say how much happened.
-Both are needed, and neither replaces the other.
-
-\begin{definition}[Rule]
-\label{def:rule}
-The \textbf{rule} of an event is a specification that contains three pieces of information:
-\begin{enumerate}
-  \item \textbf{Find}: Which spots in the current simplicial set qualify for the move to happen.
-  \item \textbf{Match}: Which spot the move is applied to.
-  \item \textbf{Apply}: What new simplices the move puts in there.
-\end{enumerate}
-Formally, the rule is an inclusion $F \hookrightarrow A$ of finite simplicial sets, from the \textbf{find pattern} $F$ to the \textbf{apply pattern} $A$.
-The match is an injective map $m_e : F \hookrightarrow X_{<e}$ from the find pattern into the state of the events strictly preceding $e$ (Definition~\ref{def:state}), and apply is the pushout of the rule along the match.
-Injectivity forbids folded spots, where two simplices of the pattern land on the same simplex of the state.
-The event adds the simplices of $A$ not in the image of $F$.
-The find and apply patterns of an event $e$ are written $F_e$ and $A_e$.
-\end{definition}
-
-Three kinds of rules exist:
-
-\begin{itemize}
-  \item \textbf{The big bang.}
-    Find: nothing needs to be found.
-    Match: there is no spot to choose.
-    Apply: the initial vertex $\Delta^0$ is created out of nothing ($\varnothing \hookrightarrow \Delta^0$).
-  \item \textbf{A sprout.}
-    Find: every vertex qualifies.
-    Match: the chosen vertex $v$, a map $\Delta^0 \to X_{<e}$.
-    Apply: attach $\Delta^1$ by its source vertex (the coface $d^1 : \Delta^0 \hookrightarrow \Delta^1$), adding an edge from $v$ to a fresh vertex.
-  \item \textbf{A fill.}
-    Find: every unfilled inner horn $\Lambda^n_k$ with $0 < k < n$ qualifies.
-    Match: the chosen horn, an embedded copy of $\Lambda^n_k$ in $X_{<e}$.
-    Apply: attach $\Delta^n$ along the horn ($\Lambda^n_k \hookrightarrow \Delta^n$), adding the missing face and the interior.
-\end{itemize}
-
-% TODO: or what if we have a more structured condition such that 2-level growth cannot happen or growth happens only on the edges and hence the internal sset must be complete first - but it will impose a very important global condition on spacetime! (or will it, i mean it will still be a local condition followed globally?)
-% \begin{remark}[The quasicategory limit needs a fairness condition]
-% \label{rem:fairness}
-% The limit of the filling process is a quasicategory exactly when every inner horn is filled at some point.
-% A history can fail this and still satisfy every condition imposed here.
-% Each fill creates simplices that offer further horns, so the pool of unfilled inner horns grows as the history runs, and a rule may leave a given horn unchosen forever.
-% Call a history \textbf{fair} when every inner horn of every state is filled at some later event.
-% The limit of a fair history is a quasicategory.
-% Fairness is a condition on the rule, it is not implied by anything else stated here, and it therefore belongs among the constraints on the inference problem rather than among the consequences of the move set.
-% \end{remark}
-
-\begin{remark}[The at-most-once convention]
-\label{rem:atmostonce}
-The last clause of Definition~\ref{def:moves} is automatic under the fill rule as stated, since the find pattern offers only unfilled inner horns, and a horn, once filled, is never offered again.
-The clause is kept because it records a choice.
-The alternative convention lets a filled horn be filled again, so that one horn can supply several witnesses to the same composite.
-That variant changes what the events record, and with it any entropy built from the event record.
-It is not studied here.
-It is worth noting what is being set aside.
-Under the refilling convention the number of composites between a fixed pair of vertices becomes an unbounded local quantity attached to that pair.
-That is the only quantity anywhere in the framework which behaves like an edge length or a local volume, so the discarded variant is the one in which a metric variable could be carried.
-\end{remark}
-% hey but can we not say that for e.g. the simplex angles etc still hold a lot of metricizability in the way they are connected?
-
-\subsection{History, runs, and the causal order}
-
-Growth happens one move at a time.
-The universe at any moment is a finite stage of an ongoing history, and each event after the big bang is a move applied at a particular spot.
-Since no move deletes anything, an event can only apply to simplices that already exist.
-Event $b$ therefore depends on event $a$ when the spot at which $b$ is applied contains, among its maximal simplices, one created by $a$, where a simplex of the spot is maximal when it is not a face of another simplex of the spot.
-For a sprout the spot is a single vertex, which is maximal.
-For a fill the maximal simplices of the horn $\Lambda^n_k$ are its $(n-1)$-faces, so a dimension-two fill depends on the two events that created the edges of its horn and not directly on the events that created its vertices.
-The vertex creators still lie in the causal past by transitivity, since a simplex is only ever created after its vertices already exist.
-The causal order of an event $e$ is the set of events that $e$ depends on directly or via other events, together with $e$ itself, with the order among them.
-A reference frame is a linear extension of this order \citep{davey2002lattices}.
-
-\begin{definition}[History]
-\label{def:history}
-A \textbf{history} $\mathcal{H}$ is a set of events carrying a strict partial order $\prec$ with a least element $\bot$, in which every event has only finitely many events below it, together with a rule and a match assigned to each event.
-\end{definition}
-
-The order is well founded and the strict pasts are finite, so the following is defined by recursion on $\prec$.
-For each event $e$, the \textbf{state of the strict past}, written $X_{<e}$, is the simplicial set built by the events strictly below $e$, each of which is already available because its own strict past is smaller.
-Every simplex of $X_{<e}$ is attached by exactly one of those events, and we write $\varepsilon(\sigma)$ for it.
-The conditions are these.
-
-\begin{enumerate}
-  \item The least event $\bot$ carries the rule $\varnothing \hookrightarrow \Delta^0$, so it creates the initial vertex.
-  \item Every other event $e$ carries a sprout or fill rule $F_e \hookrightarrow A_e$ together with an injective match $m_e : F_e \to X_{<e}$.
-  \item Write $a \vartriangleleft e$ when $a = \varepsilon(\sigma)$ for some maximal simplex $\sigma$ of the image of $m_e$. Then $\prec$ is the transitive closure of $\vartriangleleft$.
-\end{enumerate}
-
-
-\begin{remark}[What the recursion fixes and what it does not]
-\label{rem:recursion}
-The earlier form of this definition described each event as applied to the simplicial set built by the events strictly preceding it, and left that simplicial set to be constructed in Definition~\ref{def:state}, which in turn needed the causal order, which needed the matches.
-The recursion above removes the forward reference.
-The order is posited first, well-foundedness makes the recursion legitimate, the states of the strict pasts are produced by it, and the third condition is then a check on the posited order rather than a definition of it.
-What remains open is the stronger presentation in which no order is posited at all and events arrive as a bare family whose order is derived.
-That presentation is the one that matches the claim that history is primary and the state is derived, and it is not developed here.
-\end{remark}
-
-A history maintains a record of every event and all of its data, namely its rule.
-Different histories can result in the same simplicial set.
-Nothing in the framework as stated selects one history over another, and we do not treat the collection of all histories as a single mathematical object here.
-What selects the realized history is left open.
-Posing that selection as a well-formed inference problem is one of the aims of this work.
-
-\begin{definition}[Causal Order]
-\label{def:causalorder}
-A \textbf{causal order} $\causalO{e}$ of a history $\mathcal{H}$ for an event $e$ is the set of events preceding and including $e$, partially ordered by $\prec$, where $a \prec b$ if and only if $b$ depends on $a$ directly or via other events. Direct dependency is witnessed only by the maximal simplices of the spot, as fixed above, so a fill depends directly on the creators of the faces of its horn and only indirectly on the creators of its vertices. The \textbf{causal past} of $e$ is the causal order with $e$ itself removed.
-\end{definition}
-
-Every vertex is created by a unique event, the big bang for the initial vertex and a sprout for every other one, and we write $\varepsilon(v)$ for that event.
-For every vertex $w$ other than the initial one we write $\pi(w)$ for the source of the sprout edge that created $w$, and call $\pi(w)$ the \textbf{parent} of $w$.
-Call $u$ an \textbf{ancestor} of $w$ when $u$ is reached from $w$ by applying $\pi$ one or more times.
-
-\begin{lemma}[Acyclicity of the one-skeleton]
-\label{lem:acyclic}
-The directed multigraph formed by the vertices and the non-degenerate edges of the state at any event has no directed cycles.
-Degenerate edges have to be excluded, since $s_0 v$ is a loop at every vertex $v$.
-\end{lemma}
-
-\begin{proof}
-The proof uses a single invariant, maintained by induction on events: every edge added by every move either has a vertex that is fresh at that move, or runs parallel to a directed path that already exists.
-A sprout adds an edge into a fresh vertex, so it satisfies the invariant through freshness and cannot lie on a directed cycle, since a fresh vertex has no outgoing edges.
-A fill adds no new vertices.
-A dimension-two fill adds its composite parallel to the two-edge path supplied by its horn, satisfying the invariant directly; if that composite closed a directed cycle, the cycle minus the composite would be a directed path from target back to source in the previous state, which the induction hypothesis forbids.
-A fill in dimension three or above adds no edges by Lemma~\ref{lem:edges}.
-No move ever adds an edge between two pre-existing vertices other than such a composite, so no cycle is ever completed, and the induction runs along any linear extension of the history.
-Note that the invariant and the argument never mention the causal order: acyclicity is a consequence of the shape of the moves alone, not of when they are applied.
-This matters in Section~\ref{sec:kfold}, where moves are admitted whose edges violate the creator-precedes-created relation used in earlier drafts of this proof but satisfy the present invariant unchanged.
-\end{proof}
-
-\begin{proposition}[Reachability is the ancestor relation of a forest]
-\label{prop:tree}
-For every state and every edge $u \to w$, the vertex $u$ is an ancestor of $w$.
-Consequently a directed path runs from $u$ to $w$ if and only if $u$ is an ancestor of $w$.
-\end{proposition}
-
-\begin{proof}
-Induct along the causal order, as in Lemma~\ref{lem:acyclic}.
-A sprout edge runs from an existing vertex $u$ to the fresh vertex $w$ it creates, and $\pi(w) = u$ holds by the definition of $\pi$, so $u$ is an ancestor of $w$.
-A composite edge $u \to w$ is supplied by a fill whose horn carries edges $u \to v$ and $v \to w$, both created earlier.
-The induction hypothesis makes $u$ an ancestor of $v$ and $v$ an ancestor of $w$, and the ancestor relation is transitive because it is the transitive closure of $\pi$.
-By Lemma~\ref{lem:edges} there are no other edges.
-For the second statement, every edge realises an ancestor relation and therefore so does every directed path, while conversely the sprout edges alone already join every vertex to each of its ancestors.
-\end{proof}
-
-\begin{corollary}[Incomparable vertices have no common future]
-\label{cor:nocommonfuture}
-Let $u$ and $w$ be vertices of a state with neither an ancestor of the other.
-Then no vertex is reachable from both, at this event or at any later one.
-\end{corollary}
-
-\begin{proof}
-Every vertex other than the initial one has exactly one parent, so the ancestors of a vertex $x$ are $\pi(x)$, then $\pi(\pi(x))$, and so on, which is a chain under the ancestor relation.
-If some $x$ were reachable from both $u$ and $w$, then Proposition~\ref{prop:tree} would place $u$ and $w$ in that chain, making them comparable, against the assumption.
-No move alters $\pi$ at a vertex that already exists, and no move removes a vertex, so the same argument applies at every later state.
-\end{proof}
-
-\begin{remark}[What Corollary~\ref{cor:nocommonfuture} costs]
-\label{rem:treecost}
-The reachability relation on vertices is the ancestor relation of a rooted tree.
-This follows from the move set of Definition~\ref{def:moves} alone and not from any particular rule, so no choice of rule and no solution of the inference problem can change it.
-Two consequences are worth stating plainly.
-The causal past of a vertex is a chain, so it is one-dimensional as an order.
-Two vertices that are not causally comparable share no future event, whereas in a Lorentzian manifold of dimension two or more any two spacelike separated points have points in their common causal future.
-The framework as stated therefore offers no place for a spatial separation to live.
-The only number the one-skeleton attaches to a pair of vertices is the multiplicity of parallel composites between them, and that number is defined only when the pair is already comparable.
-Section~\ref{sec:kfold} sets out the smallest change to the move set that removes the obstruction, together with what the change costs.
-\end{remark}
-
-\begin{definition}[Run]
-\label{def:run}
-The \textbf{run} at event $e$, written $\mathcal{R}(e)$, is the subposet of $\causalO{e}$ consisting of the big bang and the events that add an edge, with the induced order. By Lemma~\ref{lem:edges} these are exactly the sprouts and the dimension-two fills.
-\end{definition}
-
-The run is closed downward.
-A sprout depends only on the event that created its vertex, and vertices are created only by sprouts.
-A dimension-two fill depends only on the events that created the two edges of its horn, and edges are created only by sprouts and dimension-two fills.
-So no edge-adding event ever depends on a higher fill, and the run at $e$ is a downset \citep{davey2002lattices} of the history.
-A general downset of the history is not a run: downsets may contain higher fills, while the run keeps only the edge-adding events.
-The induced order is automatically a partial order, since a partial order restricted to a subset is still a partial order.
-Moreover, the run at $e$ is a history in its own right, since it satisfies the three conditions:
-
-\begin{enumerate}
-  \item Every event of the run has only finitely many events below it in the history, hence also in the run.
-  \item The big bang is included by definition and stays the least event.
-  \item The induced order on the run is generated by creation-before-use. A sprout depends only on the event that created its vertex, which is a sprout, and a dimension-two fill depends only on the events that created the two edges of its horn, which are sprouts or dimension-two fills. So every direct dependency of an edge-adding event is again an edge-adding event, and dependency chains between run events never leave the run.
-\end{enumerate}
-
-At any moment, the run is the partially ordered record of exactly those events that change the one-skeleton.
-It determines the one-skeleton of the state as a multigraph, with parallel composites kept distinct, and it forgets the higher fills entirely.
-Passing from a history to its run forgets the higher fills, and passing from a run to its one-skeleton forgets the order.
-Different histories can produce the same run, since higher fills leave no trace in it.
-Different runs can produce the same one-skeleton, since the multigraph forgets the order.
-Everything metric in this framework will be a function of the run, while the entropy of an event is a function of its causal order, which remembers the higher fills that the run forgets.
-
-\begin{definition}[Entropy]
-\label{def:entropy}
-For a finite poset $P$, write $\Lin(P)$ for its set of linear extensions.
-The \textbf{entropy} of an event $e$ is
+\begin{definition}[Admissibility data]
+Admissibility data $\mathcal A$ consist of $L$, $\Sigma$, and a specified
+collection of isomorphism-invariant constraints on candidate histories.
+For a positive integer $N$, let
 \[
-S(e) = \log |\Lin(\causalO{e})|,
+  \Omega_N(\mathcal A)
+  = \{H : H\text{ satisfies }\mathcal A,\ 1\leq |E_H|\leq N\}/{\cong}.
 \]
-the logarithm of the number of linear extensions of the causal order.
-The event $e$ is the unique maximum of $\causalO{e}$, so the causal past of $e$ has the same number of linear extensions, and the entropy measures how much of the past could have happened in a different order.
-Logarithms are natural throughout.
+We use only cutoffs for which this finite set is nonempty.
 \end{definition}
 
-\begin{proposition}[Which events carry no entropy]
-\label{prop:zeroentropy}
-$S(e) = 0$ in each of these two cases.
-\begin{enumerate}
-  \item $e$ is the big bang or a sprout.
-  \item $e$ is a dimension-two fill whose horn carries two sprout edges.
-\end{enumerate}
-\end{proposition}
+The cutoff $N$ limits the size of a description. Increasing it is not
+identified with the passage of physical time. The phrase ``all histories''
+will always mean all histories admitted by specified data $\mathcal A$,
+not all mathematical structures without restriction.
 
-\begin{proof}
-A finite poset has exactly one linear extension when it is a chain, so it is enough to show that $\causalO{e}$ is a chain in both cases.
-For the first case, a sprout at a vertex $v$ depends directly on the one event $\varepsilon(v)$ that created $v$, and $\varepsilon(v)$ is the big bang or a sprout, so the same holds of it.
-Iterating reaches the big bang after finitely many steps, by the first condition of Definition~\ref{def:history}, and the causal order is the chain this produces.
-For the second case, let the horn carry the sprout edges $u \to v$ and $v \to w$.
-The second of these created $w$, so its creating event is $\varepsilon(w)$, a sprout applied at $v$, whose one direct dependency is $\varepsilon(v)$.
-The first edge created $v$, so its creating event is $\varepsilon(v)$.
-The two events the fill depends on are therefore comparable, each has a chain for its causal order by the first case, and the fill sits above both.
-\end{proof}
+Locality also needs a definition. One available combinatorial notion uses
+the incidence graph whose vertices are elements of $E_H$, with two distinct
+elements adjacent when they occur together in a relation tuple. A model
+can impose conditions on neighbourhoods of a specified finite radius in
+this graph. The graph, radius, and allowed patterns are then inputs. This
+does not establish locality with respect to a Lorentzian metric. Global
+conditions, including acyclicity, must be stated separately rather than
+described as consequences of local compatibility without an argument.
 
-\begin{remark}[What the entropy is measuring]
-\label{rem:whatentropymeasures}
-Proposition~\ref{prop:zeroentropy} says that fresh vertices and first-tier composites are free.
-An event carries positive entropy only when it composes something that is itself a composite, which is what happens at the event $g$ of Example~\ref{ex:run}, whose horn carries the composite supplied by $f$ alongside a sprout edge.
-So $S$ counts how deeply composition has been nested in the causal past, and not how much of the universe has been built.
-Whatever second law the framework supports is a statement about the growth of the coherence tower, and the prose should not let it be read as a statement about the growth of space.
-\end{remark}
+Passing to isomorphism classes removes arbitrary names for constituents.
+It does not identify distinct histories merely because they share a
+topology or some coarse description. Any further identification requires
+an explicit equivalence relation and an account of which observations it
+preserves.
 
-\begin{remark}[The entropy is not a function of the geometric data]
-\label{rem:notafunctionofrun}
-Passing from a history to its run forgets the higher fills and the entropy of an event does not.
-Two histories with the same run can therefore differ in $S$, since a dimension-three fill can be inserted into one of them and not the other while leaving both runs equal.
-An area law is an equality between an entropy and a geometric quantity.
-If everything geometric is a function of the run, as stated above, no such equality can hold for $S$ as it is defined here.
-There are two ways out.
-Either the entropy is rebuilt from the run alone, which gives up the nesting that Remark~\ref{rem:whatentropymeasures} identifies as its content, or the geometric data is enlarged until it sees the higher fills.
-This has to be settled before a horizon computation can be posed at all.
-\end{remark}
+\gap{Choose a relational signature and admissibility constraints with an
+independent structural motivation. Specify the meaning of locality and any
+global restrictions. No particular choice is selected in this paper.}
 
-\begin{remark}[The entropy alone cannot select a causal structure]
-\label{rem:antichain}
-For posets on $n$ elements, $|\Lin(P)| \leq n!$ with equality exactly when $P$ is an antichain.
-An inference principle that maximises $S$ under no further constraint therefore selects the causal order with no relations in it.
-The same difficulty is known in causal set theory, where the uniform measure on $n$-element posets concentrates on the three-layer orders of \citet{kleitman1975}, which are not manifold-like, and where an action is introduced to suppress them \citep{surya2019living, loomis2018suppression}.
-The constraint set for the maximum entropy problem has to do that work here as well.
-Saying which constraint does it is a prerequisite for posing the problem and not a detail of solving it.
-\end{remark}
+\subsection{Weights and interference}
+\label{sec:weights}
 
-\begin{example}
-\label{ex:run}
-Start from the single vertex $v_0$, created by the big bang.
-The history grows by the following events.
-\begin{enumerate}
-  \item $s_1$: sprout an edge $v_0 \to v_1$.
-  \item $s_2$: sprout an edge $v_1 \to v_2$.
-  \item $s_3$: sprout a second edge $v_0 \to v_3$ from the starting vertex.
-  \item $f$: fill the horn $v_0 \to v_1 \to v_2$, supplying the composite $v_0 \to v_2$ and its witnessing $2$-simplex.
-  \item $s_4$: sprout an edge $v_2 \to v_4$.
-  \item $g$: fill the horn $v_0 \to v_2 \to v_4$, whose first edge is the composite from $f$, supplying the composite $v_0 \to v_4$.
-  \item $f'$: fill the horn $v_1 \to v_2 \to v_4$, supplying the composite $v_1 \to v_4$.
-        Now all six edges among $v_0, v_1, v_2, v_4$ exist, and three of the four triangular faces carry $2$-simplices.
-  \item $h$: fill the resulting inner horn $\Lambda^3_2$, supplying the missing face $(v_0, v_1, v_4)$ and the $3$-simplex on all four vertices, and adding no edge.
-\end{enumerate}
+Admissibility alone does not supply probabilities. For fixed $N$ and
+$\mathcal A$, write $\Omega_N=\Omega_N(\mathcal A)$. A classical model
+could assign a probability $p_N(H)$ to each $H\in\Omega_N$. Such a model
+adds probabilities for disjoint alternatives and has no interference
+between them.
 
-The causal order is generated by $s_1 \prec s_2 \prec f \prec g \prec h$ and $s_2 \prec s_4 \prec g$, $s_4 \prec f' \prec h$, while $s_3$ shares only the initial vertex with the others and stays incomparable to all of them.
-The causal order of $g$ is $\causalO{g} = \{s_1, s_2, f, s_4, g\}$, in which $f$ and $s_4$ are incomparable, so $|\Lin(\causalO{g})| = 2$ and $S(g) = \log 2$.
-We suppress the big bang $\bot$ from the notation for causal orders, since it sits below every event.
+To leave room for interference, we instead introduce the following quantum
+weighting. This is an adopted mathematical structure, not a consequence of
+the preceding definitions \citep{sorkin1994quantummeasure}.
 
-The three objects of this section differ at $h$.
-The causal order is $\causalO{h} = \{s_1, s_2, s_4, f, g, f', h\}$, with $5$ linear extensions, so $S(h) = \log 5$.
-The run at $h$ is the same poset with $h$ removed, since $h$ adds no edge and leaves no trace in the edge record.
-The state at $h$ is the simplicial set on $v_0, v_1, v_2, v_4$ with all six edges, all four $2$-simplices, and the $3$-simplex, carrying no event labels, and it does not contain $v_3$, since $s_3$ is not in the causal order of $h$.
-\end{example}
-
-\begin{definition}[State]
-\label{def:state}
-The \textbf{state} at $e$, written $X_e$, is the colimit of the diagram of rule applications in $\causalO{e}$.
-The diagram is indexed by the downsets of $\causalO{e}$, sending each downset $D$ to the simplicial set $X_D$ built by the events of $D$ and each inclusion of downsets to the induced inclusion of states.
-This agrees with the state of the strict past $X_{<e}$ produced by the recursion of Definition~\ref{def:history}, since $\causalO{e} \setminus \{e\}$ is exactly the set of events strictly below $e$.
-\end{definition}
-
-The colimit is used here so that ordering of $\causalO{e}$ has no consequence on the resulting state.
-Whether the diagram is well-defined, and whether it agrees with what any sequential build produces, is the content of Proposition~\ref{prop:welldef}.
-
-\begin{figure}[H]
-  \centering
-  \input{figures/example_run}
-  \caption{Example~\ref{ex:run}.
-  Left: the state at $h$, the simplicial set itself, with sprout edges plain and the three composites colored by the fill that supplied them. The face $(v_0, v_1, v_4)$ (purple) and the solid tetrahedron come from $h$.
-  Middle: the history, with $h$ (purple) a dimension-three fill sitting above the fills it depends on.
-  Right: the run at $h$, the same order with $h$ forgotten, since $h$ adds no edge.
-  The history remembers every event, the run drops the higher fill, and the state drops the order and the labels.}
-  \label{fig:examplerun}
-\end{figure}
-
-\begin{lemma}[Exchange of order]
-\label{lem:exchange}
-Let $X$ be a simplicial set and let $a$ and $b$ be two events whose matches both factor through $X$.
-Then $a$ and $b$ can be applied in either order, and the two resulting simplicial sets are canonically isomorphic.
-\end{lemma}
-
-\begin{proof}
-Pushouts of monomorphisms in $\sset$ are monomorphisms, so the attachment map $X \to X \cup_{F_a} A_a$ is a monomorphism, and since no simplices are deleted or re-glued, the match of $b$ persists as a map into $X \cup_{F_a} A_a$.
-The pushout property used here holds because pushouts in $\sset$ are computed degree by degree, and in the category of sets the pushout of an injection along any map is an injection, which is the adhesiveness property of presheaf categories \citep{ehrig2006dpo}.
-Symmetrically, $a$ can be applied after $b$:
+\begin{definition}[Finite quantum weighting]
+A weighting on $\Omega_N$ is a Hermitian positive semidefinite matrix
+$K_N$, indexed by pairs of histories, with normalization
 \[
-\begin{tikzcd}[column sep=small]
-  & X \cup_{F_a} A_a \arrow[dr, "b"] & \\
-  X \arrow[ur, "a"] \arrow[dr, "b"'] & & X_{ab} \\
-  & X \cup_{F_b} A_b \arrow[ur, "a"'] &
-\end{tikzcd}
+  \sum_{H,H'\in\Omega_N} K_N(H,H')=1.
 \]
-The two routes compute the colimit of the same diagram, formed by $X$, the two matches, and the two rules, so the resulting states $X_{ab}$ are canonically isomorphic by the pasting law for pushouts.
-This is the local Church--Rosser property for non-deleting double-pushout rewriting \citep{ehrig2006dpo}.
-\end{proof}
-
-\begin{proposition}[Well-definedness of the state]
-\label{prop:welldef}
-The causal order on the events of a history is a partial order, and for every event $e$ the colimit in Definition~\ref{def:state} exists and agrees with the state produced by any sequential build along a linear extension of $\causalO{e}$.
-\end{proposition}
-
-\begin{proof}
-There are three claims to prove:
-\begin{enumerate}
-  \item The causal order $\causalO{e}$ of an event $e$ is a partial order.
-  \item The states $X_D$ exist for all finite downsets $D$ of $\mathcal{H}$.
-  \item The state at $e$ agrees with every sequential build of $\causalO{e}$.
-\end{enumerate}
-We prove them in that order.
-
-\medskip
-\noindent\textbf{Claim 1: the causal order is a partial order.}
-This claim is a consistency check on Definition~\ref{def:history}, not a theorem about an unordered growth process.
-A history presents its events as a partially ordered set from the outset, and the third condition asks this order to be the transitive closure of $\vartriangleleft$.
-What needs checking is that the condition can be met, meaning that $\vartriangleleft$ generates a strict partial order.
-Recall that $b$ depends on $a$ when a maximal simplex of the spot of $b$ is created by $a$.
-The spot of $b$ lies in the simplicial set built by the events strictly below $b$, so every simplex of the spot is created by an event strictly below $b$, and dependency never points upward.
-The transitive closure of the dependency relation is therefore contained in the strict order of the history, and a cycle of dependencies would be a cycle in that strict order, which has none.
-So the dependency relation generates a strict partial order on $\causalO{e}$, as the third condition requires.
-A stronger formulation is possible, in which events are given as a bare sequence of move applications with no order posited in advance, and dependency is shown acyclic by induction on position in the sequence.
-We do not develop that presentation here.
-
-\medskip
-\noindent\textbf{Claim 2: the state of a finite downset exists.}
-For a finite downset $D \subseteq \mathcal{H}$ we construct the simplicial set $X_D$ by induction on $|D|$, the number of events in $D$.
-The induction is an algorithm that removes one event per step.
-\begin{enumerate}
-  \item \emph{Base case.}
-        If $D = \varnothing$, set $X_\varnothing = \varnothing$, the empty simplicial set.
-  \item \emph{Inductive step.}
-        Suppose $X_{D'}$ has been constructed for every downset $D'$ with $|D'| < |D|$.
-        Choose a maximal element $b$ of $D$ and set $D' = D \setminus \{b\}$, which is again a downset and has one element fewer.
-        Let $F_b \hookrightarrow A_b$ be the rule of $b$ and $m_b : F_b \to X_{<b}$ its match, as in Definition~\ref{def:rule}.
-        Every simplex in the image of $m_b$ is created by an event strictly below $b$, and every such event lies in $D'$, so the image sits inside $X_{D'}$ with its face relations unchanged, since no move deletes or re-glues anything.
-        We therefore also write $m_b$ for the map $F_b \to X_{D'}$.
-        Now define $X_D$ by the pushout square
-        \[
-        \begin{tikzcd}
-          F_b \arrow[r, hook] \arrow[d, "m_b"'] & A_b \arrow[d] \\
-          X_{D'} \arrow[r]                    & X_D
-        \end{tikzcd}
-        \]
-        which attaches the new simplices of $A_b$ to $X_{D'}$ along the spot $m_b$.
-  \item \emph{Termination.}
-        Each step removes one event, so the recursion reaches $\varnothing$ after exactly $|D|$ steps.
-        Since $D$ is finite, this always stops.
-  \item \emph{The choice of maximal element does not matter.}
-        If $b_1 \neq b_2$ are both maximal in $D$, they are incomparable, and $D'' = D \setminus \{b_1, b_2\}$ is again a downset, and it contains every event strictly below $b_1$ or $b_2$.
-        Both matches therefore factor through $X_{D''}$.
-        By the induction hypothesis, $X_{D \setminus \{b_1\}}$ can be computed by attaching $b_2$ to $X_{D''}$, and $X_{D \setminus \{b_2\}}$ can be computed by attaching $b_1$ to $X_{D''}$.
-        Lemma~\ref{lem:exchange} identifies the two routes to $X_D$, and induction on $|D|$ then shows that $X_D$ is independent of all such choices.
-\end{enumerate}
-Applying this to $D = \causalO{e}$ defines the state $X_e := X_{\causalO{e}}$.
-The causal order $\causalO{e}$ is finite by the definition of a history, so the algorithm applies.
-
-\medskip
-\noindent\textbf{Claim 3: every sequential build agrees with the colimit.}
-Fix a linear extension of $\causalO{e}$ and build the state event by event along it.
-\begin{enumerate}
-  \item Any two linear extensions of a finite poset are connected by a sequence of adjacent transpositions of incomparable elements.
-        If $a$ and $b$ are adjacent in the extension and incomparable in the causal order, then every event strictly below $b$ precedes $a$ in the extension, since it cannot lie between two adjacent events and cannot be $a$ itself.
-        Both matches then factor through the state built before $a$, and Lemma~\ref{lem:exchange} shows that swapping the two events does not change the result.
-        So all sequential builds of $\causalO{e}$ agree.
-  \item The chain of downsets
-        \[
-          \varnothing \subsetneq \{e_1\} \subsetneq \{e_1, e_2\} \subsetneq \dots \subsetneq \causalO{e}
-        \]
-        built along a linear extension is final in the poset of downsets of $\causalO{e}$, meaning that every downset is contained in some member of the chain, and the members are nested.
-        Hence the colimit over the downset diagram equals the colimit along the chain.
-  \item The colimit along the chain is the iterated pushout, which is exactly what the sequential build computes.
-\end{enumerate}
-Hence every sequential build produces the state $X_e$ of Definition~\ref{def:state}.
-\end{proof}
-
-\subsection{Branching, reversal closure, and the homotopy ledger}
-\label{sec:kfold}
-
-This subsection extends the framework of Definition~\ref{def:moves}.
-The base framework is contractible at every event, and Corollary~\ref{cor:nocommonfuture} is the geometric face of that commitment: reachability is an ancestor relation of a rooted tree, so no two incomparable vertices ever acquire a common future, and no place for a spatial separation exists.
-This section admits the smallest family of moves that changes this, audits exactly what each admission costs, and proves the accounting identity that governs all of them.
-
-Three observations organize what follows.
-First, every fill is a pushout of an inner horn inclusion, hence a pushout of an anodyne extension; anodyne extensions are closed under pushout and are trivial cofibrations, so \textbf{a fill in any dimension is a weak homotopy equivalence and never alters a homotopy invariant of the state}.
-All homotopy is therefore minted by creation moves alone.
-Second, the move set as it stands is not closed under the opposite construction $(-)^{\mathrm{op}}$, which reverses the order of every simplex: $\mathrm{op}$ preserves colimits and monomorphisms, fixes $\Delta^0$, and carries $\Lambda^1_0 \hookrightarrow \Delta^1$ to $\Lambda^1_1 \hookrightarrow \Delta^1$, so a history built under one move set has its mirror built under the other, and the two sets must be admitted together for either mirror to be a state of the same framework.
-Third, the obstruction itself has a precise source: every vertex receives exactly one edge from the creation event that made it, so common pasts are free while common futures across incomparable vertices are impossible.
-Any repair must let a fresh vertex receive edges from more than one existing vertex, and reversal closure forces the dual move alongside it.
-
-\begin{definition}[$k$-fold sprout]
-\label{def:kfold}
-For $k \geq 1$ let $E_k$ be the simplicial set consisting of $k$ vertices and nothing else, and let $C_k$ be the join of $E_k$ with a single vertex, that is, $k+1$ vertices together with one edge from each vertex of $E_k$ to the new one.
-The \textbf{$k$-fold sprout} is the pushout along $E_k \hookrightarrow C_k$.
-A match is an injective map $E_k \to X_{<e}$, so it picks $k$ distinct existing vertices; since $\operatorname{Aut}(E_k) = S_k$ acts on the inclusion by automorphisms, the ordering of the chosen vertices is not part of the data and the match may be read as an unordered $k$-element subset.
-The move attaches a fresh vertex together with one edge into it from each matched vertex, giving it those $k$ parents.
-The sprout of Definition~\ref{def:moves} is the case $k = 1$.
-\end{definition}
-
-\begin{definition}[Co-sprout]
-\label{def:cosprout}
-The \textbf{$k$-fold co-sprout} is the pushout along the opposite inclusion $(C_k)^{\mathrm{op}}$: it attaches a fresh vertex carrying one edge out of it into each of $k$ distinct existing vertices, giving them a shared future vertex.
-The one-fold co-sprout, the pushout along $\Lambda^1_1 \hookrightarrow \Delta^1$, is the horn whose admission was declined in Remark~\ref{rem:sproutishorn}.
-Both families are rules in the sense of Definition~\ref{def:rule}, delete nothing, and need no global check: a freshly created vertex cannot complete a directed cycle at the moment of its creation, whatever the orientation of its edges, so Lemma~\ref{lem:acyclic} holds verbatim for the extended move set, by the proof given there.
-Lemma~\ref{lem:exchange} and Proposition~\ref{prop:welldef} use only that rules are monomorphisms and that nothing is deleted or re-glued, so they hold unchanged, and Definition~\ref{def:run} stands with the run still consisting of the edge-adding events.
-Lemma~\ref{lem:edges} gains one clause per family: a $k$-fold sprout or co-sprout adds exactly $k$ edges.
-\end{definition}
-
-The two families do different jobs, and the difference is the point.
-$\mathrm{op}$ is an involution of $\sset$ preserving colimits and monomorphisms and fixing $\Delta^0$, so applying it to a history built under one move set yields the mirror history built under the opposite move set in the same order.
-A move set is closed under reversal exactly when it contains both families, and only a closed set makes the mirror of every state a state, which is what the broken-symmetry discussion of the Introduction requires.
-Geometrically, a $k$-fold sprout hands its $k$ matched vertices a common future; a co-$k$-fold hands them a common past.
-Since every pair of vertices already shares the root as a common past, only the sprout family buys new spacelike structure, and the co-sprout family exists for closure.
-One caution: a $k$-fold sprout at a pairwise comparable set pays every cost of branching and buys nothing, since those vertices already had common futures; the spacelike content of a move lies in whether its match spans incomparable vertices, and a rule can be constrained to that case without loss.
-
-What the extension costs outside homotopy is limited and worth stating plainly.
-Proposition~\ref{prop:tree} and Corollary~\ref{cor:nocommonfuture} fail, which is the purpose: ancestors form a directed acyclic graph rather than a chain, and Proposition~\ref{prop:zeroentropy} fails in both clauses, since a multi-vertex sprout depends on the creators of its $k$ matched vertices, which need not be comparable, so creation events themselves can carry entropy.
-
-\begin{proposition}[The homotopy ledger]
-\label{prop:ledger}
-Let $e$ be an event of a history built with sprouts, co-sprouts, $k$-fold versions of both, and inner fills.
-Then the state $X_e$ is connected and
+Its decoherence functional on pairs of subsets is
 \[
-X_e \;\simeq\; \bigvee_{a}\; S^1 \vee \dots \vee S^1,
-\qquad
-\beta_1(X_e) \;=\; \sum_{a \preceq e} \bigl(k_a - 1\bigr),
+  D_N(A,B)=\sum_{H\in A}\sum_{H'\in B}K_N(H,H').
 \]
-where the sum runs over the multi-vertex creation events $a$ below $e$, $k_a$ is the number of vertices matched by $a$, and all higher homotopy groups vanish.
-In particular every fill contributes nothing, and a history under the base move set of Definition~\ref{def:moves} reads zero at every event, recovering contractibility as the zero row of the ledger rather than an additional assumption.
-\end{proposition}
+The positive semidefinite condition on $K_N$ imposes strong positivity.
+\end{definition}
 
-\begin{proof}
-States remain connected by induction, since every move attaches its fresh vertices along at least one edge to the existing state.
-Each creation move is the attachment of a cone $\mathrm{Cone}(E_k)$ along the discrete subspace $E_k$ of $k$ points.
-For $k=1$ this is an interval attached at an endpoint, hence a weak equivalence contributing nothing.
-For $k \geq 2$, the long exact sequence of the pair $(\mathrm{Cone}(E_k), E_k)$ gives $\widetilde{H}_n(\mathrm{Cone}(E_k), E_k) = 0$ for $n \neq 1$ and $\widetilde{H}_1 \cong \mathbb{Z}^{k-1}$; equivalently, van Kampen for groupoids exhibits the new fundamental group as a free product with a free group of rank $k-1$, leaving all higher homotopy groups unchanged.
-Fills are pushouts of inner horn inclusions, hence of anodyne extensions; anodyne extensions are closed under pushout and are trivial cofibrations, so every fill is a weak equivalence and contributes no entry.
-Summing the contributions of the creation events along any linear extension of $\causalO{e}$ gives the identity, with the wedge decomposition assembled one circle at a time.
-\end{proof}
+The diagonal choice $K_N(H,H')=p_N(H)\delta_{H,H'}$ includes classical
+probability as a special case. Off-diagonal entries allow interference.
+For disjoint alternatives $A$ and $B$,
+\[
+  D_N(A\cup B,A\cup B)
+  =D_N(A,A)+D_N(B,B)+2\operatorname{Re}D_N(A,B).
+\]
+Consequently $D_N(A,A)$ is not, in general, an additive probability measure
+on all subsets of histories.
 
-\begin{corollary}[Contractibility as bookkeeping]
-\label{cor:ledgerzero}
-A history conserves the homotopy type of a point if and only if every creation event matches exactly one vertex.
-Every departure costs $k_a - 1$ circles at event $a$, minted once and never removed, since no later move alters any homotopy invariant.
-\end{corollary}
+The pair $(\mathcal A,K_N)$ supplies finite kinematic and weighting data.
+A physical model would also have to distinguish its fixed dynamical law
+from preparation or boundary data on which $K_N$ depends. Neither the
+admissibility constraints nor this matrix definition selects that law.
+Requiring weights to respect a specified local composition of structures
+could constrain it, but the composition and the constraint would need to
+be supplied explicitly.
 
-\begin{remark}[The universe as a wedge of circles]
-\label{rem:wedge}
-Under the base move set the ledger is identically zero and Remark~\ref{rem:contractible} applies in full strength: there are no topological observables at all.
-Under branching, the entire homotopy information of every state is the non-negative integer $\beta_1(X_e)$, which is monotone along the causal order, visible to the run since multi-vertex sprouts add edges, and insensitive to everything else the history records.
-All deeper structure lives in the directed homotopy type of the limit quasicategory, not in the homotopy type of the states.
-\end{remark}
+\gap{Construct a weighting prescription with a stated physical or
+structural justification. Establish its normalization, positivity, and
+compatibility with the proposed composition of histories. The complex
+weights and strong positivity are currently assumptions, not derived laws.}
 
-\begin{proposition}[Diamonds require branching]
-\label{prop:diamondbranching}
-In the base framework of Definition~\ref{def:moves}, two vertices have a common future only if they are comparable.
-More generally, under any move set in which every composite edge runs parallel to an existing directed path: if $u$ and $w$ are incomparable vertices and some vertex is reachable from both, then some creation event matched a set containing two incomparable vertices.
-\end{proposition}
+\subsection{Alternatives and records}
+\label{sec:records}
 
-\begin{proof}
-Let $u$ and $w$ be incomparable, and let $m$ be minimal among vertices reachable from both, where paths of length zero are allowed.
-Every directed path into $m$ ends in a creation edge into $m$: composites run parallel to earlier directed paths, so tracing any path backwards past its composite edges terminates at a creation edge.
-Hence $u$ reaches $m$ through some creation parent $p_1$ of $m$ and $w$ through some creation parent $p_2$.
-If all creation parents of $m$ were pairwise comparable, then relabelling gives $p_1$ reachable-to $p_2$ through the parents' own edges, so both $u$ and $w$ reach $p_2$, and $p_2$ is an older vertex than $m$, contradicting minimality of $m$.
-So $m$ has two incomparable creation parents, and these are distinct matched vertices of the creating event.
-\end{proof}
+\begin{definition}[Decoherent family]
+A partition $\mathcal P=\{A_1,\ldots,A_m\}$ of $\Omega_N$ is decoherent
+when $D_N(A_i,A_j)=0$ for every $i\neq j$. Within that family, assign
+\[
+  p_N(A_i)=D_N(A_i,A_i).
+\]
+These numbers are nonnegative and sum to one.
+\end{definition}
 
-\begin{corollary}[No branching, no diamonds]
-\label{cor:diamondcircle}
-If every creation match is contained in a single ancestor chain, every pair of vertices with a common future is comparable, and no causal diamond ever forms.
-Conversely, a $k$-fold sprout at an incomparable pair immediately produces a diamond: its fresh vertex is a common future of the pair, and their common ancestor chain provides a common past.
-\end{corollary}
+A partition specifies alternative answers to a question. It does not by
+itself describe a measuring device or a physical record. A record model
+would need to associate those alternatives with distinguishable structures
+inside the histories and explain how their correlations are retained.
+Identifying such structures is part of the reconstruction problem.
 
-Combining the two halves: a diamond forces a branching event, the branching event pays $k-1$ circles by Proposition~\ref{prop:ledger}, and the payment is permanent.
-Within this move idiom, spacelike separation and nontrivial topology are the same expenditure seen from two sides.
-The converse fails, and the failure is diagnostic: a $k$-fold sprout at a comparable pair pays a full circle and produces no diamond, and the residual loop there is a doubled-edge artifact, a composite running parallel to a creation edge with no cell distinguishing them.
-Topology tracks the connectivity structure of matches; diamonds track their incomparability.
-Whether a rule can be found that branches only where diamonds result is a question about the constraint set of the inference problem, and Section~\ref{sec:background} does not answer it here.
+Different decoherent families need not admit a common decoherent refinement.
+The framework therefore does not assume one joint classical probability
+distribution for all possible measurement questions. The definition above
+uses exact decoherence. Any application using approximate decoherence must
+bound the interference terms and the resulting probability errors.
 
-\begin{remark}[The limit has genuinely distinct parallel paths]
-\label{rem:limitpaths}
-Fairness asks that every inner horn that exists be filled eventually, and nothing in this subsection conflicts with it: a horn spanning an incomparable pair never exists, because $\Delta^3$ needs all six edges of its tetrahedron and no move ever supplies an edge between incomparable vertices, so there is no unmet obligation.
-What fails instead is uniqueness of composition.
-At a diamond the two routes from past to future yield two composite edges from $p$ to $m$, supplied by fills of different horns, and no simplex of the state ever identifies them, so the limit quasicategory contains genuinely distinct parallel morphisms between the same endpoints.
-This is Proposition~\ref{prop:ledger} restated categorically: the wedge summands are precisely the non-homotopic pairs of parallel composites.
-The classical zero-information limit in which every filler is unique is thus available exactly when the ledger reads zero.
-\end{remark}
+No operators, spectra, or measurement interactions have yet been recovered.
+In particular, the existence of this weighting formalism does not derive
+the eigenvalues of a quantum observable or the Born rule for a physical
+apparatus. Those claims would require a connection between the history
+description and a quantum theory of states, operations, and measurements.
 
-One further point is worth recording.
-A move that attaches a fresh element to the future of a chosen set of existing elements is exactly the growth step of the classical sequential growth models of \citet{rideout2000csg}, in which the fresh element is added to the future of an arbitrary subset of the existing causal set, and in which manifold-like causal sets are at least reachable.
-Adopting Definitions~\ref{def:kfold} and~\ref{def:cosprout} therefore puts the framework in a setting where the recovery of a geometry is a live question rather than one already closed by Corollary~\ref{cor:nocommonfuture}.
-It also makes the overlap with that literature substantial, so the novelty claims in Section~\ref{sec:background} have to be written against it.
+\gap{Define internal records and measurement alternatives. Show which
+families decohere and with what accuracy. Explain the relation to quantum
+observables without assigning independent classical values to all
+incompatible measurements.}
 
-\gap{Three decisions remain before the inference problem is posed. First, fix the move set: the base set of Definition~\ref{def:moves} keeps contractibility and loses diamonds outright; adding the $k$-fold sprout alone leaves the move set open under $(-)^{\mathrm{op}}$, so reversal closure argues for admitting the co-sprout family alongside, per Definition~\ref{def:cosprout}. Second, decide whether the rule constrains creation matches to span incomparable sets, which is the efficient regime identified after Corollary~\ref{cor:diamondcircle}. Third, Remark~\ref{rem:notafunctionofrun} has sharpened rather than resolved: the run sees exactly the integer $\beta_1$ of Proposition~\ref{prop:ledger}, so the geometric trace knows the topology of the deep structure but not its entropy, and whichever observable pairs with entropy in an area law must see more of the run than the one-skeleton currently exposes. The exhaustiveness of the case analysis --- arrow, contractibility, diamonds, choose two --- remains open beyond move sets satisfying the parallel-path condition of Proposition~\ref{prop:diamondbranching}.}
+\subsection{Time and invariance}
+\label{sec:time}
+
+The weighted space of histories is specified without a process that chooses
+one history after another. This removes the need for an external clock
+governing such a process. It does not establish that the physical universe
+is timeless, nor does it explain the occurrence of a definite measurement
+outcome.
+
+A candidate internal clock would be a structure whose distinguishable
+readings correlate with other records. If the joint alternatives for a
+clock reading $t$ and another record $r$ form a decoherent partition, their
+conditional probabilities can be written
+\[
+  p_N(r\mid t)
+  =\frac{D_N(A_r\cap A_t,A_r\cap A_t)}{D_N(A_t,A_t)},
+  \qquad D_N(A_t,A_t)>0.
+\]
+This is a way to express relational predictions, not a derivation of
+dynamics \citep{page1983}. A useful clock also requires ordered readings,
+appropriate correlations, and a regime in which it reliably parametrizes
+other changes. Conditional probabilities alone provide none of these.
+
+An arrow of time would require an asymmetry in the relevant record
+correlations or boundary conditions. It is not supplied by the order in
+which a computer enumerates a history. Distinct microscopic histories can
+agree on clock readings, but that fact does not establish a second hidden
+time or a physical process outside the clock description.
+
+Likewise, a fixed space of possibilities is not a conservation law.
+Relabelling invariance is built into $\Omega_N$. Independence of predictions
+from a cutoff, a presentation, or an added equivalence relation is a
+different requirement. Each must specify the transformation and the
+predictions claimed to remain unchanged. Homotopy equivalence alone does
+not imply equality of geometry or physical observations.
+
+\gap{Construct an internal clock and identify its domain of validity.
+Determine which record correlations distinguish a temporal direction.
+No physical time observable or arrow of time has been derived.}
+
+\subsection{Effective geometry and matter}
+\label{sec:geometry}
+
+A spacetime reconstruction would assign geometric descriptions to suitable
+coarse alternatives, not identify every microscopic constituent with a
+spacetime point. It must specify what is being coarse-grained, which
+histories contribute to an alternative, and when a metric description is
+accurate. If a causal order is used, its origin and its relation to
+operational causality must be stated. A volume measure and physical scale
+cannot be inferred from the word ``order.''
+
+The target is a regime in which effective geometry and matter predictions
+come from the same admissibility and weighting data. A Lorentzian metric
+without gravitational dynamics would not recover general relativity.
+Random outcomes without interference, the appropriate observable algebra,
+and quantum correlations would not recover quantum field theory. Fitting
+these two descriptions independently would not establish their common
+origin.
+
+Cosmological expansion would have to be expressed through an effective
+metric relative to internal clock readings. Neither an increase in the
+cutoff $N$ nor a greater number of admissible histories is, by definition,
+an increase in spatial volume. No general principle requiring a closed
+system to settle into its lowest-energy configuration is assumed.
+
+Entropy also depends on the question being asked. For a decoherent family,
+$-\sum_i p_N(A_i)\log p_N(A_i)$ is a Shannon entropy of those alternatives.
+It is not automatically thermodynamic entropy, entanglement entropy, or
+horizon entropy. Counting microscopic descriptions or their enumerations
+does not establish an area law.
+
+\gap{O1. Recover an effective Lorentzian geometry and its local Lorentz
+symmetry. Identify a regime in which gravitational and matter predictions
+recover general relativity and quantum field theory from the same model.}
+
+\gap{O2. Define a region, a horizon, its area, and the entropy associated
+with inaccessible records or degrees of freedom. Only then can an area-law
+comparison be posed.}
+
+\subsection{Robustness of effective laws}
+\label{sec:robustness}
+
+The proposed explanation of effective laws is that they might persist
+across a range of microscopic choices. This is a question about a family
+of models, not a property established by giving one model a complicated
+state space. It requires specified changes to admissibility or weighting
+and a way to compare the same coarse questions across those changes.
+
+For example, suppose two models give probability distributions $p_i$ and
+$\widetilde p_i$ on matched coarse alternatives, each in a decoherent
+family. An operational tolerance can be expressed as
+\[
+  \frac12\sum_i |p_i-\widetilde p_i|\leq\epsilon.
+\]
+A robustness claim must name the alternatives, the permitted microscopic
+changes, the tolerance, and the regime over which the bound is meant to
+hold. This comparison does not require an external physical time.
+
+Persistence within a history is a separate property. It requires a way to
+recognize related records at different internal clock readings. Neither
+form of stability implies that a configuration is probable. In the
+interfering model, probability claims must refer to alternatives in a
+decoherent family rather than to an assumed classical distribution over
+all individual histories.
+
+No global fitness function is needed for these questions. Conversely,
+neither local compatibility nor stability alone is claimed to force the
+observed laws. A model would have to exhibit the proposed regime and show
+which microscopic details its predictions do not depend on.
+
+\gap{Specify a family of microscopic models, matched coarse records, and
+allowed perturbations. Establish a nontrivial regime of robust predictions
+and distinguish this from persistence under an internal clock. No such
+regime has yet been demonstrated.}
+
+\subsection{Inference and limits}
+\label{sec:inference}
+
+An inference principle could restrict the remaining choices, but its prior
+and constraints are part of the model. On the classical diagonal subclass,
+one possible finite problem is
+\[
+  \underset{p_N\in\mathcal F_N}{\operatorname{maximize}}
+  \left[-\sum_{H\in\Omega_N}p_N(H)
+  \log\frac{p_N(H)}{\mu_N(H)}\right],
+\]
+where $\mu_N$ is a specified strictly positive reference probability and
+$\mathcal F_N$ is a specified feasible set of probability distributions.
+Terms with $p_N(H)=0$ are taken to be zero. This is a relative-entropy
+inference problem \citep{jaynes1957}, not a derivation of the prior or the
+constraints. A uniform distribution over isomorphism classes is itself a
+choice and need not agree with counting labelled descriptions.
+
+This classical problem does not determine off-diagonal quantum weights.
+Any inference principle for $K_N$ must state its objective, admissible
+variations, and justification independently. No Gibbs form or unique
+quantum law is asserted here.
+
+Finally, the family of finite models is not yet a theory of an infinite
+universe. A limiting proposal must specify how coarse records at different
+cutoffs correspond and whether their probabilities converge. It must also
+control dependence on the chosen regulator. Simply restricting a matrix
+from $\Omega_{N+1}$ to $\Omega_N$ need not preserve its normalization.
+
+\gap{Specify the inference data and a consistent limiting prescription.
+Complete the comparison with decoherent histories and quantum measure
+theory, causal set entropy and growth models, Wolfram model papers,
+entropic dynamics, network cosmology, and directed algebraic topology
+before making any claim of novelty.}

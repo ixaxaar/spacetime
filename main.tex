@@ -40,7 +40,7 @@
 \newcommand{\Cat}{\mathsf{Cat}}
 \newcommand{\N}{\mathrm{N}}
 
-\title{A Framework for Emergent Time from Horn-Filling Dynamics}
+\title{A Framework for Spacetime from Weighted Histories}
 \author{Russi Chatterjee}
 \date{\today}
 
@@ -49,38 +49,29 @@
 \maketitle
 
 \begin{abstract}
-We propose a framework in which spacetime is a growing simplicial set and
-time is the process of filling its inner horns. Two local, non-deleting
-moves drive the growth of spacetime: a "sprout" attaches a fresh directed edge ending at a
-new vertex, and a "fill" completes an unfilled inner horn with a composite
-edge and its witnessing cell. Each move is a weak homotopy equivalence of
-the underlying space, so the homotopy type is conserved at every step. Since the
-geometric realization of the simplicial set forgets edge orientation, this conserved type cannot
-see any arrow of time; all physical content lives in the directed structure
-that realization forgets. The completed limit of the filling process is a
-quasicategory, in which every composition question has an answer while edges
-remain directed. Each move is an event that consumes cells created by
-earlier events, the dependency of moves forms a partial order, and a
-reference frame is a choice of linear extension of this order. The entropy of
-an event is the logarithm of the number of linear extensions of its causal
-past. This quantity measures how much of the past could
-have happened in a different order, and grows monotonically, which we prove;
-a toy implementation provides first numerical support. The arrow of time
-appears as a broken symmetry. The universe carries an arrow exactly when it
-is not isomorphic to its own edge-reversal, and pairing the universe with
-its mirror image restores the symmetry globally, in the spirit of
-CPT-symmetric cosmologies. We formulate a maximum-entropy inference problem whose
-solution, conjecturally of Gibbs form, would determine the rule from
-locality and a fixed update budget alone. We close with the open problems, foremost the recovery of the Lorentz group and of an area law for horizon entropy.
+We formulate a research framework for investigating whether spacetime and
+quantum fields can arise from a common underlying structure. Candidate
+histories are finite relational structures considered up to isomorphism.
+Admissibility conditions specify which histories are possible, while a
+separate weighting specifies how alternatives contribute to predictions.
+To allow interference, the weighting is a strongly positive decoherence
+functional rather than an ordinary probability distribution over individual
+histories. Probabilities are assigned to decoherent families of alternatives.
+This quantum structure is an assumption, not a derivation from combinatorics.
+No external growth time is introduced. Physical time is instead a proposed
+relation between internal clock readings and other records. The central
+question is whether suitable admissibility conditions and weights support
+effective geometry and matter dynamics that remain stable under changes in
+microscopic details. We specify the finite framework and the reconstruction
+tasks, but do not supply a physical model or establish such a regime. The
+selection of the weights, recovery of general relativity and quantum field
+theory, and definition of a horizon entropy remain open.
 \end{abstract}
 
 % \tableofcontents
 
 \input{src/introduction}
-\input{src/background}
 \input{src/methodology}
-\input{src/results}
-\input{src/discussion}
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography/references}

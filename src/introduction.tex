@@ -1,149 +1,53 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Discrete approaches to quantum gravity, from Regge calculus
-\citep{regge1961} to causal dynamical triangulations
-\citep{ambjorn2012cdt}, replace smooth spacetime with combinatorial data:
-simplices, gluings, and the lengths assigned to them.
-In Regge calculus the combinatorial scaffold is fixed with only
-edge lengths allowed to vary. The vertices, simplices, and gluings of the triangulation
-never change, so no new combinatorial structure is ever introduced. That is
-enough for classical gravity, where one solves the field equations on a
-triangulation that is given in advance. The discomfort begins one step
-later, when Feynman's path integral is applied to the evolution of the
-universe and the sum runs over all histories. Summing over Regge geometries
-means integrating over edge lengths, a continuous space in which many
-assignments describe the same geometry and no canonical measure presents
-itself. On the other hand, dynamical triangulations
-\citep{david1985,ambjorn1985diseases,ambjorn1997quantum} escape this by
-inverting Regge's choice.
-The lengths are frozen and the combinatorics is set free, so a geometry
-becomes a gluing pattern of simplices whose shapes are fixed once and for
-all, and summing over geometries becomes counting gluings.
+General relativity describes a dynamical spacetime geometry, while quantum
+field theory describes quantum matter and its interactions on a specified
+spacetime background. The aim of this work is to investigate a structure
+from which both descriptions could be recovered in appropriate regimes.
+The underlying objects need not themselves be points of spacetime, and
+their mathematical description need not begin with a metric or an external
+time parameter.
 
-In both cases the geometry is carried by the gluing and not by any ambient
-space. Each simplex is flat inside, so curvature can only sit where simplices
-meet, and it is measured by how far the angles around such a meeting place
-fall short of a full turn. Figure~\ref{fig:deficit} shows the three cases for
-triangles glued around a vertex.
+The proposal concerns a space of admissible histories together with weights
+that determine how alternatives contribute to observations. A history is a
+relational structure, not initially a trajectory through an already defined
+space. Admissibility specifies which relations can coexist. Weighting is a
+separate part of the model, since knowing which structures are possible does
+not by itself determine their relative contributions. Quantum interference
+requires more than an ordinary probability distribution over alternatives.
+We therefore use a finite decoherence-functional description, drawing on
+the histories-based treatment of quantum theory \citep{sorkin1994quantummeasure}.
+This imports a quantum probability framework. It does not explain its origin.
 
-\begin{figure}[ht]
-  \centering
-  \input{figures/deficit_angle}
-  \caption{Curvature in Regge calculus lives at the vertices, not on the
-  interiors of the simplices. Gluing $k$ flat unit equilateral triangles
-  around a single point makes the angles there sum to $k \cdot 60^\circ$,
-  and the deficit angle $\delta = 2\pi - \sum_i \theta_i$ measures the
-  failure to close up in the plane. Top row shows the resulting surface in
-  $\mathbb{R}^3$, bottom row shows the same triangles unfolded flat, where
-  $\delta$ is directly visible. For $k=5$ the angles fall short, the gap
-  closes only by lifting the vertex out of the plane, and the cone carries
-  positive curvature concentrated at a point. For $k=6$ the angles close
-  exactly and the neighbourhood is isometric to a patch of the Euclidean
-  plane. For $k=7$ the seventh triangle (dashed) overlaps the first, the
-  excess forces the surface to buckle into a saddle, and the curvature is
-  negative. Every triangle is flat throughout, so all the geometry is
-  carried by the combinatorics of how they are glued.}
-\end{figure}
+The physical question is whether such a model can support persistent
+organisation with a useful spacetime description. A successful account
+would explain why the same effective laws survive a range of changes in
+microscopic details. It would also have to distinguish structures that are
+merely admissible from regimes that have appreciable probability within an
+appropriate decoherent family. Neither persistence nor probability is
+defined by resemblance to the physics one hopes to recover.
 
-Because the combinatorics is now free, the number of simplices differs from
-history to history, and within a single history the number of simplices in a
-slice changes from one slice to the next. New geometric measure appears from
-nowhere. Classical general relativity is no better off on this point, since
-it has no conservation law for spatial volume either, and in a closed
-universe the Hamiltonian constraint balances the total at zero
-\citep{adm1962,dewitt1967} however much volume appears. The complaint is
-therefore not that volume grows, but that the growth answers to nothing the
-theory conserves. A cosmological constant term only assigns a cost to
-four-volume within the ensemble, and where the total is held fixed instead,
-as in simulations and in unimodular gravity \citep{unruh1989,henneaux1989},
-the constraint is imposed by hand rather than descending from a symmetry.
+In this formulation there is no external process that traverses the space
+of histories. A calculation that enumerates a history is not itself a
+physical clock. Time would have to be recovered from correlations between
+internal records, in the spirit of relational approaches
+\citep{page1983}. This leaves the construction of clocks and the origin of
+an arrow of time as separate problems. Likewise, cosmological expansion
+would concern an effective metric relative to such clocks, not the number
+of objects introduced by an enumeration algorithm.
 
-This paper takes the discomfort seriously and asks what a theory looks like if
-one demands, from the start, that
+Relational structures, histories, and inference principles already occur in
+causal set theory \citep{bombelli1987,rideout2000csg,surya2019living},
+rewriting approaches \citep{gorard2020}, and entropic dynamics
+\citep{caticha2011}. These precedents do not establish the present proposal,
+and no claim of novelty for these ingredients is made here. The required
+comparison with those programmes remains part of the work.
 
-\begin{enumerate}
-  \item Nothing is ever destroyed. Evolution proceeds only by forking
-        and completion moves, never by deletion, so that topological
-        invariants are conserved by construction.
-  \item Time is not a dimension of the fundamental structure but an emergent
-        bookkeeping of an irreversible forking-filling process.
-  \item Entropy is attached to frame-invariant causal data, not to spatial
-        slices, so that the theory never needs to say what all of space
-        looks like at a single moment.
-  \item The rule that chooses which move happens next is derived from an
-        inference principle rather than postulated.
-\end{enumerate}
-
-In our framework the universe begins as a single vertex, which we call the
-big bang, and grows by two kinds of local moves:
-
-\begin{enumerate}
-      \item A \textbf{sprout} attaches a fresh directed edge ending at a new vertex, adding new space.
-      \item A \textbf{fill} completes an unfilled inner horn, attaching a composite edge together with the higher simplex that witnesses the composition.
-\end{enumerate}
-
-% figure: sprout and fill, do later, dont add now (need to figure it out first)
-
-Two kinds of direction appear here. Every edge of the simplicial set carries an orientation, and that
-orientation is what decides which horns count as inner and what composition
-means. Separately, every move is an event, and the events are ordered by
-which of them created the simplices the others apply to. We call the first the
-\textbf{orientation} and the second the \textbf{causal order}.
-No move ever deletes anything, so growth always runs forward in the causal order,
-while orientation is a property of the finished simplices and can be reversed on paper.
-
-At the big bang two edges sprout from the single vertex with opposite
-orientation, and this is what produces the two branches. The mirror branch is
-not an independent run. By definition it is the edge-reversal of the branch,
-carrying one mirrored event for every event, which is what makes the pair a
-mirror image of itself. The mirroring is causally inert, since no move in one
-branch ever applies to a simplex created in the other, so the causal past of any
-event lies wholly inside its own branch. Each branch grows
-forward in its own causal order while pointing the opposite way in
-orientation, so neither branch runs backward in time in any absolute sense.
-Each is backward only as seen from the other, and there is no global causal
-order in which either of them is reversed. This is a combinatorial
-counterpart of CPT-symmetric cosmologies, where a universe and an antiuniverse
-emerge together from a single point \citep{boyle2018cpt,barbour2014janus}.
-
-\begin{figure}[ht]
-  \centering
-  \input{figures/mirror_pair}
-  \caption{The total object. A branch on the right and its mirror image on the
-  left, glued at the single vertex where both were born. Corresponding edges
-  carry opposite orientation, so the pair is isomorphic to its own
-  edge-reversal. The shaded region on each side is a filled inner horn, drawn
-  with its composite edge in bold, and the fill is mirrored along with
-  everything else. The grey arrows are the causal order, which runs away from
-  the shared vertex on both sides, so each branch is backward only as seen from
-  the other, and never in the order in which its own simplices were built.}
-  \label{fig:mirrorpair}
-\end{figure}
-
-At any moment the state of the universe is a finite simplicial set with
-directed edges, together with the history of how it was built. The limit of
-the filling process in one branch is a quasicategory, in which every
-composition has been formed while the orientations remain. The classical,
-zero-information limit is the nerve of an ordinary category, the simplicial
-set whose $n$-simplices are the chains of $n$ composable morphisms
-\citep{segal1968,lurie2009htt}, and in it every filler is unique. The
-physical content of a completed universe is precisely how far it is from
-being a nerve.
-
-The pair of branches is meant to carry no information at all.
-Two contractible halves glued at a single vertex are again contractible,
-so every homotopy invariant of the pair is that of a point, and the pair is
-isomorphic to its own edge-reversal, so it carries no arrow either. Whatever
-is physical therefore sits inside a single branch, in the orientations and in
-the history of how its simplices were built.
-
-% The pair is not a Kan complex, and we do not want it to be. It is not one
-% because a branch is a retract of the pair, by the map sending the mirror
-% branch to the shared vertex, and a retract of a Kan complex is again a Kan
-% complex, so a Kan pair would force each branch to be Kan, which inner-horn
-% filling never delivers. It is also unwanted, because filling outer horns
-% makes every edge invertible, and an object carrying all of its inverses is
-% isomorphic to its own reversal at every stage, so the arrow of time as we
-% define it would never appear at all. Contractibility already gives the
-% triviality we were after, and it costs nothing.
+This is a framework paper, not a derivation of a physical theory. The
+methodology separates admissibility, quantum weighting, records, and
+effective geometry so that assumptions in one part cannot be presented as
+results of another. It supplies definitions and identifies the missing
+constructions. No particular relational signature, weighting law, or
+continuum limit is shown to reproduce general relativity or quantum field
+theory.

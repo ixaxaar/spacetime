@@ -75,7 +75,8 @@ preserves.
 
 \gap{Choose a relational signature and admissibility constraints with an
 independent structural motivation. Specify the meaning of locality and any
-global restrictions. No particular choice is selected in this paper.}
+global restrictions. Section~\ref{sec:twopath} specifies a finite test
+model, but no choice suitable for a spacetime reconstruction is selected.}
 
 \subsection{Weights and interference}
 \label{sec:weights}
@@ -160,6 +161,151 @@ description and a quantum theory of states, operations, and measurements.
 families decohere and with what accuracy. Explain the relation to quantum
 observables without assigning independent classical values to all
 incompatible measurements.}
+
+\subsection{A finite model of interference and records}
+\label{sec:twopath}
+
+The definitions can be tested on a system small enough that every history
+and every weight can be written explicitly. The example is a standard
+two-path quantum process expressed in the language of the framework.
+Its purpose is to expose which information comes from admissibility, which
+comes from weighting, and which alternatives can carry probabilities.
+It is not a new explanation of interference.
+
+\subsubsection{The four histories}
+
+Take one binary relation and the label set
+\[
+  L=\{\mathrm{in},\mathrm{route}_0,\mathrm{route}_1,
+       \mathrm{out}_0,\mathrm{out}_1\}.
+\]
+Require a history to contain exactly three vertices, with relation edges
+forming a path from an input vertex to one route vertex and then to one
+output vertex. No other vertices or relation tuples are allowed. These
+are explicit finite boundary and admissibility conditions, not a proposed
+universal local law. The four isomorphism classes are
+\[
+  H_{sd}=(\mathrm{in}\longrightarrow\mathrm{route}_s
+                  \longrightarrow\mathrm{out}_d),
+  \qquad s,d\in\{0,1\}.
+\]
+Here $s$ labels a route and $d$ labels an output. Fix $N=3$ and write
+$\Omega=\{H_{00},H_{10},H_{01},H_{11}\}$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth, every node/.style={font=\small}]
+    \node (input) at (0,0) {$\mathrm{in}$};
+    \node (r0) at (2,0.8) {$\mathrm{route}_0$};
+    \node (r1) at (2,-0.8) {$\mathrm{route}_1$};
+    \node (d0) at (4.5,0.8) {$\mathrm{out}_0$};
+    \node (d1) at (4.5,-0.8) {$\mathrm{out}_1$};
+    \draw[->] (input) -- (r0);
+    \draw[->] (input) -- (r1);
+    \draw[->] (r0) -- (d0);
+    \draw[->] (r0) -- (d1);
+    \draw[->] (r1) -- (d0);
+    \draw[->] (r1) -- (d1);
+  \end{tikzpicture}
+  \caption{The allowed paths of the finite model. Each history is one
+  input--route--output path, not this entire diagram. Positions in the
+  drawing have no metric meaning.}
+  \label{fig:twopath}
+\end{figure}
+
+All four histories have the same underlying path shape. Their labels
+distinguish them. Merely counting them gives no phase dependence and says
+nothing about whether the route becomes recorded.
+
+\subsubsection{The composition prescription}
+
+Supply a two-dimensional route space and the mixing matrix
+\[
+  B=\frac{1}{\sqrt{2}}
+  \begin{pmatrix}1&1\\1&-1\end{pmatrix}.
+\]
+The input is the basis state $|0\rangle$. The first operation is $B$,
+the route labelled $1$ acquires a phase $e^{i\phi}$, and the last operation
+is another $B$. Matrix entries belong to the weighting prescription, not
+to the bare relation edges. The phase $\phi$ is a dimensionless setting,
+not a clock reading. In the absence of route records the history amplitude
+is
+\[
+  a_{sd}=B_{ds}e^{is\phi}B_{s0}
+        =\frac12(-1)^{sd}e^{is\phi}.
+\]
+The same matrices are used for every setting. We do not fit an independent
+weight to each output probability.
+
+To model a possible route record, supply an auxiliary two-dimensional
+space and normalized states
+\[
+  |r_0\rangle=|0\rangle,\qquad
+  |r_1\rangle=\gamma|0\rangle+\sqrt{1-\gamma^2}|1\rangle,
+  \qquad 0\leq\gamma\leq1.
+\]
+Between the two mixing operations, route $s$ becomes correlated with
+$|r_s\rangle$. Their overlap is $\langle r_0|r_1\rangle=\gamma$.
+At $\gamma=1$ the auxiliary state contains no information about the route.
+At $\gamma=0$ the two auxiliary states are orthogonal and can distinguish
+the routes perfectly. This record space is additional weighting data.
+It has not been reconstructed from the three-vertex histories.
+
+With orthogonal output states $|d\rangle$, the branch vector for a history
+is
+\[
+  |\psi_{sd}\rangle=a_{sd}|d\rangle\otimes|r_s\rangle.
+\]
+The prescribed kernel is
+\[
+  K(H_{sd},H_{s'd'})
+   =\langle\psi_{s'd'}|\psi_{sd}\rangle
+   =\delta_{dd'}a_{sd}\overline{a_{s'd'}}
+      \langle r_{s'}|r_s\rangle.
+\]
+In the stated ordering of $\Omega$ this is
+\begin{equation}
+  K=\frac14
+  \begin{pmatrix}
+    1&\gamma e^{-i\phi}&0&0\\
+    \gamma e^{i\phi}&1&0&0\\
+    0&0&1&-\gamma e^{-i\phi}\\
+    0&0&-\gamma e^{i\phi}&1
+  \end{pmatrix}.
+  \label{eq:toykernel}
+\end{equation}
+
+This specifies a family of finite weightings on one unchanged possibility
+space. The matrix $B$, complex amplitudes, tensor-product record space, and
+inner-product prescription are quantum assumptions. Locality here means
+factorization across the stated operations. It is not locality in an
+emergent spacetime. The input preparation and the choice of operation order
+are also supplied, rather than derived.
+
+\subsubsection{The questions asked of the model}
+
+The output alternatives are
+\[
+  A_d=\{H_{0d},H_{1d}\},
+\]
+and the route alternatives are
+\[
+  C_s=\{H_{s0},H_{s1}\}.
+\]
+The output question forgets the route. The joint route-and-output question
+retains every history separately. A distinction between these partitions
+is therefore a concrete test of whether discarding microscopic labels is
+legitimate classical coarse-graining or requires interference terms.
+
+Section~\ref{sec:toyresults} gives the resulting probabilities and their
+dependence on record overlap. The calculation has no statistical sampling
+error because it uses four histories exactly. No laboratory comparison or
+simulation is reported.
+
+\gap{Supply author-checked derivations of the positivity and normalization
+of Equation~\ref{eq:toykernel}, the decoherence statements, and the analytic
+expressions in Section~\ref{sec:toyresults}. These are finite quantum
+calculations, not proofs of emergent spacetime.}
 
 \subsection{Time and invariance}
 \label{sec:time}

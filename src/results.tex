@@ -1,1 +1,121 @@
-\section{Results}
+\section{Finite-model predictions}
+\label{sec:toyresults}
+
+The four-history model gives explicit calculations with which to check the
+framework. They are standard quantum predictions under the assumptions of
+Section~\ref{sec:twopath}, not new experimental evidence or a derivation of
+quantum mechanics.
+
+\subsection{Output interference}
+
+The output partition is decoherent for every $\phi$ and $\gamma$, since
+the kernel has no entries joining different output labels. Its probabilities
+are
+\begin{equation}
+  p(A_0)=\frac{1+\gamma\cos\phi}{2},\qquad
+  p(A_1)=\frac{1-\gamma\cos\phi}{2}.
+  \label{eq:toyfringes}
+\end{equation}
+At $\gamma=1$ and $\phi=0$, output $1$ has zero probability even though
+both histories ending there have nonzero amplitudes. The exclusion is due
+to cancellation, not inadmissibility. At $\gamma=0$, the probabilities are
+both $1/2$ and phase dependence disappears.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{ccccc}
+    \hline
+    $\gamma$ & $\phi$ & $p(A_0)$ & $p(A_1)$ & Auxiliary route record\\
+    \hline
+    $1$ & $0$ & $1$ & $0$ & Identical states\\
+    $1$ & $\pi/2$ & $1/2$ & $1/2$ & Identical states\\
+    $1$ & $\pi$ & $0$ & $1$ & Identical states\\
+    $0$ & Any & $1/2$ & $1/2$ & Orthogonal states\\
+    \hline
+  \end{tabular}
+  \caption{Exact predictions of the specified finite model. Admissibility
+  and the number of histories are unchanged in every row.}
+  \label{tab:toyoutputs}
+\end{table}
+
+The output-$0$ fringe visibility, defined by sweeping $\phi$ at fixed
+$\gamma$, is
+\[
+  V=\frac{p_{\max}(A_0)-p_{\min}(A_0)}
+          {p_{\max}(A_0)+p_{\min}(A_0)}=\gamma.
+\]
+The connection between records and interference is therefore quantitative.
+It follows from the supplied inner product on record states, not from
+the number or connectivity of the histories.
+
+\subsection{Which alternatives decohere}
+
+The route partition is also decoherent, with $p(C_0)=p(C_1)=1/2$.
+However, the common refinement of the route and output partitions is the
+singleton partition of $\Omega$. For its distinct histories ending at the
+same output,
+\[
+  \left|D(\{H_{0d}\},\{H_{1d}\})\right|=\frac{\gamma}{4}.
+\]
+The refinement is exactly decoherent, in the sense defined here, only
+when $\gamma=0$. Separately admissible probability questions therefore
+need not combine into a finer decoherent question.
+
+At $\gamma=1$, the route partition decoheres even though the auxiliary
+states contain no route record. Thus decoherence of a partition is not by
+itself a construction of a physical recorder. At $\gamma=0$, the auxiliary
+states distinguish the routes and the refined probabilities are $1/4$
+for each history. Labels that merely name alternatives and states that
+record alternatives do different work in the model.
+
+Replacing $K$ by its diagonal gives $p_{\mathrm{diag}}(A_d)=1/2$ at every
+phase. The discrepancy at the outputs, in total variation distance, is
+\begin{equation}
+  \frac12\sum_{d=0}^1
+    |p(A_d)-p_{\mathrm{diag}}(A_d)|
+    =\frac{\gamma|\cos\phi|}{2}\leq\frac{\gamma}{2}.
+  \label{eq:classicalerror}
+\end{equation}
+This is an error bound for this specified output question. It is not a
+bound for every possible measurement. A small discrepancy at one phase
+does not establish decoherence of the refined family.
+
+\subsection{Entropy depends on the record question}
+
+Write $h(x)=-x\log x-(1-x)\log(1-x)$, with $0\log0=0$. The Shannon
+entropy of the detector outcomes is
+\[
+  S_{\mathrm{out}}=h\!\left(\frac{1+\gamma\cos\phi}{2}\right).
+\]
+In the supplied quantum description the reduced auxiliary record state is
+\[
+  \rho_{\mathrm{rec}}
+    =\frac12\bigl(|r_0\rangle\langle r_0|
+                 +|r_1\rangle\langle r_1|\bigr),
+\]
+with von Neumann entropy
+\[
+  S_{\mathrm{rec}}=h\!\left(\frac{1+\gamma}{2}\right).
+\]
+At $\gamma=1$ and $\phi=\pi/2$, the output entropy is $\log2$ while the
+record entropy is zero. The same allowed histories also give zero output
+entropy at $\gamma=1$ and $\phi=0$. Counting the four histories would give
+$\log4$ in both cases. These are different quantities, not competing
+calculations of one universal entropy. None is an area or a horizon entropy.
+
+\subsection{A controlled sensitivity calculation}
+
+For the output distributions at parameter settings $(\gamma,\phi)$ and
+$(\widetilde\gamma,\widetilde\phi)$, the total variation distance is
+\begin{equation}
+  \frac12\sum_{d=0}^1|p(A_d)-\widetilde p(A_d)|
+   =\frac12|\gamma\cos\phi-\widetilde\gamma\cos\widetilde\phi|
+   \leq\frac12\bigl(|\gamma-\widetilde\gamma|
+                      +|\phi-\widetilde\phi|\bigr).
+  \label{eq:toysensitivity}
+\end{equation}
+Here the phases are represented by real numbers. This is a finite
+sensitivity bound for two specified weighting parameters and one output
+partition. It does not establish universality under changes to the
+relational signature, stability of a spacetime, or persistence under an
+internal clock.

@@ -66,23 +66,56 @@ The singularities inside black holes and at the big bang are exactly the places 
 
 \subsubsection{Metric and signature}
 
+\begin{definition}[Metric]
+Let $M$ be a smooth manifold and let $T_pM$ be the tangent space at $p\in M$ (the vector space of velocity vectors of smooth curves passing through $p$).
+A metric on $M$ is a smooth assignment, to every point $p$, of a bilinear map $g_p:T_pM\times T_pM\to\mathbb{R}$ that is symmetric, $g_p(u,v)=g_p(v,u)$, and nondegenerate, so the only $u$ with $g_p(u,v)=0$ for all $v$ is $u=0$.
+The metric is Riemannian if $g_p(v,v)>0$ for every nonzero $v$.
+It is Lorentzian if at every $p$ there is a basis of $T_pM$ in which $g_p$ is the diagonal matrix $\operatorname{diag}(-1,1,\ldots,1)$.
+\end{definition}
+
 A metric is a rule that gives the length of a small step in any direction at every point.
+The tangent space is the set of all directions one can step in from $p$, and $g_p(v,v)$ is the length squared of a step $v$.
+A Riemannian manifold is a smooth manifold together with a Riemannian metric.
 On a Riemannian manifold, like the sphere, every length squared is positive.
 
-GR uses a Lorentzian metric $g_{\mu\nu}$ instead, with one minus sign and three plus signs.
+GR uses a Lorentzian metric $g_{\mu\nu}$ instead, with one minus sign and three plus signs, $(-1, 1, 1, 1)$ being the Minkowski metric.
 Now a small step can have positive, negative, or zero length squared, which makes it spacelike, timelike, or lightlike.
 The metric gives the proper time along a path.
 That one minus sign is the whole difference between time and space.
 
 \subsubsection{Light cones and a direction of time}
 
-At each point the lightlike directions form a cone.
-Events inside the cone can be reached by something moving slower than light, and events outside cannot.
-So the light cones tell which events can influence which.
+\begin{definition}[Causal character and light cone]
+Let $(M,g)$ be a Lorentzian manifold and $p\in M$.
+A nonzero vector $v\in T_pM$ is timelike if $g_p(v,v)<0$, lightlike (or null) if $g_p(v,v)=0$, and spacelike if $g_p(v,v)>0$.
+It is causal if it is timelike or lightlike.
+The light cone at $p$ is the set of lightlike vectors in $T_pM$.
+A curve in $M$ is causal if its velocity vector is causal at every point along it.
+\end{definition}
 
-GR also needs to tell the future half of each cone from the past half, and to do it continuously over all of spacetime.
-This is called time orientability.
-It does not come for free from the metric, so it is an extra assumption.
+\begin{definition}[Time orientation]
+A Lorentzian manifold $(M,g)$ is time orientable if there is a continuous vector field $T$ on $M$ that is timelike everywhere.
+Such a $T$ picks out the future. A causal vector $v$ at $p$ is future directed if $g_p(v,T_p)<0$ and past directed otherwise.
+\end{definition}
+
+\begin{definition}[Causal order]
+In a time oriented Lorentzian manifold, write $p\preceq q$ if $p=q$ or there is a future directed causal curve from $p$ to $q$.
+The causal future of $p$ is $J^+(p)=\{q: p\preceq q\}$, and the causal past $J^-(p)$ is defined the same way with the order reversed.
+\end{definition}
+
+Light cones are a property of spacetime itself and comes straight out of the metric.
+At each point, the lightlike directions form a double cone in the tangent space, and the timelike directions are the ones inside it.
+
+The physics enters as a rule about what moves through spacetime.
+Every massive particle travels along a timelike curve, and light travels along lightlike curves.
+That is the precise meaning of ``nothing goes faster than light'' in GR.
+The speed limit of light implies that matter follows causal curves of the metric.
+So the light cones tell which events can influence which, and the relation $p\preceq q$ is exactly ``$p$ can influence $q$''.
+
+The metric alone does not say which half of each cone is the future.
+Time orientability is the extra global condition that one can make that choice continuously across all of spacetime.
+It is a property of the spacetime as a whole, and some Lorentzian manifolds do not have it.
+Without it the causal order $\preceq$ cannot even be defined, since ``future directed'' has no meaning.
 
 \subsubsection{Local flatness}
 

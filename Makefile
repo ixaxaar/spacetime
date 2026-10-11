@@ -6,7 +6,7 @@ all: $(MAIN).pdf
 
 $(MAIN).pdf: $(MAIN).tex src/*.tex bibliography/*.bib
 	$(LATEX) $(MAIN)
-	$(BIBTEX) $(MAIN)
+	-$(BIBTEX) $(MAIN)
 	$(LATEX) $(MAIN)
 	$(LATEX) $(MAIN)
 

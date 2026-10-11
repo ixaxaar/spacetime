@@ -4,7 +4,7 @@ BIBTEX = bibtex
 
 all: $(MAIN).pdf
 
-$(MAIN).pdf: $(MAIN).tex src/*.tex figures/*.tex bibliography/*.bib
+$(MAIN).pdf: $(MAIN).tex src/*.tex bibliography/*.bib
 	$(LATEX) $(MAIN)
 	$(BIBTEX) $(MAIN)
 	$(LATEX) $(MAIN)

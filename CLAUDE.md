@@ -45,6 +45,9 @@ The human (ixaxaar) must personally touch every proof. Your job is to attack.
   - `clause; clause` (semicolon splices)
   - em dashes and `text - text - text` asides
   - the words "load-bearing" and "naked"
+- Generic pronoun in the paper is "one", never "you".
+- **One sentence per line, always**, in every .tex file. No hard wrapping
+  inside a sentence.
   Emphasis (bold/italics) sparingly or not at all; ixaxaar handles that.
   Do not write in a terse aphoristic register. Write like a person explaining
   something to a colleague who is not an expert in this subfield.
